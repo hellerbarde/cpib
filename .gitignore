@@ -184,3 +184,5 @@ FakesAssemblies/
 
 #Custom
 .gitattributes
+Slides_FixFoxi_V3.pdf
+*.exe
