@@ -245,7 +245,6 @@ val productions =
 
   (factor ,
     [[T LITERAL], 
-    [T IDENT,T INIT], 
     [T IDENT,N exprList], 
     [N monadicOpr,N factor]]),
 
@@ -326,15 +325,14 @@ val productions =
 
   (repTerm3,
     [[],
-    [T ADDOPR, N term3,N repTerm3]]),
+    [T ADDOPR, N term3, N repTerm3]]),
+
   (term3,
-    [[N term4, N repTerm4]]),
+    [[N factor, N repTerm4]]),
 
   (repTerm4,
     [[],
-    [T MULTOPR,N term4, N repTerm4]]),
-  (term4,
-    [[N factor, N repTerm4]])
+    [T MULTOPR,N factor, N repTerm4]])
 
 ]
 
