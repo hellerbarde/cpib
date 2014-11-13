@@ -8,6 +8,7 @@
 
 Zur lexikalischen Syntax haben wir eine ausführliche Diskussion geführt, und dabei verschiedene Varianten ent- und wieder ver-worfen.
 
+### Deklaration
 Zum Vergleich zunächst die Deklaration einer Variablen, wie sie bereits in IML existiert:
 var m:int;
 Zunächst wird deklariert, dass es eine Variable (und nicht eine Konstante) ist, dann wird sie benannt und dann der Typ angegeben.
@@ -38,28 +39,33 @@ Da alle nicht-Array Elemente eines Arrays vom gleichen Typ sind, und das einzige
 Redundanzen zu entfernen:
 var d:arr (4,10,5) int;
 var d:arr (3) int;
-Die Länge der einzelnen Dimensionen ist das einzige, was sie unterscheidet und mit dieser Deklaration ist dies auch klar.
+Die Länge der einzelnen Dimensionen ist das einzige, was sie unterscheidet und mit dieser Deklaration nutzen wir dies.
 
-WIP Array Initialisierung und Zugriff:
-// Arrays müssen vollständig initialisiert werden; sugar für init:= 0;
+### Array Initialisierung und Zugriff
+
+Beim Initialisieren der Arrays haben wir uns sofort dafür entschieden, dass ein Array immer vollständig initialisiert werden muss,
+d.h. nicht teilweise unbestimmte Werte haben darf. Wir haben uns aber überlegt, dass es nützlich sein könnte, Arrays leicht "nullbar" 
+zu machen. Dazu haben wir die folgende Syntax entworfen und das Keyword 'fill' eingeführt.
 var a: arr 7 int;
-var foo: int;
+var b: arr 3 int;
 a init := [0, 1, 2, 3, 4, 5, 6];
-foo init := a[0];
+b init := fill 0;
+Bei erneuter Betrachtung haben wir keinen Grund gefunden, warum unsere Array nur "nullbar" sein sollten, und erlauben nun, ein Array
+komplett mit einem beliebigen Wert aufzufüllen, welcher auch durch eine Expression repräsentiert sein könnte.
+var c: arr 6 int;
+c init := fill 5*3+1;
 
-WIP Array Init und Zugriff bei verschachtelten Arrays:
-var a: arr (4,2) bool;
-a init:= [[true, true],[true, false],[false, true],[false,false]];
-a[0] = [true, true];
-a[0][1] = true; \\ this gets REAL ugly if you go several levels deep
+Beim Zugriff haben wir uns für eine Schreibweise entschieden, wie sie in verschiedenen anderen Sprachen verwendet wir, da sie uns gefällt,
+und so möglichst vielen Benutzern bekannt sein sollte.
+var d: arr (4,2) bool;
+d init := [[true, true],[true, false],[false, true],[false,false]];
+Dann hat a[0] den Inhalt [true, true], und a[0][1] den Wert true.
 
+Bevor wir nun zu den Array Slices kommen, sollte noch erwähnt werden, dass wir auch Array-Literale einführen, wie bei der Array-
+Initialisierung bereits gezeigt.
 
-WIP Array Deklaration mit Array Literalen:
-var a: arr 4 int;
-<snip>
-a := [0, 1, 5, 6];
+### Array Slice Notation
 
-WIP Array Slice Notation:
 var a: arr 20 int;
 var b: arr 4 int;
 b := a[1:3]; // the indices are both inclusive, making this a 3
