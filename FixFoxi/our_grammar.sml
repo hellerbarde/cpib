@@ -140,6 +140,7 @@ datatype nonterm
    | arrayAccess
    | arrayIndex
    | repArrayIndex
+   | optArrayOrFunction
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -191,6 +192,7 @@ val string_of_nonterm =
    | arrayAccess => "arrayAccess"
    | arrayIndex => "arrayIndex"
    | repArrayIndex => "repArrayIndex"
+   | optArrayOrFunction => "optArrayOrFunction"
 
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
@@ -327,12 +329,14 @@ val productions =
 
   (factor ,
     [[T LITERAL],
-    [N arrayAccess],
-    [T IDENT,N exprList], 
-    [N monadicOpr,N factor]]),
-    
-  (arrayAccess ,
-    [[T IDENT, N arrayIndex]]),
+    [N monadicOpr,N factor],
+    [T IDENT, N optArrayOrFunction],
+    [T LPAREN, N expr, T RPAREN]]),
+
+  (optArrayOrFunction ,
+    [[],
+    [N arrayIndex],
+    [N exprList]]),
   
   (arrayIndex ,
      [[T LBRACKET, N expr, T RBRACKET, N repArrayIndex]]),
