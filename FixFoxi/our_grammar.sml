@@ -141,6 +141,8 @@ datatype nonterm
    | arrayIndex
    | repArrayIndex
    | optArrayOrFunction
+   | typeOrArray
+   | repArrayLength
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -193,6 +195,8 @@ val string_of_nonterm =
    | arrayIndex => "arrayIndex"
    | repArrayIndex => "repArrayIndex"
    | optArrayOrFunction => "optArrayOrFunction"
+   | typeOrArray => "typeOrArray"
+   | repArrayLength => "repArrayLength"
 
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
@@ -253,7 +257,15 @@ val productions =
     [T COMMA,N progParams]]),
 
   (typedident ,
-    [[T IDENT,T COLON,T TYPE]]),
+    [[T IDENT,T COLON,N typeOrArray]]),
+
+  (typeOrArray ,
+    [[T TYPE],
+    [T ARRAY, T LPAREN, N expr, N repArrayLength, T RPAREN, T TYPE]]),
+
+  (repArrayLength ,
+     [[],
+     [T COMMA, N expr]]),
 
   (monadicOpr ,
     [[T NOT], 
