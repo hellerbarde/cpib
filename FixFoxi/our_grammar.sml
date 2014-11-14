@@ -137,6 +137,7 @@ datatype nonterm
    | typedident
    | arrayDecl
    | arrayLiteral
+   | arrayAccess
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -185,6 +186,7 @@ val string_of_nonterm =
    | typedident => "typedident"
    | arrayDecl => "arrayDecl"
    | arrayLiteral => "arrayLiteral"
+   | arrayAccess => "arrayLiteral"
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
 
@@ -319,9 +321,17 @@ val productions =
     [N expr, N repExpr]]),
 
   (factor ,
-    [[T LITERAL], 
+    [[T LITERAL],
+    [N arrayAccess],
     [T IDENT,N exprList], 
     [N monadicOpr,N factor]]),
+    
+  (arrayAccess ,
+    [[T IDENT, N arrayIndex]]),
+  
+  (arrayIndex ,
+     [[T LBRACKET, N expr, T RBRACKET, N arrayIndex],
+     []])
 
   (repExpr,
     [[], 
