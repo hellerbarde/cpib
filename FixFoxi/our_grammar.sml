@@ -1,8 +1,7 @@
 datatype term
   = LPAREN
    | RPAREN
-   | LBRACE
-   | RBRACE
+   | END
    | LBRACKET
    | RBRACKET
    | COMMA
@@ -48,8 +47,7 @@ datatype term
 val string_of_term =
   fn LPAREN => "LPAREN"
    | RPAREN => "RPAREN"
-   | LBRACE => "LBRACE"
-   | RBRACE => "RBRACE"
+   | END => "END"
    | COMMA => "COMMA"
    | SEMICOLON => "SEMICOLON"
    | COLON => "COLON"
@@ -330,7 +328,7 @@ val productions =
     [T MECHMODE]]),
 
   (blockCmd ,
-    [[T LBRACE,N cmd,N repCmd,T RBRACE]]),
+    [[T DO,N cmd,N repCmd,T END]]),
 
   (exprList ,
     [[T LPAREN,N optRepExpr,T RPAREN]]),
