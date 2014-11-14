@@ -89,19 +89,21 @@ datatype nonterm
    | cmd
    | cpsDecl
    | repCpsDecl
-   | cpsCmd
    | decl
    | expr
    | exprList
    | factor
    | funDecl
-   | globImp
-   | globImpList
+   | globImport
+   | globImportList
    | globInitList
    | repGlobInit
    | monadicOpr
-   | optCpsDecl
-   | optGlobImplList
+   | optCpsStoDecl
+   | cpsStoDecl
+   | repCpsStoDecl
+   | optGlobCpsDecl
+   | optGlobImportList
    | optModeChange
    | optModeFlow
    | optModeMech
@@ -115,7 +117,7 @@ datatype nonterm
    | repCmd
    | repExpr
    | optRepExpr
-   | repGlobImp
+   | repglobImport
    | repParam
    | storeDecl
    | term1
@@ -133,19 +135,21 @@ val string_of_nonterm =
    | cmd => "cmd"
    | cpsDecl => "cpsDecl"
    | repCpsDecl => "repCpsDecl"
-   | cpsCmd => "cpsCmd"
    | decl => "decl"
    | expr => "expr"
    | exprList => "exprList"
    | factor => "factor"
    | funDecl => "funDecl"
-   | globImp => "globImp"
-   | globImpList => "globImpList"
+   | globImport => "globImport"
+   | globImportList => "globImportList"
    | globInitList => "globInitList"
    | repGlobInit => "repGlobInit"
    | monadicOpr => "monadicOpr"
-   | optCpsDecl => "optCpsDecl"
-   | optGlobImplList => "optGlobImplList"
+   | optCpsStoDecl =>"optCpsStoDecl"
+   | cpsStoDecl => "cpsStoDecl"
+   | repCpsStoDecl => "repCpsStoDecl"
+   | optGlobCpsDecl => "optGlobCpsDecl"
+   | optGlobImportList => "optGlobImportList"
    | optModeChange => "optModeChange"
    | optModeFlow => "optModeFlow"
    | optModeMech => "optModeMech"
@@ -159,7 +163,7 @@ val string_of_nonterm =
    | repCmd => "repCmd"
    | repExpr => "repExpr"
    | optRepExpr => "optRepExpr"
-   | repGlobImp => "repGlobImp"
+   | repglobImport => "repglobImport"
    | repParam => "repParam"
    | storeDecl => "storeDecl"
    | term1 => "term1"
@@ -191,23 +195,19 @@ val productions =
   (repCpsDecl ,
     [[],
     [T SEMICOLON,N cpsDecl]]),
- 
-  (cpsCmd ,
-    [[],
-    [T SEMICOLON,N cmd]]),
 
   (cmd ,
     [[T SKIP], 
-    [N expr,T BECOMES,N expr, N cpsCmd], 
-    [T IF,T LPAREN,N expr,T RPAREN,N blockCmd,T ELSE,N blockCmd, N cpsCmd], 
-    [T WHILE,T LPAREN,N expr,T RPAREN,N blockCmd, N cpsCmd], 
-    [T CALL,T IDENT,N exprList,T INIT,N globInitList, N cpsCmd], 
-    [T QUESTMARK,N expr, N cpsCmd], 
-    [T EXCLAMARK,N expr, N cpsCmd]]),
+    [N expr,T BECOMES,N expr], 
+    [T IF,T LPAREN,N expr,T RPAREN,N blockCmd,T ELSE,N blockCmd], 
+    [T WHILE,T LPAREN,N expr,T RPAREN,N blockCmd], 
+    [T CALL,T IDENT,N exprList,T INIT,N globInitList], 
+    [T QUESTMARK,N expr], 
+    [T EXCLAMARK,N expr]]),
 
   (repParam ,
-    [[N param], 
-    [N param,T COMMA,N repParam]]),
+    [[], 
+    [T COMMA,N param]]),
 
   (globInitList ,
     [[T IDENT, N repGlobInit]]),
@@ -217,10 +217,10 @@ val productions =
     [T COMMA, T IDENT, N repGlobInit]]),
 
   (param ,
-    [[N optModeFlow,N optModeMech,N storeDecl]]),
+    [[N optModeFlow,N optModeMech,N storeDecl,N repParam]]),
 
   (program ,
-    [[T PROGRAM,T IDENT,N progParamList,N optCpsDecl,T DO,N cmd,T ENDPROGRAM]]),
+    [[T PROGRAM,T IDENT,N progParamList,N optGlobCpsDecl,T DO,N cmd,N repCmd,T ENDPROGRAM]]),
 
   (progParamList , 
     [[T LPAREN,N progParams,T RPAREN]]),
@@ -240,9 +240,6 @@ val productions =
     [[T NOT], 
     [T ADDOPR]]),
 
-  (globImp ,
-    [[N optModeFlow,N optModeChange,T IDENT]]),
-
   (factor ,
     [[T LITERAL], 
     [T IDENT,N exprList], 
@@ -254,42 +251,54 @@ val productions =
     [N procDecl]]),
 
   (procDecl ,
-    [[T PROC,T IDENT,N paramList, N optGlobImplList,N optCpsDecl,N blockCmd]]),
+    [[T PROC,T IDENT,N paramList, N optGlobImportList,N optCpsStoDecl,N blockCmd]]),
 
   (storeDecl ,
     [[T CHANGEMODE,T IDENT,T COLON,T TYPE], 
     [T IDENT,T COLON,T TYPE]]),
 
   (funDecl ,
-    [[T FUN,T IDENT,N paramList,T RETURNS,N storeDecl,N optGlobImplList,N optCpsDecl,N blockCmd]]),
+    [[T FUN,T IDENT,N paramList,T RETURNS,N storeDecl,N optGlobImportList,N optCpsStoDecl,N blockCmd]]),
 
-  (optCpsDecl ,
-    [[T LOCAL,N cpsDecl],
-    [T GLOBAL,N cpsDecl],
+  (optCpsStoDecl, 
+    [[T LOCAL, N cpsStoDecl],
+    []]),
+
+  (cpsStoDecl, 
+    [[N storeDecl, N repCpsStoDecl]]),
+
+  (repCpsStoDecl, 
+    [[T SEMICOLON, N storeDecl, N repCpsStoDecl],
+    []]),
+    
+  (optGlobCpsDecl ,
+    [[T GLOBAL,N cpsDecl],
     []]),
 
   (paramList ,
-    [[T LPAREN,N repParam,T RPAREN]]),
+    [[T LPAREN,N param,T RPAREN]]),
 
   (repCmd ,
-    [[N cmd], 
-    [N cmd,T SEMICOLON,N repCmd]]),
+    [[], 
+    [T SEMICOLON, N cmd, N repCmd]]),
 
-  (globImpList ,
-    [[N globImp],
-     [N repGlobImp]]),
+  (globImport ,
+    [[N optModeFlow,N optModeChange,T IDENT]]),
 
-  (repGlobImp ,
+  (globImportList ,
+    [[N globImport, N repglobImport]]),
+
+  (repglobImport ,
     [[],
-    [N globImp,T COMMA,N repGlobImp]]),
+    [T COMMA, N globImport, N repglobImport]]),
+
+  (optGlobImportList ,
+    [[T GLOBAL,N globImportList], 
+    []]),
 
   (optModeChange ,
     [[], 
     [T CHANGEMODE]]),
-
-  (optGlobImplList ,
-    [[T GLOBAL,N globImpList], 
-    []]),
 
   (optModeMech ,
     [[], 
