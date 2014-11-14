@@ -1,7 +1,6 @@
 datatype term
   = LPAREN
    | RPAREN
-   | DO
    | END
    | LBRACKET
    | RBRACKET
@@ -48,7 +47,6 @@ datatype term
 val string_of_term =
   fn LPAREN => "LPAREN"
    | RPAREN => "RPAREN"
-   | DO => "DO"
    | END => "END"
    | COMMA => "COMMA"
    | SEMICOLON => "SEMICOLON"
