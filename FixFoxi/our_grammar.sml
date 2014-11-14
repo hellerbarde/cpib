@@ -3,6 +3,8 @@ datatype term
    | RPAREN
    | LBRACE
    | RBRACE
+   | LBRACKET
+   | RBRACKET
    | COMMA
    | SEMICOLON
    | COLON
@@ -40,6 +42,8 @@ datatype term
    | ENDFUN
    | ENDPROC
    | ENDPROGRAM
+   | ARRAY
+   | FILL
 
 val string_of_term =
   fn LPAREN => "LPAREN"
@@ -83,6 +87,8 @@ val string_of_term =
    | ENDFUN => "ENDFUN"
    | ENDPROC => "ENDPROC"
    | ENDPROGRAM => "ENDPROGRAM"
+   | ARRAY => "ARRAY"
+   | FILL => "FILL"
    
 datatype nonterm
   = blockCmd
@@ -129,6 +135,8 @@ datatype nonterm
    | repTerm3
    | repTerm4
    | typedident
+   | arrayDecl
+   | arrayLiteral
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -175,6 +183,8 @@ val string_of_nonterm =
    | repTerm3 => "repTerm3"
    | repTerm4 => "repTerm4"
    | typedident => "typedident"
+   | arrayDecl => "arrayDecl"
+   | arrayLiteral => "arrayLiteral"
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
 
@@ -240,11 +250,6 @@ val productions =
     [[T NOT], 
     [T ADDOPR]]),
 
-  (factor ,
-    [[T LITERAL], 
-    [T IDENT,N exprList], 
-    [N monadicOpr,N factor]]),
-
   (decl ,
     [[N storeDecl], 
     [N funDecl], 
@@ -254,8 +259,7 @@ val productions =
     [[T PROC,T IDENT,N paramList, N optGlobImportList,N optCpsStoDecl,N blockCmd]]),
 
   (storeDecl ,
-    [[T CHANGEMODE,T IDENT,T COLON,T TYPE], 
-    [T IDENT,T COLON,T TYPE]]),
+    [[N optModeChange,N typedident]]),
 
   (funDecl ,
     [[T FUN,T IDENT,N paramList,T RETURNS,N storeDecl,N optGlobImportList,N optCpsStoDecl,N blockCmd]]),
@@ -313,6 +317,11 @@ val productions =
   (optRepExpr,
     [[],
     [N expr, N repExpr]]),
+
+  (factor ,
+    [[T LITERAL], 
+    [T IDENT,N exprList], 
+    [N monadicOpr,N factor]]),
 
   (repExpr,
     [[], 
