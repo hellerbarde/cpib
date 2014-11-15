@@ -1,7 +1,14 @@
 
 ## Vergleich mit anderen Sprachen
-Matlab: Schrittlänge
-Python: Slice notation, aber inklusive
-??: ++ als concatenation
+Wir haben nach unserer Diskussion uns auch überlegt was wir eventuell von anderen Sprachen übernehmen wollen, und nachgelesen, wie Array Slicing von anderen umgesetzt wurde.
+Dabei ist uns aufgefallen, dass wir die Syntax für Array Slicing nahezu genauso definieren wie Perl. Die Deklaration ist anders, und Perl
+bietet an, eine Expression zu verwenden welche z.B. nur jedes dritte Element zurückliefert statt nur eine Range. Dies erweitert aber 
+Array Slicing zu einem generischeren Filter, was wir ablehnen, da wir hier eine klare Funktion einbauen wollen und nicht ein Schweizer 
+Taschenmesser entwerfen. Perl vertritt da einen ganz anderen Standpunkt, weshalb diese Fähigkeit auch passt.
+Ebenso ist Python sehr ähnlich, allerdings ist bei Python der End-Index exklusiv, d.h. `a[0:3]` liefert 3 Werte zurück. Uns erschien dies aber unintuitiv, da `a[3]` ja nicht das dritte, sondern das vierte Element liefern würde. Python hat auch eine sehr elegante Lösung für "jedes x-te Element", indem eine Schrittlänge als drittes Argument mitgeliefert werden kann: `a[0:9:2]` liefert das erste, dritte, fünfte, siebte und neunte Element. Wir entschieden uns dagegen, dies einzubauen, da wir solche Schrittlängen nicht für sehr nützlich erachten, und es uns widerstrebt die Sprache mit allzu vielen neuen Konstrukten und Funktionen zu überladen. In einer weiteren Erweiterung mögen 
+Schrittlängen ein erstrebenswertes Feature sein, aber nicht in unserer.
+
+Schlussendlich haben wir eine Syntax erarbeitet, wie sie alle Sprachen haben, welche Array Slicing unterstützen. Natürlich bestehen immer kleine Unterschiede, aber wir haben keine Sprache gefunden, welche eine komplett andere Syntax verwendet. Dadurch fühlen wir uns in unseren
+Designentscheiden auch etwas bestätigt, denn so sind wir uns relativ sicher, dass wir eine brauchbare und klare Syntax entworfen haben.
 
 
