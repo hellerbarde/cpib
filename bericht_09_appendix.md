@@ -1,7 +1,7 @@
 
 ## Appendix: Testprogramme
 
-### Beispiel für die Array initialisierung und den Zugriff auf Elemente der Arrays.
+### Beispiel für die Array Initialisierung und den Zugriff auf Elemente der Arrays.
 
 ```
 // matrixmult.iml
@@ -37,8 +37,8 @@ do
 endprogram
 ```
 
-### Beispiel für Array slicing.
-Der input ist ein array von 300 ints. Diese kommen von einer Wetterstation und sind eigentlich 100 Datenpunkte mit je 3 Werten, nämlich Datum (Sekunden seit Unixepoche), Maximaltemperatur (in Grad Celsius) und Niederschlag (in mm). Die Auswertung hier soll aufsummieren an wievielen Tagen es mehr als 5mm geregnet hat und die Temperatur trotzdem über 25 Grad Celsius gestiegen ist. 
+### Beispiel für Array Slicing
+Der Input ist ein Array von 300 ints. Diese kommen von einer Wetterstation und sind eigentlich 100 Datenpunkte mit je 3 Werten, nämlich Datum (Sekunden seit Unix-Epoch), Maximaltemperatur (in Grad Celsius) und Niederschlag (in mm). Die Auswertung hier soll aufsummieren an wievielen Tagen es mehr als 5mm geregnet hat und die Temperatur trotzdem über 25 Grad Celsius gestiegen ist. 
 
 ```
 program parseInput(in const input: array (300) int,

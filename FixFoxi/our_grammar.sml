@@ -348,7 +348,13 @@ val productions =
     [T MECHMODE]]),
 
   (blockCmd ,
-    [[T DO,N cmd,N repCmd,T END]]),
+    [[T DO,N cmd,N repCmd,N endBlock]]),
+
+  (endBlock , 
+    [[T ENDWHILE],
+     [T ENDFUN],
+     [T ENDPROC],
+     [T ENDIF]])
 
   (exprList ,
     [[T LPAREN,N optRepExpr,T RPAREN]]),
