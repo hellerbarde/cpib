@@ -63,7 +63,7 @@ Die Länge der einzelnen Dimensionen ist das einzige, was sie unterscheidet und 
 ### Array Initialisierung und Zugriff
 
 Beim Initialisieren der Arrays haben wir uns sofort dafür entschieden, dass ein Array immer vollständig initialisiert werden muss,
-d.h. nicht teilweise unbestimmte Werte haben darf. Wir haben uns aber überlegt, dass es nützlich sein könnte, Arrays leicht initializu machen. Dazu haben wir die folgende Syntax entworfen und das Keyword 'fill' eingeführt.
+d.h. nicht teilweise unbestimmte Werte haben darf. Wir haben uns aber überlegt, dass es nützlich sein könnte, Arrays leicht initializu machen. Dazu haben wir die folgende Syntax entworfen und das Keyword 'fill' eingeführt. Hier haben wir die eckigen Klammern dann doch eingeführt, da uns die Syntax mit ihnen genug deutlich besser lesbar vorkam.
 
 ```
 var a: arr 7 int;
