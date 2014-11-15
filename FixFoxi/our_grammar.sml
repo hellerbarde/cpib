@@ -139,6 +139,9 @@ datatype nonterm
    | typedident
    | arrayDecl
    | arrayLiteral
+   | arrayContent
+   | repArray
+   | repLiteral
    | arrayAccess
    | arrayIndex
    | repArrayIndex
@@ -196,6 +199,9 @@ val string_of_nonterm =
    | typedident => "typedident"
    | arrayDecl => "arrayDecl"
    | arrayLiteral => "arrayLiteral"
+   | arrayContent => "arrayContent"
+   | repArray => "repArray"
+   | repLiteral => "repLiteral"
    | arrayAccess => "arrayAccess"
    | arrayIndex => "arrayIndex"
    | repArrayIndex => "repArrayIndex"
@@ -353,6 +359,7 @@ val productions =
 
   (factor ,
     [[T LITERAL],
+    [N arrayLiteral],
     [N monadicOpr,N factor],
     [T IDENT, N optInitParamsOrArrayAccess],
     [T LPAREN, N expr, T RPAREN]]),
@@ -363,6 +370,21 @@ val productions =
     [N exprList],
     [T INIT]]),
   
+  (arrayLiteral, 
+    [[T LBRACKET, N arrayContent, T RBRACKET]]),
+
+  (arrayContent , 
+    [[T LITERAL,N repLiteral],
+    [N arrayLiteral, N repArray]]),
+
+  (repArray ,
+    [[],
+    [T COMMA, N arrayLiteral, N repArray]]),
+
+  (repLiteral ,
+    [[],
+    [T COMMA, T LITERAL, N repLiteral]]),
+
   (arrayIndex ,
     [[T LBRACKET, N sliceExpr, T RBRACKET, N repArrayIndex]]),
  
