@@ -138,9 +138,10 @@ datatype nonterm
    | arrayAccess
    | arrayIndex
    | repArrayIndex
-   | optArrayOrFunction
+   | optInitParamsOrArrayAccess
    | typeOrArray
    | repArrayLength
+   | optFill
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -192,9 +193,10 @@ val string_of_nonterm =
    | arrayAccess => "arrayAccess"
    | arrayIndex => "arrayIndex"
    | repArrayIndex => "repArrayIndex"
-   | optArrayOrFunction => "optArrayOrFunction"
+   | optInitParamsOrArrayAccess => "optInitParamsOrArrayAccess"
    | typeOrArray => "typeOrArray"
    | repArrayLength => "repArrayLength"
+   | optFill => "optFill"
 
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
@@ -218,13 +220,17 @@ val productions =
     [T SEMICOLON,N cpsDecl]]),
 
   (cmd ,
-    [[T SKIP], 
-    [N expr,T BECOMES,N expr], 
+    [[T SKIP],
+    [N expr,T BECOMES,N optFill, N expr], 
     [T IF,T LPAREN,N expr,T RPAREN,N blockCmd,T ELSE,N blockCmd], 
     [T WHILE,T LPAREN,N expr,T RPAREN,N blockCmd], 
     [T CALL,T IDENT,N exprList,T INIT,N globInitList], 
     [T QUESTMARK,N expr], 
     [T EXCLAMARK,N expr]]),
+
+  (optFill ,
+    [[],
+     [T FILL]]),
 
   (repParam ,
     [[], 
@@ -340,13 +346,14 @@ val productions =
   (factor ,
     [[T LITERAL],
     [N monadicOpr,N factor],
-    [T IDENT, N optArrayOrFunction],
+    [T IDENT, N optInitParamsOrArrayAccess],
     [T LPAREN, N expr, T RPAREN]]),
 
-  (optArrayOrFunction ,
+  (optInitParamsOrArrayAccess ,
     [[],
     [N arrayIndex],
-    [N exprList]]),
+    [N exprList],
+    [T INIT]]),
   
   (arrayIndex ,
      [[T LBRACKET, N expr, T RBRACKET, N repArrayIndex]]),
