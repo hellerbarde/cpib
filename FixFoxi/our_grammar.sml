@@ -43,6 +43,7 @@ datatype term
    | ENDPROGRAM
    | ARRAY
    | FILL
+   | DOTDOT
 
 val string_of_term =
   fn LPAREN => "LPAREN"
@@ -87,6 +88,7 @@ val string_of_term =
    | ENDPROGRAM => "ENDPROGRAM"
    | ARRAY => "ARRAY"
    | FILL => "FILL"
+   | DOTDOT => "DOTDOT"
    
 datatype nonterm
   = blockCmd
@@ -142,6 +144,8 @@ datatype nonterm
    | typeOrArray
    | repArrayLength
    | optFill
+   | sliceExpr
+   | repSliceExpr
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -197,6 +201,8 @@ val string_of_nonterm =
    | typeOrArray => "typeOrArray"
    | repArrayLength => "repArrayLength"
    | optFill => "optFill"
+   | sliceExpr => "sliceExpr"
+   | repSliceExpr => "repSliceExpr"
 
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
@@ -356,8 +362,14 @@ val productions =
     [T INIT]]),
   
   (arrayIndex ,
-     [[T LBRACKET, N expr, T RBRACKET, N repArrayIndex]]),
+    [[T LBRACKET, N sliceExpr, T RBRACKET, N repArrayIndex]]),
  
+  (sliceExpr ,
+    [[N expr, N repSliceExpr]]),
+  (repSliceExpr ,
+    [[],
+    [T DOTDOT, N expr]]),
+
   (repArrayIndex , 
      [[],
       [N arrayIndex]]),
