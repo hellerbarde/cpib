@@ -4,9 +4,7 @@
 
 # Syntax 
 
-## Lexikalisch
-
-Zur lexikalischen Syntax haben wir eine ausführliche Diskussion geführt, und dabei verschiedene Varianten ent- und wieder verworfen.
+Zur Syntax haben wir eine ausführliche Diskussion geführt, und dabei verschiedene Varianten ent- und wieder verworfen.
 
 ### Deklaration
 Zum Vergleich zunächst die Deklaration einer Variablen, wie sie bereits in IML existiert:
@@ -102,6 +100,17 @@ b := a[1:3]; // the indices are both inclusive, making this an array of length 3
 WIP Array Zuweisungen:
 a[0] := EXPR;
 a[0:2] := ARR_EXPR;
+
+## Lexikalisch
+
+Lexikalisch erweiterten wir die Syntax um die folgenden Tokens:
+Pattern  | Token
+------------- | -------------
+[  | LBRACKET
+]  | RBRACKET
+fill   | FILL
+arr (int) type | (ARRAY,Length,Type)
+.. | DOTDOT
 
 
 ## Grammatikalisch
