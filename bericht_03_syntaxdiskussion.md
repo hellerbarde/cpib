@@ -81,7 +81,7 @@ c init := fill 5*3+1;
 ```
 
 Beim Zugriff haben wir uns für eine Schreibweise entschieden, wie sie in verschiedenen anderen Sprachen verwendet wir, da sie uns gefällt,
-und so möglichst vielen Benutzern bekannt sein sollte.
+und so möglichst vielen Benutzern bekannt sein sollte. Wir indizieren aus demselben Grund auch von 0 aus und erlauben keine negativen Indices. Auch bei den Slices kommen negative Werte nicht vor.
 
 ```
 var d: arr (4,2) bool;
@@ -95,13 +95,25 @@ Initialisierung bereits gezeigt.
 
 ### Array Slice Notation
 
+Ein Array Slice ist ein erweiterter Zugriff, und soll auf möglichst simple Art erlauben, mehrere Elemente gleichzeitig zu adressieren.
+Daher übernahmen wir grundsätzlich die Syntax eines Array-Zugriffs, und erweiterten sie um ein Trennsymbol, '..', und einen zweiten Index.
+Wir beschreiben Slices also über einen Start- und einen End-Index. In unserem Fall sind beide *inklusive* zu verstehen.
 
 ```
 var a: arr 20 int;
 var b: arr 4 int;
-b := a[1:3]; // the indices are both inclusive, making this an array of length 3.
+> snip
+b := a[0..3]; 
 ```
+In diesem Beispiel nehmen wir daher die ersten vier Elemente eines 20-Element Arrays, und füllen sie in einen 4-Element Array.
+Das bedingt auch, dass Arrays nicht nur Array-Literale zugewiesen werden können, sondern auch Array-Slices, wobei die Länge und der Typ 
+natürlich korrekt sein müssen.
 
-WIP Array Zuweisungen:
-a[0] := EXPR;
-a[0:2] := ARR_EXPR;
+Zudem sollten Slice zu Slice Zuweisungen möglich sein, also z.B:
+
+```
+var c: arr 20 int;
+var d: arr 10 int;
+> snip
+d[5..8] := c[16..20]; 
+```
