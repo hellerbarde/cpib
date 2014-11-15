@@ -14,10 +14,17 @@ cmd     ::= SKIP
 typedIdent  ::= IDENT COLON (ATOMTYPE | ARRAY LPAREN expr {COMMA expr} RPAREN TYPE)
 
 factor      ::= LITERAL
+              | arrayLiteral
               | IDENT [INIT | exprList | arrayIndex]
               | monadicOpr factor
               | LPAREN expr RPAREN
 
 arrayIndex  ::= LBRACKET expr [DOTDOT expr] RBRACKET {arrayIndex}
+
+arrayLiteral ::= LBRACKET arrayContent RBRACKET
+
+arrayContent ::= LITERAL {COMMA LITERAL}
+               | arrayLiteral {COMMA arrayLiteral}
+
 ```
 
