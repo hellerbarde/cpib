@@ -4,8 +4,6 @@
 ### Beispiel für die Array initialisierung und den Zugriff auf Elemente der Arrays.
 
 ```
-// matrixmult.iml
-
 program matrixMult
 
 global
