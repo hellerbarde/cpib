@@ -1,10 +1,5 @@
 
-TODO: ## Warum so und nicht anders?
-Maximale Lesbarkeit ohne Unklarheit und ohne die Typsicherheit zu verletzen.
-Wir haben uns ueberlegt, Arrays auch mit basic types zu konkatenieren. Dies fuehrt aber zu einer komplexeren Grammatik. Da wir Array Literale haben, kann ein basic type ohne grossen Aufwand manuell in ein Array verpackt werden.
-
-
-## Gedanken zum Syntax
+## Gedanken zur Syntax
 
 *Warum so und nicht anders?*
 
