@@ -104,8 +104,9 @@ a[0:2] := ARR_EXPR;
 ## Lexikalisch
 
 Lexikalisch erweiterten wir die Syntax um die folgenden Tokens:
+
 Pattern  | Token
-------------- | -------------
+-------  | -----
 [  | LBRACKET
 ]  | RBRACKET
 fill   | FILL
