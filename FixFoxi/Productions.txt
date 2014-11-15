@@ -1,0 +1,143 @@
+<optModeFlow>
+
+  FLOWMODE
+<cpsDecl>
+
+  <decl> <repCpsDecl>
+<repCpsDecl>
+
+  SEMICOLON <cpsDecl>
+<cmd>
+  SKIP
+  <expr> BECOMES <optFill> <expr>
+  IF LPAREN <expr> RPAREN <blockCmd> ELSE <blockCmd>
+  WHILE LPAREN <expr> RPAREN <blockCmd>
+  CALL IDENT <exprList> INIT <globInitList>
+  QUESTMARK <expr>
+  EXCLAMARK <expr>
+<optFill>
+
+  FILL
+<repParam>
+
+  COMMA <param>
+<globInitList>
+  IDENT <repGlobInit>
+<repGlobInit>
+
+  COMMA IDENT <repGlobInit>
+<param>
+  <optModeFlow> <optModeMech> <storeDecl> <repParam>
+<program>
+  PROGRAM IDENT <progParamList> <optGlobCpsDecl> DO <cmd> <repCmd> ENDPROGRAM
+<progParamList>
+  LPAREN <progParams> RPAREN
+<progParams>
+
+  FLOWMODE CHANGEMODE <typedident> <repProgParams>
+<repProgParams>
+
+  COMMA <progParams>
+<typedident>
+  IDENT COLON <typeOrArray>
+<typeOrArray>
+  TYPE
+  ARRAY LPAREN <expr> <repArrayLength> RPAREN TYPE
+<repArrayLength>
+
+  COMMA <expr>
+<monadicOpr>
+  NOT
+  ADDOPR
+<decl>
+  <storeDecl>
+  <funDecl>
+  <procDecl>
+<procDecl>
+  PROC IDENT <paramList> <optGlobImportList> <optCpsStoDecl> <blockCmd>
+<storeDecl>
+  <optModeChange> <typedident>
+<funDecl>
+  FUN IDENT <paramList> RETURNS <storeDecl> <optGlobImportList> <optCpsStoDecl> <blockCmd>
+<optCpsStoDecl>
+  LOCAL <cpsStoDecl>
+
+<cpsStoDecl>
+  <storeDecl> <repCpsStoDecl>
+<repCpsStoDecl>
+  SEMICOLON <storeDecl> <repCpsStoDecl>
+
+<optGlobCpsDecl>
+  GLOBAL <cpsDecl>
+
+<paramList>
+  LPAREN <param> RPAREN
+<repCmd>
+
+  SEMICOLON <cmd> <repCmd>
+<globImport>
+  <optModeFlow> <optModeChange> IDENT
+<globImportList>
+  <globImport> <repglobImport>
+<repglobImport>
+
+  COMMA <globImport> <repglobImport>
+<optGlobImportList>
+  GLOBAL <globImportList>
+
+<optModeChange>
+
+  CHANGEMODE
+<optModeMech>
+
+  MECHMODE
+<blockCmd>
+  DO <cmd> <repCmd> END
+<exprList>
+  LPAREN <optRepExpr> RPAREN
+<optRepExpr>
+
+  <expr> <repExpr>
+<factor>
+  LITERAL
+  <monadicOpr> <factor>
+  IDENT <optInitParamsOrArrayAccess>
+  LPAREN <expr> RPAREN
+<optInitParamsOrArrayAccess>
+
+  <arrayIndex>
+  <exprList>
+  INIT
+<arrayIndex>
+  LBRACKET <sliceExpr> RBRACKET <repArrayIndex>
+<sliceExpr>
+  <expr> <repSliceExpr>
+<repSliceExpr>
+
+  DOTDOT <expr>
+<repArrayIndex>
+
+  <arrayIndex>
+<repExpr>
+
+  COMMA <expr> <repExpr>
+<expr>
+  <term1> <repTerm1>
+<repTerm1>
+
+  BOOLOPR <term1> <repTerm1>
+<term1>
+  <term2> <repTerm2>
+<repTerm2>
+
+  RELOPR <term2> <repTerm2>
+<term2>
+  <term3> <repTerm3>
+<repTerm3>
+
+  ADDOPR <term3> <repTerm3>
+<term3>
+  <factor> <repTerm4>
+<repTerm4>
+
+  MULTOPR <factor> <repTerm4>
