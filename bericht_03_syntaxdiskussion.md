@@ -79,7 +79,7 @@ c init := fill 5*3+1;
 ```
 
 Beim Zugriff haben wir uns für eine Schreibweise entschieden, wie sie in verschiedenen anderen Sprachen verwendet wir, da sie uns gefällt,
-und so möglichst vielen Benutzern bekannt sein sollte. Wir indizieren aus demselben Grund auch von 0 aus.
+und so möglichst vielen Benutzern bekannt sein sollte. Wir indizieren aus demselben Grund auch von 0 aus und erlauben keine negativen Indices. Auch bei den Slices kommen negative Werte nicht vor.
 
 ```
 var d: arr (4,2) bool;
@@ -100,8 +100,16 @@ Wir beschreiben Slices also über einen Start- und einen End-Index. In unserem F
 var a: arr 20 int;
 var b: arr 4 int;
 > snip
-b := a[0:3]; 
+b := a[0..3]; 
 ```
 In diesem Beispiel nehmen wir daher die ersten vier Elemente eines 20-Element Arrays, und füllen sie in einen 4-Element Array.
 Das bedingt auch, dass Arrays nicht nur Array-Literale zugewiesen werden können, sondern auch Array-Slices, wobei die Länge und der Typ 
 natürlich korrekt sein müssen.
+
+Zudem sollten Slice zu Slice Zuweisungen möglich sein, also z.B:
+```
+var c: arr 20 int;
+var d: arr 10 int;
+> snip
+d[5..8] := c[16..20]; 
+```
