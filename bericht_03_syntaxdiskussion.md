@@ -4,7 +4,9 @@ Maximale Lesbarkeit ohne Unklarheit und ohne die Typsicherheit zu verletzen.
 Wir haben uns ueberlegt, Arrays auch mit basic types zu konkatenieren. Dies fuehrt aber zu einer komplexeren Grammatik. Da wir Array Literale haben, kann ein basic type ohne grossen Aufwand manuell in ein Array verpackt werden.
 
 
-# Syntax
+## Gedanken zum Syntax
+
+*Warum so und nicht anders?*
 
 Zur Syntax haben wir eine ausführliche Diskussion geführt, und dabei verschiedene Varianten ent- und wieder verworfen.
 
@@ -92,6 +94,7 @@ Bevor wir nun zu den Array Slices kommen, sollte noch erwähnt werden, dass wir 
 Initialisierung bereits gezeigt.
 
 ### Array Slice Notation
+
 
 ```
 var a: arr 20 int;

@@ -1,1 +1,1 @@
-# Arrays und Array-Slicing
+# Compilerbau 2014 - Gruppe 10 - Arrays und Array-Slicing
