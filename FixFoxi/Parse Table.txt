@@ -34,6 +34,8 @@
     <expr> BECOMES <optFill> <expr>
   terminal NOT
     <expr> BECOMES <optFill> <expr>
+  terminal LBRACKET
+    <expr> BECOMES <optFill> <expr>
   terminal LITERAL
     <expr> BECOMES <optFill> <expr>
   terminal IF
@@ -54,6 +56,8 @@
   terminal ADDOPR
 
   terminal NOT
+
+  terminal LBRACKET
 
   terminal LITERAL
 
@@ -226,11 +230,15 @@
     <expr> <repExpr>
   terminal NOT
     <expr> <repExpr>
+  terminal LBRACKET
+    <expr> <repExpr>
   terminal LITERAL
     <expr> <repExpr>
 <factor>
   terminal LITERAL
     LITERAL
+  terminal LBRACKET
+    <arrayLiteral>
   terminal ADDOPR
     <monadicOpr> <factor>
   terminal NOT
@@ -270,6 +278,24 @@
     <exprList>
   terminal INIT
     INIT
+<arrayLiteral>
+  terminal LBRACKET
+    LBRACKET <arrayContent> RBRACKET
+<arrayContent>
+  terminal LITERAL
+    LITERAL <repLiteral>
+  terminal LBRACKET
+    <arrayLiteral> <repArray>
+<repArray>
+  terminal RBRACKET
+
+  terminal COMMA
+    COMMA <arrayLiteral> <repArray>
+<repLiteral>
+  terminal RBRACKET
+
+  terminal COMMA
+    COMMA LITERAL <repLiteral>
 <arrayIndex>
   terminal LBRACKET
     LBRACKET <sliceExpr> RBRACKET <repArrayIndex>
@@ -281,6 +307,8 @@
   terminal ADDOPR
     <expr> <repSliceExpr>
   terminal NOT
+    <expr> <repSliceExpr>
+  terminal LBRACKET
     <expr> <repSliceExpr>
   terminal LITERAL
     <expr> <repSliceExpr>
@@ -330,6 +358,8 @@
     <term1> <repTerm1>
   terminal NOT
     <term1> <repTerm1>
+  terminal LBRACKET
+    <term1> <repTerm1>
   terminal LITERAL
     <term1> <repTerm1>
 <repTerm1>
@@ -359,6 +389,8 @@
   terminal ADDOPR
     <term2> <repTerm2>
   terminal NOT
+    <term2> <repTerm2>
+  terminal LBRACKET
     <term2> <repTerm2>
   terminal LITERAL
     <term2> <repTerm2>
@@ -391,6 +423,8 @@
   terminal ADDOPR
     <term3> <repTerm3>
   terminal NOT
+    <term3> <repTerm3>
+  terminal LBRACKET
     <term3> <repTerm3>
   terminal LITERAL
     <term3> <repTerm3>
@@ -425,6 +459,8 @@
   terminal ADDOPR
     <factor> <repTerm4>
   terminal NOT
+    <factor> <repTerm4>
+  terminal LBRACKET
     <factor> <repTerm4>
   terminal LITERAL
     <factor> <repTerm4>
