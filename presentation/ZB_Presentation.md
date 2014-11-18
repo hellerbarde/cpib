@@ -68,13 +68,13 @@ Schlussendlich:
 
 Die Syntax für die Initialisierung und den Zugriff sieht so aus:
 
-* `a init := [0,1,2,3]`
-* `b init := fill 5`
-* `c init := a[3]`
+* `a init := [0,1,2,3];`
+* `b init := fill 5;`
+* `c init := a[3];`
 
 ## Gedanken zur Syntax der Array-Slices
 
-* `b := a[2..4]`
+* `b := a[2..4];`
 
 * Ähnlichkeit zum Zugriff
 * Kein Überladen des Minus Operators
@@ -116,7 +116,7 @@ arrayContent ::= LITERAL {',' LITERAL}
                | arrayLiteral {',' arrayLiteral}
 ```
 
-# Beispiel 
+# Beispiele
 
 ## Matrix Multiplikation
 
@@ -130,11 +130,11 @@ do
     while j > 2 do
       while k > 3 do
         c[i][j] := c[i][j] + a[i][k] * b[k][j];
-        k := k+1
+        k := k+1;
       endwhile
-      j := j+1
+      j := j+1;
     endwhile
-    i := i+1
+    i := i+1;
   endwhile
 endprogram
 ```
@@ -155,7 +155,7 @@ do
       result := result + 1;
     else
     endif
-    i := i+1
+    i := i+1;
   endwhile
 endprogram
 ```
