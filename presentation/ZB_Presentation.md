@@ -1,5 +1,3 @@
-
-<!--- It's DIE Syntax. Ask Duden if you doubt it ;) --->
 # Sprachdesign
 
 ## Arrays
@@ -11,27 +9,50 @@ Wir definieren Arrays so:
 
 Die Deklaration sieht mittlerweile so aus:
 
-`var a:array (5) int;`
+```
+var a:array (5) int;
+```
 
 und der Zugriff so:
 
-`a[5];`
+```
+a[5];
+```
 
 
 ## Array Slicing
+
+### Was?
+
+* Extraktion eines Teilarrays
+
+```
+a := [1,2,3,4,5];
+
+print(a[0..3]);
+
+--------------------
+output => [1,2,3,4]
+```
+
+## Array Slicing
+
+### Warum?
 
 * Selten in Sprachen umgesetzt
 * Expressive Syntax
 * Übersichtlicher Array-Handling Code
 
 Ein Slice hat die folgende Syntax:
-`a[2..4];`
+```
+a[2..4];
+```
 
-## Gedanken zur Syntax der Deklaration
+## Gedanken zur Deklaration
 
 Mehrere Versuche, bis wir zur definitiven Syntax kamen:
 
-* `var a:TYPE[LENGTH][DIMENSION];`
+* `var a:TYPE[LENGTH][DIMENSIONS];`
 * `var b:array (array or type) LENGTH;`
 * `var c:array LENGTH (array or type);`
 
@@ -39,7 +60,7 @@ Schlussendlich:
 
 * `var d:array (LENGTHS) type;`
 
-## Gedanken zur Syntax der Initialisierung und des Zugriffs
+## Gedanken zu Initialisierung und Zugriff
 
 * Immer vollständig initialisiert
 * Syntaktischer Zucker um Arrays zu "nullen"
@@ -55,47 +76,91 @@ Die Syntax für die Initialisierung und den Zugriff sieht so aus:
 
 * `b := a[2..4]`
 
-Wir wollten möglichst grosse Ähnlichkeit zum Zugriff und zudem
-wollten wir das `-` nicht überladen, also haben wir uns für `..` entschieden. 
-
+* Ähnlichkeit zum Zugriff
+* Kein Überladen des Minus Operators
 
 
 # Technisches
 
 ## Lexikalische Erweiterungen
 
-* Nur wenig zwingend nötig
-* Fill für den syntaktischen Zucker
-* DOTDOT damit wir Minus nicht überladen müssen
+* Nur weniges nötig
+* `FILL` für den syntaktischen Zucker
+* `DOTDOT` damit wir Minus nicht überladen
 
-Pattern            | Token
--------------------|--------------------
-`[`                | LBRACKET
-`]`                | RBRACKET
-`fill`             | FILL
-`array (int) type` | (ARRAY,Length,Type)
-`..`               | DOTDOT
+Pattern                        | Token
+-------------------            |--------------------
+`[`                            | LBRACKET
+`]`                            | RBRACKET
+`fill`                         | FILL
+`array (<int>{,<int>}) <type>` | (ARRAY,Length,Type)
+`..`                           | DOTDOT
 
 
 ## Grammatikalische Produktionen
 
+```
+cmd     ::= SKIP
+          | expr ':=' [FILL] expr
+          [...]
+typedIdent ::= IDENT ':'(ATOMTYPE 
+              | ARRAY '(' expr {',' expr} ')' TYPE)
+factor ::= LITERAL
+         | arrayLiteral
+         | IDENT [INIT | exprList | arrayIndex]
+         [...]
+
+arrayIndex::= '[' expr ['..' expr] ']' {arrayIndex}
+arrayLiteral ::= '[' arrayContent ']'
+arrayContent ::= LITERAL {',' LITERAL}
+               | arrayLiteral {',' arrayLiteral}
+```
+
 # Beispiel 
 
 ## Matrix Multiplikation
-* Beispiel beispiel
 
 ```
-Fooobar baz
-program
-functions and stuffs
-declarations and so on
+do
+  a init := [[1,2,3],[4,5,6]];
+  b init := [[1,2],[3,4],[5,6]];
+  c init := fill 0;
+  [skip restliche Initialisierungen]
+  while i > 2 do
+    while j > 2 do
+      while k > 3 do
+        c[i][j] := c[i][j] + a[i][k] * b[k][j];
+        k := k+1
+      endwhile
+      j := j+1
+    endwhile
+    i := i+1
+  endwhile
+endprogram
 ```
 
 ## Datensatzauswertung
 
-* explanation of the example
+* Wetterstation
+* Datum, Temperatur [°C], Niederschlag [mm]
+* Output: Anzahl Tage mit `T > 25 && N > 5`
 
 ```
-program bla
-
+global 
+  var datapoint : array (3) int;
+do
+  while i > 100 do 
+    datapoint := input[i*3 .. i*3 + 2]
+    if datapoint[1] > 25 && datapoint[2] > 5 then
+      result := result + 1;
+    else
+    endif
+    i := i+1
+  endwhile
+endprogram
 ```
+
+
+## Fragen
+
+Vielen Dank! 
