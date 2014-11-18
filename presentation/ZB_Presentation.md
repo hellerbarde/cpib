@@ -7,11 +7,11 @@
 Wir definieren Arrays so:
 
 * Multidimensional
-* Simple Types <!--- Sollte dies Primitive Typen heissen? --->
+* Primitive Typen
 
 Die Deklaration sieht mittlerweile so aus:
 
-`var a:arr (5) int;`
+`var a:array (5) int;`
 
 und der Zugriff so:
 
@@ -20,9 +20,9 @@ und der Zugriff so:
 
 ## Array Slicing
 
-* Unorthodox
+* Selten in Sprachen umgesetzt
 * Expressive Syntax
-* Übersichtlicher Array-handling Code
+* Übersichtlicher Array-Handling Code
 
 Ein Slice hat die folgende Syntax:
 `a[2..4];`
@@ -32,12 +32,12 @@ Ein Slice hat die folgende Syntax:
 Mehrere Versuche, bis wir zur definitiven Syntax kamen:
 
 * `var a:TYPE[LENGTH][DIMENSION];`
-* `var b:arr (array or type) LENGTH;`
-* `var c:arr LENGTH (array or type);`
+* `var b:array (array or type) LENGTH;`
+* `var c:array LENGTH (array or type);`
 
 Schlussendlich:
 
-* `var d:arr (LENGTHS) type;`
+* `var d:array (LENGTHS) type;`
 
 ## Gedanken zur Syntax der Initialisierung und des Zugriffs
 
