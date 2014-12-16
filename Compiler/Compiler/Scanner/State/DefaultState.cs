@@ -18,6 +18,8 @@ namespace Compiler
                 {
                     case '(': Add(scanner, Terminals.LPAREN); break;
                     case ')': Add(scanner, Terminals.RPAREN); break;
+                    case '[': Add(scanner, Terminals.LBRACKET); break;
+                    case ']': Add(scanner, Terminals.RBRACKET); break;
                     case ',': Add(scanner, Terminals.COMMA); break;
                     case ';': Add(scanner, Terminals.SEMICOLON); break;
                     case '+': scanner.AddToken(new OperatorToken(Terminals.ADDOPR, Operators.PLUS)); break;
@@ -30,6 +32,7 @@ namespace Compiler
                     case '&': scanner.CurrentState = new AndState(); break;
                     case '|': scanner.CurrentState = new OrState(); break;
                     case ':': scanner.CurrentState = new ColonState(); break;
+                    case '.': scanner.CurrentState = new PeriodState(); break;
                     default:
                         throw new LexicalException(String.Format("Unexpected charachter: '{0}'", data));
                 }

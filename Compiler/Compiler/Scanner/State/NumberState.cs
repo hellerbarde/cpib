@@ -22,7 +22,7 @@ namespace Compiler
                 scanner.CurrentState = new DefaultState();
                 scanner.CurrentState.Handle(scanner, data);
             }
-            if (value > Int32.MaxValue) { throw new LexicalException("Int32 Literal '" + value + "' is to large"); }
+            if (value > Int32.MaxValue) { throw new LexicalException("Int32 Literal '" + value + "' is too large"); }
         }
     }
 }

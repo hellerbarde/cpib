@@ -73,6 +73,7 @@
     <Compile Include="Scanner\Token\Token.cs" />
     <Compile Include="Scanner\Token\Type.cs" />
     <Compile Include="Scanner\Token\TypeToken.cs" />
+    <Compile Include="Scanner\State\PeriodState.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

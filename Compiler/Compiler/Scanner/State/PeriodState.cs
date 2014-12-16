@@ -6,7 +6,19 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-	public class PeriodState
-	{
-	}
+  public class PeriodState : State
+  {
+
+    public override void Handle(Scanner scanner, char data)
+    {
+      if (data == '.') {
+        scanner.AddToken(scanner.Keywords[".."]);
+        scanner.CurrentState = new DefaultState();
+        scanner.CurrentState.Handle(scanner, data);
+      }
+      else {
+        throw new LexicalException("Found '.'; '..' expected.");
+      }
+    }
+  }
 }
