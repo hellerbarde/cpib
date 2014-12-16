@@ -1,2 +1,2 @@
-﻿Liebe Grossmutter!
-Zu Deinem 67-ten Geburtstag
+﻿a:array [ 5 ] bool;
+a init := fill 5;
