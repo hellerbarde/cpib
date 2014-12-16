@@ -66,6 +66,9 @@ namespace Compiler
             Keywords.Add("skip", new Token(Terminals.SKIP));
             Keywords.Add("then", new Token(Terminals.THEN));
             Keywords.Add("while", new Token(Terminals.WHILE));
+            Keywords.Add("..", new Token(Terminals.RANGE));
+            Keywords.Add("array", new TypeToken(Type.ARRAY));
+            Keywords.Add("fill", new Token(Terminals.FILL));
         }
         /// <summary>
         /// Runs a state machine to execute the lexical analysis

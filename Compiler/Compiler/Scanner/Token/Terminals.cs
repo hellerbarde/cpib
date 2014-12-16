@@ -12,6 +12,10 @@ namespace Compiler
         LPAREN,
         ///<summary>)</summary>
         RPAREN,
+        ///<summary>[</summary>
+        LBRACKET,
+        ///<summary>]</summary>
+        RBRACKET, 
         ///<summary>,</summary>
         COMMA,
         ///<summary>;</summary>
@@ -84,6 +88,12 @@ namespace Compiler
         WHILE,
         ///<summary>[a-zA-Z][a-zA-z0-9]*</summary>
         IDENT,
+        ///<summary>..</summary>
+        RANGE,
+        ///<summary>array</summary>
+        ARRAY,
+        ///<summary>fill</summary>
+        FILL,
         ///<summary>EOF</summary>
         SENTINEL,
     }

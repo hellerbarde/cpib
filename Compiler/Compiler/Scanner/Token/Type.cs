@@ -9,6 +9,7 @@ namespace Compiler
     public enum Type
     {
         INT32,
-        BOOL
+        BOOL,
+        ARRAY
     }
 }
