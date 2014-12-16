@@ -1,6 +1,6 @@
 # Scanner
 
-Needs to be extended to parse our new Tokens (array etc.)
+Needs to be extended to parse our new Tokens (array etc.) DONE
 
 # Parser
 
