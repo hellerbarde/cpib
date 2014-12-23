@@ -4,8 +4,26 @@ using System.Collections.Generic;
 
 namespace Compiler
 {
-	public interface IProgram
-	{
-	}
+  public interface IProgram
+  {
+    Token Ident { get; set; }
+
+    ICmd Cmd {
+      get;
+      set;
+    }
+
+    IRepCmd RepCmd {
+      get;
+      set;
+    }
+
+    IOptGlobCpsDecl OptGlobCpsDecl {
+      get;
+      set;
+    }
+
+    IProgParamList ProgParamList { get; set; }
+  }
 }
 

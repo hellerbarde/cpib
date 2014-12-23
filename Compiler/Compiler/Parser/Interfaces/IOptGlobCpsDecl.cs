@@ -1,0 +1,15 @@
+using System;
+using System.Collections;
+using System.Collections.Generic;
+
+namespace Compiler
+{
+  public interface IOptGlobCpsDecl
+  {
+    ICpsDecl CpsDecl {
+      get;
+      set;
+    }
+  }
+}
+
