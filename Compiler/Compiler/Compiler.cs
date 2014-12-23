@@ -15,6 +15,9 @@ namespace Compiler
                 Scanner scanner = new Scanner();
                 var list = scanner.Scan(new System.IO.StreamReader("test03.iml"));
                 Console.WriteLine("[" + String.Join(", ", list) + "]");
+                Parser parser = new Parser(list);
+                IProgram program = parser.parse();
+                Console.WriteLine(program.ToString());
             }
             catch (Exception ex)
             {
