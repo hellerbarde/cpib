@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 
 namespace Compiler
 {
@@ -20,6 +21,13 @@ namespace Compiler
 
     public Program()
     {
+    }
+
+    public override String ToString(){
+//      StringBuilder sb = new StringBuilder("This is a program called " + ((IdentToken)Ident).Value);
+//      sb.AppendLine(ProgParamList.ToString)
+//      return (sb.ToString());
+      return ("This is a program called " + ((IdentToken)Ident).Value);
     }
   }
 }
