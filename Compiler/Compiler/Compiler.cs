@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    class Program
+    class Compiler
     {
         static void Main(string[] args)
         {
             try
             {
                 Scanner scanner = new Scanner();
-                var list = scanner.Scan(new System.IO.StreamReader("test02.iml"));
+                var list = scanner.Scan(new System.IO.StreamReader("test01.iml"));
                 Console.WriteLine("[" + String.Join(", ", list) + "]");
             }
             catch (Exception ex)

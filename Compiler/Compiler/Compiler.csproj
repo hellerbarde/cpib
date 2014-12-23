@@ -67,13 +67,15 @@
     <Compile Include="Scanner\Token\OperatorToken.cs" />
     <Compile Include="Scanner\Token\BoolLiteralToken.cs" />
     <Compile Include="Scanner\Token\IntLiteralToken.cs" />
-    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scanner\Token\Terminals.cs" />
     <Compile Include="Scanner\Token\Token.cs" />
     <Compile Include="Scanner\Token\Type.cs" />
     <Compile Include="Scanner\Token\TypeToken.cs" />
     <Compile Include="Scanner\State\PeriodState.cs" />
+    <Compile Include="Parser\Parser.cs" />
+    <Compile Include="Compiler.cs" />
+    <Compile Include="Parser\Interfaces\IProgram.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -93,4 +95,18 @@
   <Target Name="AfterBuild">
   </Target>
   -->
+  <ItemGroup>
+    <Folder Include="Parser\" />
+    <Folder Include="Parser\Interfaces\" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <TextStylePolicy FileWidth="120" IndentWidth="2" EolMarker="Windows" inheritsSet="VisualStudio" inheritsScope="text/plain" scope="text/x-csharp" />
+          <CSharpFormattingPolicy IndentSwitchBody="True" ElseNewLinePlacement="NewLine" ElseIfNewLinePlacement="SameLine" BeforeMethodDeclarationParentheses="False" BeforeMethodCallParentheses="False" BeforeConstructorDeclarationParentheses="False" BeforeDelegateDeclarationParentheses="False" NewParentheses="False" SpacesBeforeBrackets="False" inheritsSet="Mono" inheritsScope="text/x-csharp" scope="text/x-csharp" />
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>
