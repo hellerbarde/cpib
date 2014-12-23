@@ -4,18 +4,11 @@ using System.Collections.Generic;
 
 namespace Compiler
 {
-	public class OptGlobCpsDecl : IOptGlobCpsDecl
-	{
+  public class OptGlobCpsDecl : IOptGlobCpsDecl
+  {
     #region IOptGlobCpsDecl implementation
-    public ICpsDecl CpsDecl {
-      get {
-        throw new NotImplementedException();
-      }
-      set {
-        throw new NotImplementedException();
-      }
-    }
+    public ICpsDecl CpsDecl { get; set; }
     #endregion
-	}
+  }
 }
 

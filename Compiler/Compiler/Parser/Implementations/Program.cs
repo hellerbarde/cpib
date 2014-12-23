@@ -6,50 +6,15 @@ namespace Compiler
   {
     #region IProgram implementation
 
-    public Token Ident {
-      get {
-        throw new NotImplementedException();
-      }
-      set {
-        throw new NotImplementedException();
-      }
-    }
+    public Token Ident { get; set;}
 
-    public ICmd Cmd {
-      get {
-        throw new NotImplementedException();
-      }
-      set {
-        throw new NotImplementedException();
-      }
-    }
+    public ICmd Cmd { get; set; }
 
-    public IRepCmd RepCmd {
-      get {
-        throw new NotImplementedException();
-      }
-      set {
-        throw new NotImplementedException();
-      }
-    }
+    public IRepCmd RepCmd { get; set;}
 
-    public IOptGlobCpsDecl OptGlobCpsDecl {
-      get {
-        throw new NotImplementedException();
-      }
-      set {
-        throw new NotImplementedException();
-      }
-    }
+    public IOptGlobCpsDecl OptGlobCpsDecl { get; set; }
 
-    public IProgParamList ProgParamList {
-      get {
-        throw new NotImplementedException();
-      }
-      set {
-        throw new NotImplementedException();
-      }
-    }
+    public IProgParamList ProgParamList { get; set; }
 
     #endregion
 
