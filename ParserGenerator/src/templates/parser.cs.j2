@@ -40,103 +40,23 @@ namespace Compiler
       }
     }
 
-    {% for nts in list_of_nts %}
-        {{ nts }}
-    {% endfor %}
-
-    public IProgram parseProgram()
-    {
-      IProgram program = new Program();
-      consume(Terminals.PROGRAM);
-      program.Ident = consume(Terminals.IDENT);
-      program.ProgParamList = parseProgParamList();
-      program.OptGlobCpsDecl = parseOptGlobCpsDecl();
-      consume(Terminals.DO);
-      program.Cmd = parseCmd();
-      program.RepCmd = parseRepCmd();
-       consume(Terminals.ENDPROGRAM);
-      return program;
-    }
-
-    public IProgParamList parseProgParamList()
-    {
-      IProgParamList progParamList = new ProgParamList();
-      consume(Terminals.LPAREN);
-      progParamList.progParams = parseProgParams();    
-      consume(Terminals.RPAREN);
-      return progParamList;
-    }
-
-    public IProgParams parseProgParams()
-    {
-
-      if (terminal == Terminals.RPAREN) {
-        var progParams = new ProgParamsEps();
-        return progParams;
-      }
-      else {
-        var progParams = new ProgParams();
-        progParams.Flowmode = consume(Terminals.FLOWMODE);
-        progParams.Changemode = consume(Terminals.CHANGEMODE);
-        progParams.TypedIdent = parseTypedIdent();
-        progParams.repProgParams = parseRepProgParams();
-        return progParams;
-      }
-    }
-
-    public ITypedIdent parseTypedIdent()
-    {
-      throw new NotImplementedException();
-    }
-
-    public IRepProgParams parseRepProgParams()
-    {
-      throw new NotImplementedException();
-    }
-
-    public IOptGlobCpsDecl parseOptGlobCpsDecl()
-    {
-      if (terminal == Terminals.GLOBAL) {
-        consume(Terminals.GLOBAL);
-        IOptGlobCpsDecl ogcd = new OptGlobCpsDecl();
-        ogcd.CpsDecl = parseCpsDecl();
-        consume(Terminals.DO);
-        return ogcd;
-      }
-      else {
-        return new OptGlobCpsDeclEps();
-      }
-    }
-
-    ICpsDecl parseCpsDecl()
-    {
-      throw new NotImplementedException();
-    }
-
-    ICmd parseCmd()
+    {% for token in list_of_nts %}
+    public I{{ token.name }} parse{{ token.name }}()
     {
       switch (terminal) {
-        case Terminals.SKIP:
-          consume(Terminals.SKIP);
-          return new CmdEps();
+        {% for entry in token.entries %}
+        case Terminals.{{ column.name | upper }}:
+        {
+          var {{ token.name | lower }} = new {{ token.name }}{{ column.name | capitalize }};
+          {{ entry.parse_code }}
+          return {{ token.name | lower }};
+        }
+        {% endfor %}
         default:
           throw new NotImplementedException();
       }
     }
-
-    IRepCmd parseRepCmd()
-    {
-      if (terminal == Terminals.ENDPROGRAM || terminal == Terminals.ENDFUN || terminal == Terminals.ENDPROC || terminal == Terminals.ENDIF || terminal == Terminals.ENDWHILE) {
-        return new RepCmdEps();
-      }
-      else {
-        consume(Terminals.SEMICOLON);
-        RepCmd rc = new RepCmd();
-        rc.Cmd = parseCmd();
-        rc.repCmd = parseRepCmd();
-        return rc;
-      }
-    }
+    {% endfor %}
 
     private class GrammarError : Exception
     {

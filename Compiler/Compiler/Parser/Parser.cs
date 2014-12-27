@@ -40,41 +40,61 @@ namespace Compiler
       }
     }
 
-    public IProgram parse()
+    public IProgram parseProgram()
     {
-      IProgram program = new Program();
-      consume(Terminals.PROGRAM);
-      program.Ident = consume(Terminals.IDENT);
-      program.ProgParamList = parseProgParamList();
-      program.OptGlobCpsDecl = parseOptGlobCpsDecl();
-      consume(Terminals.DO);
-      program.Cmd = parseCmd();
-      program.RepCmd = parseRepCmd();
-      consume(Terminals.ENDPROGRAM);
-      return program;
+      switch (terminal) {
+        case Terminals.PROGRAM:
+          {
+            IProgram program = new Program();
+            consume(Terminals.PROGRAM);
+            program.Ident = consume(Terminals.IDENT);
+            program.ProgParamList = parseProgParamList();
+            program.OptGlobCpsDecl = parseOptGlobCpsDecl();
+            consume(Terminals.DO);
+            program.Cmd = parseCmd();
+            program.RepCmd = parseRepCmd();
+            consume(Terminals.ENDPROGRAM);
+            return program;
+          }
+        default:
+          throw new NotImplementedException();
+      }
+
     }
 
     public IProgParamList parseProgParamList()
     {
-      IProgParamList progParamList = new ProgParamList();
-      consume(Terminals.LPAREN);
-      progParamList.progParams = parseProgParams();    
-      consume(Terminals.RPAREN);
-      return progParamList;
+      switch (terminal) {
+        case Terminals.LPAREN:
+          IProgParamList progParamList = new ProgParamList();
+          consume(Terminals.LPAREN);
+          progParamList.progParams = parseProgParams();    
+          consume(Terminals.RPAREN);
+          return progParamList;
+        default:
+          throw new NotImplementedException();
+      }
     }
 
     public IProgParams parseProgParams()
     {
-      if (terminal == Terminals.RPAREN) {
-        return new ProgParamsEps();
-      }
-      else {
-        ProgParams pp = new ProgParams();
-        pp.Flowmode = consume(Terminals.FLOWMODE);
-        pp.Changemode = consume(Terminals.CHANGEMODE);
-        pp.TypedIdent = parseTypedIdent();
-        pp.repProgParams = parseRepProgParams();
-        return pp;
+      switch (terminal) {
+        case Terminals.RPAREN:
+          {
+            var progParams = new ProgParamsEps();
+            return progParams;
+          }
+        case Terminals.FLOWMODE:
+          {
+            var progParams = new ProgParams();
+            progParams.Flowmode = consume(Terminals.FLOWMODE);
+            progParams.Changemode = consume(Terminals.CHANGEMODE);
+            progParams.TypedIdent = parseTypedIdent();
+            progParams.repProgParams = parseRepProgParams();
+            return progParams;
+          }
+        default:
+          throw new NotImplementedException();
       }
     }
 
@@ -90,15 +110,17 @@ namespace Compiler
 
     public IOptGlobCpsDecl parseOptGlobCpsDecl()
     {
-      if (terminal == Terminals.GLOBAL) {
-        consume(Terminals.GLOBAL);
-        IOptGlobCpsDecl ogcd = new OptGlobCpsDecl();
-        ogcd.CpsDecl = parseCpsDecl();
-        consume(Terminals.DO);
-        return ogcd;
-      }
-      else {
-        return new OptGlobCpsDeclEps();
+      switch (terminal) {
+        case Terminals.GLOBAL:
+          consume(Terminals.GLOBAL);
+          IOptGlobCpsDecl ogcd = new OptGlobCpsDecl();
+          ogcd.CpsDecl = parseCpsDecl();
+          consume(Terminals.DO);
+          return ogcd;
+        case Terminals.DO:
+          return new OptGlobCpsDeclEps();
+        default:
+          throw new NotImplementedException();
       }
     }
 
