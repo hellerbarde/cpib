@@ -1,0 +1,15 @@
+    public I{{ token.name }} parse{{ token.name }}()
+    {
+      {% if %}
+      I{{ token.name }} {{ token.name | lowercase}} = new {{ token.name }}();
+      for 
+      consume(Terminals.PROGRAM);
+      {{ token.name | lowercase}}.Ident = consume(Terminals.IDENT);
+      {{ token.name | lowercase}}.ProgParamList = parseProgParamList();
+      {{ token.name | lowercase}}.OptGlobCpsDecl = parseOptGlobCpsDecl();
+      consume(Terminals.DO);
+      {{ token.name | lowercase}}.Cmd = parseCmd();
+      {{ token.name | lowercase}}.RepCmd = parseRepCmd();
+       consume(Terminals.ENDPROGRAM);
+      return {{ token.name | lowercase}};
+    }
