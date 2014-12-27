@@ -7,8 +7,6 @@ datatype term
    | COMMA
    | SEMICOLON
    | COLON
-   | QUESTMARK
-   | EXCLAMARK
    | BECOMES
    | MULTOPR
    | ADDOPR
@@ -54,8 +52,6 @@ val string_of_term =
    | COMMA => "COMMA"
    | SEMICOLON => "SEMICOLON"
    | COLON => "COLON"
-   | QUESTMARK => "QUESTMARK"
-   | EXCLAMARK => "EXCLAMARK"
    | BECOMES => "BECOMES"
    | MULTOPR => "MULTOPR"
    | ADDOPR => "ADDOPR"
@@ -239,8 +235,8 @@ val productions =
     [T IF,T LPAREN,N expr,T RPAREN,N blockCmd,T ELSE,N blockCmd], 
     [T WHILE,T LPAREN,N expr,T RPAREN,N blockCmd], 
     [T CALL,T IDENT,N exprList,T INIT,N globInitList], 
-    [T QUESTMARK,N expr], 
-    [T EXCLAMARK,N expr]]),
+    [T DEBUGIN,N expr], 
+    [T DEBUGOUT,N expr]]),
 
   (optFill ,
     [[],
