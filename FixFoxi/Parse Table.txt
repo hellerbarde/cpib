@@ -44,10 +44,10 @@
     WHILE LPAREN <expr> RPAREN <blockCmd>
   terminal CALL
     CALL IDENT <exprList> INIT <globInitList>
-  terminal QUESTMARK
-    QUESTMARK <expr>
-  terminal EXCLAMARK
-    EXCLAMARK <expr>
+  terminal DEBUGIN
+    DEBUGIN <expr>
+  terminal DEBUGOUT
+    DEBUGOUT <expr>
 <optFill>
   terminal LPAREN
 
@@ -72,7 +72,13 @@
   terminal IDENT
     IDENT <repGlobInit>
 <repGlobInit>
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 
@@ -167,7 +173,13 @@
   terminal LPAREN
     LPAREN <param> RPAREN
 <repCmd>
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 
@@ -215,7 +227,16 @@
     MECHMODE
 <blockCmd>
   terminal DO
-    DO <cmd> <repCmd> END
+    DO <cmd> <repCmd> <endBlock>
+<endBlock>
+  terminal ENDWHILE
+    ENDWHILE
+  terminal ENDFUN
+    ENDFUN
+  terminal ENDPROC
+    ENDPROC
+  terminal ENDIF
+    ENDIF
 <exprList>
   terminal LPAREN
     LPAREN <optRepExpr> RPAREN
@@ -256,7 +277,13 @@
 
   terminal RPAREN
 
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 
@@ -326,7 +353,13 @@
 
   terminal RPAREN
 
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 
@@ -371,7 +404,13 @@
 
   terminal RPAREN
 
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 
@@ -403,7 +442,13 @@
 
   terminal RPAREN
 
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 
@@ -437,7 +482,13 @@
 
   terminal RPAREN
 
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 
@@ -473,7 +524,13 @@
 
   terminal RPAREN
 
-  terminal END
+  terminal ENDIF
+
+  terminal ENDPROC
+
+  terminal ENDFUN
+
+  terminal ENDWHILE
 
   terminal ENDPROGRAM
 

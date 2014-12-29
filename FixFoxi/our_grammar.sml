@@ -147,6 +147,7 @@ datatype nonterm
    | optFill
    | sliceExpr
    | repSliceExpr
+   | endBlock
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -207,6 +208,7 @@ val string_of_nonterm =
    | optFill => "optFill"
    | sliceExpr => "sliceExpr"
    | repSliceExpr => "repSliceExpr"
+   | endBlock => "endBlock"
 
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
@@ -350,7 +352,7 @@ val productions =
     [[T ENDWHILE],
      [T ENDFUN],
      [T ENDPROC],
-     [T ENDIF]])
+     [T ENDIF]]),
 
   (exprList ,
     [[T LPAREN,N optRepExpr,T RPAREN]]),
