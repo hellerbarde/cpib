@@ -44,11 +44,11 @@ namespace Compiler
     public I{{ token.name }} parse{{ token.name }}()
     {
       switch (terminal) {
-        {% for entry in token.entries %}
+        {% for entry in token.columns %}
         case Terminals.{{ column.name | upper }}:
         {
           var {{ token.name | lower }} = new {{ token.name }}{{ column.name | capitalize }};
-          {{ entry.parse_code }}
+          {{ make_parse_code(entry) }}
           return {{ token.name | lower }};
         }
         {% endfor %}
@@ -68,3 +68,22 @@ namespace Compiler
   }
 }
 
+program.Ident = consume(Terminals.IDENT);
+program.ProgParamList = parseProgParamList();
+
+{% macro make_parse_code(entry) -%}
+    {% for token in entry %}
+        {% if token.type == "Nonterminal" %}
+            program.{{ token.name }} = parse{{ token.name }}();
+        {% elif token.type == "Terminal %}
+            program.Ident = consume(Terminals.IDENT);
+        {% else %}
+            throw new NotImplementedException();
+        {% endif %}
+    {% endfor %}
+{%- endmacro %}
+
+{% macro input(name, value='', type='text', size=20) -%}
+    <input type="{{ type }}" name="{{ name }}" value="{{
+        value|e }}" size="{{ size }}">
+{%- endmacro %}

@@ -8,20 +8,11 @@ namespace Compiler
   {
     Token Ident { get; set; }
 
-    ICmd Cmd {
-      get;
-      set;
-    }
+    ICmd Cmd { get; set; }
 
-    IRepCmd RepCmd {
-      get;
-      set;
-    }
+    IRepCmd RepCmd { get; set; }
 
-    IOptGlobCpsDecl OptGlobCpsDecl {
-      get;
-      set;
-    }
+    IOptGlobCpsDecl OptGlobCpsDecl { get; set; }
 
     IProgParamList ProgParamList { get; set; }
   }

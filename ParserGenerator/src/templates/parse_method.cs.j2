@@ -1,15 +1,55 @@
+
+
+
     public I{{ token.name }} parse{{ token.name }}()
     {
+      switch (terminal) {
+        {% for entry in entries %}
+        case Terminals.{{ column.name | upper }}:
+        {
+          var {{ token.name | lower }} = new {{ token.name }}{{ column.name | capitalize }};
+          {{ entry.text }}
+          return {{ token.name | lower }};
+        }
+        {% endfor %}
+        default:
+          throw new NotImplementedException();
+      }
+    }
+
       {% if %}
-      I{{ token.name }} {{ token.name | lowercase}} = new {{ token.name }}();
+      I{{ token.name }} {{ token.name | lower}} = new {{ token.name }}();
       for 
       consume(Terminals.PROGRAM);
-      {{ token.name | lowercase}}.Ident = consume(Terminals.IDENT);
-      {{ token.name | lowercase}}.ProgParamList = parseProgParamList();
-      {{ token.name | lowercase}}.OptGlobCpsDecl = parseOptGlobCpsDecl();
+      {{ token.name | lower}}.Ident = consume(Terminals.IDENT);
+      {{ token.name | lower}}.ProgParamList = parseProgParamList();
+      {{ token.name | lower}}.OptGlobCpsDecl = parseOptGlobCpsDecl();
       consume(Terminals.DO);
-      {{ token.name | lowercase}}.Cmd = parseCmd();
-      {{ token.name | lowercase}}.RepCmd = parseRepCmd();
+      {{ token.name | lower}}.Cmd = parseCmd();
+      {{ token.name | lower}}.RepCmd = parseRepCmd();
        consume(Terminals.ENDPROGRAM);
-      return {{ token.name | lowercase}};
+      return {{ token.name | lower}};
+    }
+
+
+    public IProgParams parseProgParams()
+    {
+      switch (terminal) {
+        case Terminals.RPAREN:
+          {
+            var progParams = new ProgParamsEps();
+            return progParams;
+          }
+        case Terminals.FLOWMODE:
+          {
+            var progParams = new ProgParams();
+            progParams.Flowmode = consume(Terminals.FLOWMODE);
+            progParams.Changemode = consume(Terminals.CHANGEMODE);
+            progParams.TypedIdent = parseTypedIdent();
+            progParams.repProgParams = parseRepProgParams();
+            return progParams;
+          }
+        default:
+          throw new NotImplementedException();
+      }
     }

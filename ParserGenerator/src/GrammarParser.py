@@ -1,6 +1,8 @@
 #!/usr/bin/env python3
 # coding: utf-8
 
+from collections import defaultdict
+
 
 def get_indentation(s):
     for (n, c) in enumerate(s):
@@ -21,12 +23,38 @@ def parse_terminal(s):
     return s.split()[1]
 
 
-def parse_entry_list(s):
-    def convert_to_object(s):
-        return NonterminalEntry(parse_nonterminal(s)) \
-            if is_nonterminal(s) \
-            else TerminalEntry(s)
-    return [convert_to_object(entry) for entry in s.split()]
+# def parse_entry_list(s):
+#     def convert_to_object(s):
+#         return NonterminalEntry(parse_nonterminal(s)) \
+#             if is_nonterminal(s) \
+#             else TerminalEntry(s)
+#     return [convert_to_object(entry) for entry in s.split()]
+
+
+def parse_entry_list(string):
+    """parse the line of tokens representing the entry
+    :param string: line of tokens to parse
+    :type string: str
+    """
+    list_of_tokens = defaultdict(int)
+    result = []
+    name = str()
+    tokentype = str()
+    token = str()
+    for part in string.split():
+        if is_nonterminal(part):
+            tokentype = parse_nonterminal(part)
+        else:
+            tokentype = part
+        list_of_tokens[tokentype] += 1
+        if list_of_tokens[tokentype] > 1:
+            name = tokentype + str(list_of_tokens[token])
+        else:
+            name = tokentype
+        result.append(NonterminalEntry(parse_nonterminal(name), tokentype)
+                      if is_nonterminal(part)
+                      else TerminalEntry(name, tokentype))
+    return result
 
 
 class Line(object):
@@ -63,30 +91,44 @@ class Column(object):
 
 class Entry(object):
     name = None
+    tokentype = None
 
-    def __init__(self, name):
+    def __init__(self, name, tokentype):
         self.name = name
+        self.tokentype = tokentype
 
     def __repr__(self):
         raise NotImplementedError()
 
 
 class TerminalEntry(Entry):
+    type = None
+
+    def __init__(self, name, tokentype):
+        super().__init__(name, tokentype)
+        # for ease of use during templating
+        self.type = "Terminal"
 
     def __repr__(self):
-        return "\"T(" + self.name + ")\""
+        return "\"T(" + self.tokentype + ")\""
 
 
 class NonterminalEntry(Entry):
+    type = None
+
+    def __init__(self, name, tokentype):
+        super().__init__(name, tokentype)
+        # for ease of use during templating
+        self.type = "Nonterminal"
 
     def __repr__(self):
-        return "\"N(" + self.name + ")\""
+        return "\"N(" + self.tokentype + ")\""
 
 
 class Epsilon(Entry):
 
     def __init__(self):
-        super().__init__(None)
+        super().__init__(None, None)
 
     def __repr__(self):
         return "\"Eps()\""
@@ -166,4 +208,3 @@ if __name__ == '__main__':
 
     print("{{\n{}\n}}".format(
         ",\n".join([repr(x) for x in parse_parse_table(EXAMPLE_GRAMMAR)])))
-# map(repr, parse_parse_table(grammar)))))
