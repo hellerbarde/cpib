@@ -1,3 +1,16 @@
+
+{%- macro make_parse_code(entry) -%}
+    {%- for token in entry %}
+        {%- if token.type == "Nonterminal" %}
+          program.{{ token.name }} = parse{{ token.name }}();
+        {% elif token.type == "Terminal" %}
+          program.Ident = consume(Terminals.IDENT);
+        {% else %}
+          // Epsilon
+        {% endif -%}
+    {% endfor -%}
+{%- endmacro -%}
+
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -44,14 +57,14 @@ namespace Compiler
     public I{{ token.name }} parse{{ token.name }}()
     {
       switch (terminal) {
-        {% for entry in token.columns %}
-        case Terminals.{{ column.name | upper }}:
+        {%- for entry in token.columns %}
+        case Terminals.{{ entry.name | upper }}:
         {
-          var {{ token.name | lower }} = new {{ token.name }}{{ column.name | capitalize }};
-          {{ make_parse_code(entry) }}
+          var {{ token.name | lower }} = new {{ token.name | capitalizefirstchar }}{{ entry.name | capitalize }}();
+          {{ make_parse_code(entry.entry) }}
           return {{ token.name | lower }};
         }
-        {% endfor %}
+        {% endfor -%}
         default:
           throw new NotImplementedException();
       }
@@ -71,19 +84,3 @@ namespace Compiler
 program.Ident = consume(Terminals.IDENT);
 program.ProgParamList = parseProgParamList();
 
-{% macro make_parse_code(entry) -%}
-    {% for token in entry %}
-        {% if token.type == "Nonterminal" %}
-            program.{{ token.name }} = parse{{ token.name }}();
-        {% elif token.type == "Terminal %}
-            program.Ident = consume(Terminals.IDENT);
-        {% else %}
-            throw new NotImplementedException();
-        {% endif %}
-    {% endfor %}
-{%- endmacro %}
-
-{% macro input(name, value='', type='text', size=20) -%}
-    <input type="{{ type }}" name="{{ name }}" value="{{
-        value|e }}" size="{{ size }}">
-{%- endmacro %}

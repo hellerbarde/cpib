@@ -1,0 +1,27 @@
+using System;
+using System.Text;
+
+namespace Compiler
+{
+  public class {{ line.name | capitalizefirstchar }}{{ entry.name | capitalize }} : I{{ line.name }}
+  {
+{%- for token in entry.entry %}
+  {%- if token.type == "Nonterminal" %}
+    public I{{ token.tokentype }} {{ token.name }} { get; set; }
+  {% elif token.type == "Terminal" %}
+    public Token {{ token.name }} { get; set; } 
+  {% else %}
+    // Epsilon
+  {% endif -%}
+{% endfor %}
+    public {{ line.name | capitalizefirstchar }}{{ entry.name | capitalize }}()
+    {
+    }
+
+    public override String ToString()
+    {
+      return ("TBD");
+    }
+  }
+}
+

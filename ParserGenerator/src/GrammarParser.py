@@ -37,7 +37,7 @@ def parse_entry_list(string):
     :type string: str
     """
     list_of_tokens = defaultdict(int)
-    result = []
+    result = list()
     name = str()
     tokentype = str()
     token = str()
@@ -51,7 +51,7 @@ def parse_entry_list(string):
             name = tokentype + str(list_of_tokens[token])
         else:
             name = tokentype
-        result.append(NonterminalEntry(parse_nonterminal(name), tokentype)
+        result.append(NonterminalEntry(name, tokentype)
                       if is_nonterminal(part)
                       else TerminalEntry(name, tokentype))
     return result
