@@ -271,7 +271,7 @@
 <optInitParamsOrArrayAccess>
   terminal RBRACKET
 
-  terminal DOTDOT
+  terminal RANGE
 
   terminal COMMA
 
@@ -342,12 +342,12 @@
 <repSliceExpr>
   terminal RBRACKET
 
-  terminal DOTDOT
-    DOTDOT <expr>
+  terminal RANGE
+    RANGE <expr>
 <repArrayIndex>
   terminal RBRACKET
 
-  terminal DOTDOT
+  terminal RANGE
 
   terminal COMMA
 
@@ -398,7 +398,7 @@
 <repTerm1>
   terminal RBRACKET
 
-  terminal DOTDOT
+  terminal RANGE
 
   terminal COMMA
 
@@ -436,7 +436,7 @@
 <repTerm2>
   terminal RBRACKET
 
-  terminal DOTDOT
+  terminal RANGE
 
   terminal COMMA
 
@@ -476,7 +476,7 @@
 <repTerm3>
   terminal RBRACKET
 
-  terminal DOTDOT
+  terminal RANGE
 
   terminal COMMA
 
@@ -518,7 +518,7 @@
 <repTerm4>
   terminal RBRACKET
 
-  terminal DOTDOT
+  terminal RANGE
 
   terminal COMMA
 

@@ -41,7 +41,7 @@ datatype term
    | ENDPROGRAM
    | ARRAY
    | FILL
-   | DOTDOT
+   | RANGE
 
 val string_of_term =
   fn LPAREN => "LPAREN"
@@ -86,7 +86,7 @@ val string_of_term =
    | ENDPROGRAM => "ENDPROGRAM"
    | ARRAY => "ARRAY"
    | FILL => "FILL"
-   | DOTDOT => "DOTDOT"
+   | RANGE => "RANGE"
    
 datatype nonterm
   = blockCmd
@@ -396,7 +396,7 @@ val productions =
     [[N expr, N repSliceExpr]]),
   (repSliceExpr ,
     [[],
-    [T DOTDOT, N expr]]),
+    [T RANGE, N expr]]),
 
   (repArrayIndex , 
      [[],
