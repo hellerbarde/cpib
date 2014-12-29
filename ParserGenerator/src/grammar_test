@@ -1,0 +1,25 @@
+<optModeFlow>
+  terminal IDENT
+
+  terminal CHANGEMODE
+
+  terminal MECHMODE
+
+  terminal FLOWMODE
+    FLOWMODE
+<cpsDecl>
+  terminal DO
+
+  terminal PROC
+    <decl> <repCpsDecl>
+  terminal FUN
+    <decl> <repCpsDecl>
+  terminal IDENT
+    <decl> <repCpsDecl>
+  terminal CHANGEMODE
+    <decl> <repCpsDecl>
+<repCpsDecl>
+  terminal DO
+
+  terminal SEMICOLON
+    SEMICOLON <cpsDecl>
