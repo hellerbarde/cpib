@@ -1,4 +1,4 @@
-﻿program test(in const test1:int32, in const test2:int32,
+program test(in const test1:int32, in const test2:int32,
 	in const test3:bool, out const test4:int32)
 global
     var globTest : int32;
