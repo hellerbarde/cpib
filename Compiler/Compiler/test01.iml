@@ -6,11 +6,11 @@ global
     do
         q init := 0;
         r init := m;
-        while r >= n do
+        while (r >= n) do
             q := q + 1;
             r := r - n
         endwhile
     endproc
 do
-    call divide(m, n, q init, r init)
+    call divide(m, n, q init, r init) init foo
 endprogram

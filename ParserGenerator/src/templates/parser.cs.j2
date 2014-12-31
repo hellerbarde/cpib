@@ -2,9 +2,9 @@
 {%- macro make_parse_code(entry) -%}
     {%- for token in entry %}
         {%- if token.type == "Nonterminal" %}
-          program.{{ token.name }} = parse{{ token.name }}();
+          program.{{ token.name | lower}} = parse{{ token.name }}();
         {% elif token.type == "Terminal" %}
-          program.Ident = consume(Terminals.IDENT);
+          program.{{ token.name | upper}} = consume(Terminals.{{ token.name | upper}});
         {% else %}
           // Epsilon
         {% endif -%}
@@ -54,14 +54,22 @@ namespace Compiler
     }
 
     {% for token in list_of_nts %}
-    public I{{ token.name }} parse{{ token.name }}()
+    public I{{ token.name | capitalizefirstchar }} parse{{ token.name }}()
     {
       switch (terminal) {
         {%- for entry in token.columns %}
         case Terminals.{{ entry.name | upper }}:
         {
           var {{ token.name | lower }} = new {{ token.name | capitalizefirstchar }}{{ entry.name | capitalize }}();
-          {{ make_parse_code(entry.entry) }}
+    {% for tok in entry.entry %}
+        {%- if tok.type == "Nonterminal" %}
+          {{ token.name | lower }}.{{ tok.name | lower}} = parse{{ tok.tokentype }}();
+        {% elif tok.type == "Terminal" %}
+          {{ token.name | lower }}.{{ tok.name | upper}} = consume(Terminals.{{ tok.name | upper}});
+        {% else %}
+          // Epsilon
+        {% endif -%}
+    {% endfor %}
           return {{ token.name | lower }};
         }
         {% endfor -%}
@@ -80,7 +88,3 @@ namespace Compiler
     }
   }
 }
-
-program.Ident = consume(Terminals.IDENT);
-program.ProgParamList = parseProgParamList();
-

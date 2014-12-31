@@ -235,7 +235,7 @@ val productions =
     [[T SKIP],
     [N expr,T BECOMES,N optFill, N expr], 
     [T IF,T LPAREN,N expr,T RPAREN,N blockCmd,T ELSE,N blockCmd], 
-    [T WHILE,T LPAREN,N expr,T RPAREN,N blockCmd], 
+    [T WHILE,N expr,N blockCmd], 
     [T CALL,T IDENT,N exprList,T INIT,N globInitList], 
     [T DEBUGIN,N expr], 
     [T DEBUGOUT,N expr]]),

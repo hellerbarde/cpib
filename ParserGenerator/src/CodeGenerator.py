@@ -22,7 +22,7 @@ def capitalizefirstchar(string):
 env.filters['capitalizefirstchar'] = capitalizefirstchar
 
 
-def generate(lines, folder):
+def generate(lines, parser, interfaces, implementations):
     """Generate code for the IML Parser.
 
     :param list lines: List of Line objects representing one line in the parse
@@ -32,19 +32,19 @@ def generate(lines, folder):
     :return: Nothing, because of stuff and things.
     """
 
-    generate_parsers(lines)
+    generate_parsers(lines, parser)
     for line in lines:
-        with open(path.join(folder, 'I{}.cs'.format(capitalizefirstchar(line.name))), 'w+') as ifile:
+        with open(path.join(interfaces, 'I{}.cs'.format(capitalizefirstchar(line.name))), 'w+') as ifile:
             generate_interface_file(ifile, line)
 
         for entry in line.columns:
-            with open(path.join(folder, '{}{}.cs'.format(capitalizefirstchar(line.name), entry.name.capitalize())), 'w+') as ifile:
+            with open(path.join(implementations, '{}{}.cs'.format(capitalizefirstchar(line.name), entry.name.capitalize())), 'w+') as ifile:
                 generate_implementation_file(ifile, line, entry)
 
 
-def generate_parsers(lines):
+def generate_parsers(lines, path):
     tpl = env.get_template("parser.cs.j2")
-    with open("Parser.cs", 'w+') as pfile:
+    with open(path, 'w+') as pfile:
         pfile.write(tpl.render(list_of_nts=lines))
 
 

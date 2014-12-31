@@ -6,23 +6,21 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    class Compiler
+  class Compiler
+  {
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            try
-            {
-                Scanner scanner = new Scanner();
-                var list = scanner.Scan(new System.IO.StreamReader("test03.iml"));
-                Console.WriteLine("[" + String.Join(", ", list) + "]");
-                Parser parser = new Parser(list);
-                IProgram program = parser.parseProgram();
-                Console.WriteLine(program.ToString());
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine("Failed: " + ex.Message);
-            }
-        }
+      try {
+        Scanner scanner = new Scanner();
+        var list = scanner.Scan(new System.IO.StreamReader("test04.iml"));
+        Console.WriteLine("[" + String.Join(", ", list) + "]");
+        Parser parser = new Parser(list);
+        IProgram program = parser.parseprogram();
+        Console.WriteLine(program.ToString());
+      } catch (Exception ex) {
+        Console.WriteLine("Failed: " + ex.Message);
+        Console.WriteLine(ex.StackTrace);
+      }
     }
+  }
 }

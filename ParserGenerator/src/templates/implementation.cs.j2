@@ -3,13 +3,13 @@ using System.Text;
 
 namespace Compiler
 {
-  public class {{ line.name | capitalizefirstchar }}{{ entry.name | capitalize }} : I{{ line.name }}
+  public class {{ line.name | capitalizefirstchar }}{{ entry.name | capitalize }} : I{{ line.name | capitalizefirstchar }}
   {
 {%- for token in entry.entry %}
   {%- if token.type == "Nonterminal" %}
-    public I{{ token.tokentype }} {{ token.name }} { get; set; }
+    public I{{ token.tokentype | capitalizefirstchar }} {{ token.name | lower }} { get; set; }
   {% elif token.type == "Terminal" %}
-    public Token {{ token.name }} { get; set; } 
+    public Token {{ token.name | upper }} { get; set; } 
   {% else %}
     // Epsilon
   {% endif -%}
