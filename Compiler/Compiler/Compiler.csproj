@@ -71,28 +71,7 @@
     <Compile Include="Scanner\Token\Type.cs" />
     <Compile Include="Scanner\Token\TypeToken.cs" />
     <Compile Include="Scanner\State\PeriodState.cs" />
-    <Compile Include="Parser\Parser.cs" />
     <Compile Include="Compiler.cs" />
-    <Compile Include="Parser\Interfaces\IProgram.cs" />
-    <Compile Include="Parser\Implementations\Program.cs" />
-    <Compile Include="Parser\Interfaces\IProgParamList.cs" />
-    <Compile Include="Parser\Interfaces\IProgParams.cs" />
-    <Compile Include="Parser\Implementations\ProgParamList.cs" />
-    <Compile Include="Parser\Implementations\ProgParamsEps.cs" />
-    <Compile Include="Parser\Implementations\ProgParams.cs" />
-    <Compile Include="Parser\Interfaces\IRepProgParams.cs" />
-    <Compile Include="Parser\Interfaces\ITypedIdent.cs" />
-    <Compile Include="Parser\Implementations\CpsDecl.cs" />
-    <Compile Include="Parser\Interfaces\IOptGlobCpsDecl.cs" />
-    <Compile Include="Parser\Implementations\CpsDeclEps.cs" />
-    <Compile Include="Parser\Interfaces\ICpsDecl.cs" />
-    <Compile Include="Parser\Interfaces\ICmd.cs" />
-    <Compile Include="Parser\Interfaces\IRepCmd.cs" />
-    <Compile Include="Parser\Implementations\RepCmdEps.cs" />
-    <Compile Include="Parser\Implementations\RepCmd.cs" />
-    <Compile Include="Parser\Implementations\CmdEps.cs" />
-    <Compile Include="Parser\Implementations\OptGlobCpsDeclEps.cs" />
-    <Compile Include="Parser\Implementations\OptGlobCpsDecl.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

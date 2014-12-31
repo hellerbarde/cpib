@@ -39,15 +39,49 @@
   terminal LITERAL
     <expr> BECOMES <optFill> <expr>
   terminal IF
-    IF LPAREN <expr> RPAREN <blockCmd> ELSE <blockCmd>
+    IF <expr> THEN DO <blockCmd> ELSE <blockCmd> ENDIF
   terminal WHILE
-    WHILE LPAREN <expr> RPAREN <blockCmd>
+    WHILE <expr> DO <blockCmd> ENDWHILE
   terminal CALL
-    CALL IDENT <exprList> INIT <globInitList>
+    CALL IDENT <exprList> <optCallGlobalInitializations>
   terminal DEBUGIN
     DEBUGIN <expr>
   terminal DEBUGOUT
     DEBUGOUT <expr>
+<optCallGlobalInitializations>
+  terminal ENDFUN
+
+  terminal ENDPROC
+
+  terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
+
+  terminal ENDPROGRAM
+
+  terminal SEMICOLON
+
+  terminal GLOBAL
+    GLOBAL IDENT INIT <repInits>
+<repInits>
+  terminal ENDFUN
+
+  terminal ENDPROC
+
+  terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
+
+  terminal ENDPROGRAM
+
+  terminal SEMICOLON
+
+  terminal COMMA
+    COMMA IDENT INIT <repInits>
 <optFill>
   terminal LPAREN
 
@@ -68,24 +102,6 @@
 
   terminal COMMA
     COMMA <param>
-<globInitList>
-  terminal IDENT
-    IDENT <repGlobInit>
-<repGlobInit>
-  terminal ENDIF
-
-  terminal ENDPROC
-
-  terminal ENDFUN
-
-  terminal ENDWHILE
-
-  terminal ENDPROGRAM
-
-  terminal SEMICOLON
-
-  terminal COMMA
-    COMMA IDENT <repGlobInit>
 <param>
   terminal IDENT
     <optModeFlow> <optModeMech> <storeDecl> <repParam>
@@ -140,7 +156,7 @@
     <procDecl>
 <procDecl>
   terminal PROC
-    PROC IDENT <paramList> <optGlobImportList> <optCpsStoDecl> <blockCmd>
+    PROC IDENT <paramList> <optGlobImportList> <optCpsStoDecl> DO <blockCmd> ENDPROC
 <storeDecl>
   terminal IDENT
     <optModeChange> <typedident>
@@ -148,7 +164,7 @@
     <optModeChange> <typedident>
 <funDecl>
   terminal FUN
-    FUN IDENT <paramList> RETURNS <storeDecl> <optGlobImportList> <optCpsStoDecl> <blockCmd>
+    FUN IDENT <paramList> RETURNS <storeDecl> <optGlobImportList> <optCpsStoDecl> DO <blockCmd> ENDFUN
 <optCpsStoDecl>
   terminal LOCAL
     LOCAL <cpsStoDecl>
@@ -173,13 +189,15 @@
   terminal LPAREN
     LPAREN <param> RPAREN
 <repCmd>
-  terminal ENDIF
+  terminal ENDFUN
 
   terminal ENDPROC
 
-  terminal ENDFUN
-
   terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
 
   terminal ENDPROGRAM
 
@@ -226,17 +244,30 @@
   terminal MECHMODE
     MECHMODE
 <blockCmd>
-  terminal DO
-    DO <cmd> <repCmd> <endBlock>
-<endBlock>
-  terminal ENDWHILE
-    ENDWHILE
-  terminal ENDFUN
-    ENDFUN
-  terminal ENDPROC
-    ENDPROC
-  terminal ENDIF
-    ENDIF
+  terminal DEBUGOUT
+    <cmd> <repCmd>
+  terminal DEBUGIN
+    <cmd> <repCmd>
+  terminal CALL
+    <cmd> <repCmd>
+  terminal WHILE
+    <cmd> <repCmd>
+  terminal IF
+    <cmd> <repCmd>
+  terminal LPAREN
+    <cmd> <repCmd>
+  terminal IDENT
+    <cmd> <repCmd>
+  terminal ADDOPR
+    <cmd> <repCmd>
+  terminal NOT
+    <cmd> <repCmd>
+  terminal LBRACKET
+    <cmd> <repCmd>
+  terminal LITERAL
+    <cmd> <repCmd>
+  terminal SKIP
+    <cmd> <repCmd>
 <exprList>
   terminal LPAREN
     LPAREN <optRepExpr> RPAREN
@@ -273,17 +304,23 @@
 
   terminal RANGE
 
-  terminal COMMA
-
   terminal RPAREN
 
-  terminal ENDIF
+  terminal COMMA
 
-  terminal ENDPROC
+  terminal DO
+
+  terminal THEN
 
   terminal ENDFUN
 
+  terminal ENDPROC
+
   terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
 
   terminal ENDPROGRAM
 
@@ -349,17 +386,23 @@
 
   terminal RANGE
 
-  terminal COMMA
-
   terminal RPAREN
 
-  terminal ENDIF
+  terminal COMMA
 
-  terminal ENDPROC
+  terminal DO
+
+  terminal THEN
 
   terminal ENDFUN
 
+  terminal ENDPROC
+
   terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
 
   terminal ENDPROGRAM
 
@@ -400,17 +443,23 @@
 
   terminal RANGE
 
-  terminal COMMA
-
   terminal RPAREN
 
-  terminal ENDIF
+  terminal COMMA
 
-  terminal ENDPROC
+  terminal DO
+
+  terminal THEN
 
   terminal ENDFUN
 
+  terminal ENDPROC
+
   terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
 
   terminal ENDPROGRAM
 
@@ -438,17 +487,23 @@
 
   terminal RANGE
 
-  terminal COMMA
-
   terminal RPAREN
 
-  terminal ENDIF
+  terminal COMMA
 
-  terminal ENDPROC
+  terminal DO
+
+  terminal THEN
 
   terminal ENDFUN
 
+  terminal ENDPROC
+
   terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
 
   terminal ENDPROGRAM
 
@@ -478,17 +533,23 @@
 
   terminal RANGE
 
-  terminal COMMA
-
   terminal RPAREN
 
-  terminal ENDIF
+  terminal COMMA
 
-  terminal ENDPROC
+  terminal DO
+
+  terminal THEN
 
   terminal ENDFUN
 
+  terminal ENDPROC
+
   terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
 
   terminal ENDPROGRAM
 
@@ -504,33 +565,39 @@
     ADDOPR <term3> <repTerm3>
 <term3>
   terminal LPAREN
-    <factor> <repTerm4>
+    <factor> <repFactor>
   terminal IDENT
-    <factor> <repTerm4>
+    <factor> <repFactor>
   terminal ADDOPR
-    <factor> <repTerm4>
+    <factor> <repFactor>
   terminal NOT
-    <factor> <repTerm4>
+    <factor> <repFactor>
   terminal LBRACKET
-    <factor> <repTerm4>
+    <factor> <repFactor>
   terminal LITERAL
-    <factor> <repTerm4>
-<repTerm4>
+    <factor> <repFactor>
+<repFactor>
   terminal RBRACKET
 
   terminal RANGE
 
-  terminal COMMA
-
   terminal RPAREN
 
-  terminal ENDIF
+  terminal COMMA
 
-  terminal ENDPROC
+  terminal DO
+
+  terminal THEN
 
   terminal ENDFUN
 
+  terminal ENDPROC
+
   terminal ENDWHILE
+
+  terminal ENDIF
+
+  terminal ELSE
 
   terminal ENDPROGRAM
 
@@ -545,4 +612,4 @@
   terminal ADDOPR
 
   terminal MULTOPR
-    MULTOPR <factor> <repTerm4>
+    MULTOPR <factor> <repFactor>

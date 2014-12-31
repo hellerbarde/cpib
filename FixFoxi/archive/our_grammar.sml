@@ -20,6 +20,7 @@ datatype term
    | MECHMODE
    | FLOWMODE
    | IF
+   | THEN
    | ENDIF
    | ELSE
    | FUN
@@ -65,6 +66,7 @@ val string_of_term =
    | MECHMODE => "MECHMODE"
    | FLOWMODE => "FLOWMODE"
    | IF => "IF"
+   | THEN => "THEN"
    | ENDIF => "ENDIF"
    | ELSE => "ELSE"
    | FUN => "FUN"
@@ -131,7 +133,7 @@ datatype nonterm
    | repTerm1
    | repTerm2
    | repTerm3
-   | repTerm4
+   | repFactor
    | typedident
    | arrayDecl
    | arrayLiteral
@@ -147,7 +149,8 @@ datatype nonterm
    | optFill
    | sliceExpr
    | repSliceExpr
-   | endBlock
+   | optCallGlobalInitializations
+   | repInits
 
 val string_of_nonterm =
   fn blockCmd => "blockCmd"
@@ -192,7 +195,7 @@ val string_of_nonterm =
    | repTerm1 => "repTerm1"
    | repTerm2 => "repTerm2"
    | repTerm3 => "repTerm3"
-   | repTerm4 => "repTerm4"
+   | repFactor => "repFactor"
    | typedident => "typedident"
    | arrayDecl => "arrayDecl"
    | arrayLiteral => "arrayLiteral"
@@ -208,7 +211,8 @@ val string_of_nonterm =
    | optFill => "optFill"
    | sliceExpr => "sliceExpr"
    | repSliceExpr => "repSliceExpr"
-   | endBlock => "endBlock"
+   | optCallGlobalInitializations => "optCallGlobalInitializations"
+   | repInits => "repInits"
 
 
 val string_of_gramsym = (string_of_term, string_of_nonterm)
@@ -234,12 +238,20 @@ val productions =
   (cmd ,
     [[T SKIP],
     [N expr,T BECOMES,N optFill, N expr], 
-    [T IF,T LPAREN,N expr,T RPAREN,N blockCmd,T ELSE,N blockCmd], 
-    [T WHILE,N expr,N blockCmd], 
-    [T CALL,T IDENT,N exprList,T INIT,N globInitList], 
+    [T IF, N expr, T THEN, T DO, N blockCmd,T ELSE,N blockCmd, T ENDIF], 
+    [T WHILE, N expr, T DO, N blockCmd, T ENDWHILE], 
+    [T CALL,T IDENT,N exprList,N optCallGlobalInitializations], 
     [T DEBUGIN,N expr], 
     [T DEBUGOUT,N expr]]),
 
+  (optCallGlobalInitializations ,
+    [[],
+     [T GLOBAL, T IDENT, T INIT, N repInits]]),
+  
+  (repInits ,
+    [[],
+     [T COMMA, T IDENT, T INIT, N repInits]]),
+    
   (optFill ,
     [[],
      [T FILL]]),
@@ -293,13 +305,13 @@ val productions =
     [N procDecl]]),
 
   (procDecl ,
-    [[T PROC,T IDENT,N paramList, N optGlobImportList,N optCpsStoDecl,N blockCmd]]),
+    [[T PROC,T IDENT,N paramList, N optGlobImportList,N optCpsStoDecl,T DO,N blockCmd, T ENDPROC]]),
 
   (storeDecl ,
     [[N optModeChange,N typedident]]),
 
   (funDecl ,
-    [[T FUN,T IDENT,N paramList,T RETURNS,N storeDecl,N optGlobImportList,N optCpsStoDecl,N blockCmd]]),
+    [[T FUN,T IDENT,N paramList,T RETURNS,N storeDecl,N optGlobImportList,N optCpsStoDecl,T DO, N blockCmd, T ENDFUN]]),
 
   (optCpsStoDecl, 
     [[T LOCAL, N cpsStoDecl],
@@ -307,7 +319,7 @@ val productions =
 
   (cpsStoDecl, 
     [[N storeDecl, N repCpsStoDecl]]),
-
+    
   (repCpsStoDecl, 
     [[T SEMICOLON, N storeDecl, N repCpsStoDecl],
     []]),
@@ -346,13 +358,7 @@ val productions =
     [T MECHMODE]]),
 
   (blockCmd ,
-    [[T DO,N cmd,N repCmd,N endBlock]]),
-
-  (endBlock , 
-    [[T ENDWHILE],
-     [T ENDFUN],
-     [T ENDPROC],
-     [T ENDIF]]),
+    [[N cmd,N repCmd]]),
 
   (exprList ,
     [[T LPAREN,N optRepExpr,T RPAREN]]),
@@ -425,11 +431,11 @@ val productions =
     [T ADDOPR, N term3, N repTerm3]]),
 
   (term3,
-    [[N factor, N repTerm4]]),
+    [[N factor, N repFactor]]),
 
-  (repTerm4,
+  (repFactor,
     [[],
-    [T MULTOPR,N factor, N repTerm4]])
+    [T MULTOPR,N factor, N repFactor]])
 
 ]
 
