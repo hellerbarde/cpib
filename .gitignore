@@ -223,3 +223,6 @@ Slides_FixFoxi_V3.pdf
 *.vrb
 *.xdy
 *.tdo
+/ParserGenerator/grammar_iml.txt
+/ParserGenerator/src/__pycache__/CodeGenerator.cpython-34.pyc
+/ParserGenerator/src/__pycache__/GrammarParser.cpython-34.pyc
