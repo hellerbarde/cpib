@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public class OperatorToken : GenericParamToken<Operators>
+  public class OperatorToken : GenericParamToken<Operators>
+  {
+    public OperatorToken(Terminals terminal, Operators op) : base(terminal, op)
     {
-        public OperatorToken(Terminals terminal, Operators op) : base(terminal, op) { }
     }
+  }
 }

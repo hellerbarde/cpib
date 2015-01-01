@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public class BoolLiteralToken : GenericParamToken<bool>
+  public class BoolLiteralToken : GenericParamToken<bool>
+  {
+    public BoolLiteralToken(bool value) : base(Terminals.LITERAL, value)
     {
-        public BoolLiteralToken(bool value) : base(Terminals.LITERAL, value) { }
     }
+  }
 }

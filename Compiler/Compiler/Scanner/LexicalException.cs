@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public class LexicalException : Exception
+  public class LexicalException : Exception
+  {
+    public LexicalException(string message) : base(message)
     {
-        public LexicalException(string message) : base(message) { }
     }
+  }
 }

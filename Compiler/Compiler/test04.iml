@@ -4,7 +4,9 @@ global
     var globTest : int32;
     	proc testproc(in copy const t1:int32, in ref const t2:int32, in copy var t3:bool, in ref var t4:int32,
         inout copy const t11:int32, inout ref const t21:int32, inout copy var t31:bool, inout ref var t41:int32,
-        out copy const t12:int32, out const t22:int32, out copy var t32:bool, out ref var t42:int32)
+        out copy const t12:int32, out const t22:int32, out copy var t32:bool, out ref var t42:int32, 
+        in copy a: array(2, 3, 2) int32, out copy b: array(2) int32,
+        in copy c: array(10) int32, out copy d: array(4) int32)
     global
         var globTest, globalTest2
     local
@@ -12,7 +14,12 @@ global
 	do
 		t42 init := 1;
         t42 := 5;
-		
+		a init := [  [[1,2],[3,4],[5,6]],  [[734223,8236],[281,11123],[674,878]]  ];
+        c init := [1,2,3,4,5,6,7,8,9,0];
+
+        b init := fill 4;
+        b := a[0][1];
+        d := c[1..4];
         if ( t1 = t2 && t2 < t3 && t3 > t4 || t11 /= t41 div t31 div t21 div t11 &? t31 <= t41 * t11 |? t1 - t2 >=t4 + t3 ) then
             t11 := t22 + t32
         else
@@ -53,7 +60,7 @@ do
 	capitaln init := captialur * 20 div 20 div 1 div 4;
     capital := 1 + 2 + 3 - 4 - 5;
     if ( (a < b) = (b > c) && b < c && c < d ) then
-        capital := 4m * 3 * 4 + 2 * 3 + 4 - 1 * 2
+        capital := 4 * 3 * 4 + 2 * 3 + 4 - 1 * 2
     else
         skip
     endif

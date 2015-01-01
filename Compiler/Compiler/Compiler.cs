@@ -13,7 +13,7 @@ namespace Compiler
       try {
         Scanner scanner = new Scanner();
         var list = scanner.Scan(new System.IO.StreamReader("test04.iml"));
-        Console.WriteLine("[" + String.Join(", ", list) + "]");
+        Console.WriteLine("[" + String.Join(",\n", list) + "]");
         Parser parser = new Parser(list);
         IProgram program = parser.parseprogram();
         Console.WriteLine(program.ToString());

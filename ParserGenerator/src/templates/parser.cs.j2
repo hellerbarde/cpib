@@ -35,7 +35,7 @@ namespace Compiler
       terminal = token.Terminal;
     }
 
-    private Token consume(Terminals expectedTerminal)
+    private Tokennode consume(Terminals expectedTerminal)
     {
       if (terminal == expectedTerminal) {
         Token consumedToken = token;
@@ -45,11 +45,11 @@ namespace Compiler
           // maintain class invariant
           terminal = token.Terminal;
         }
-        return consumedToken;
+        return new Tokennode(consumedToken);
       }
       else {
-        throw new GrammarError("terminal expected: " + expectedTerminal +
-          ", terminal found: " + terminal);
+        throw new GrammarException("terminal expected: " + expectedTerminal +
+          ", terminal found: " + terminal, token.Row, token.Column);
       }
     }
 
@@ -60,31 +60,41 @@ namespace Compiler
         {%- for entry in token.columns %}
         case Terminals.{{ entry.name | upper }}:
         {
-          var {{ token.name | lower }} = new {{ token.name | capitalizefirstchar }}{{ entry.name | capitalize }}();
-    {% for tok in entry.entry %}
-        {%- if tok.type == "Nonterminal" %}
+          var {{ token.name | lower }} = new {{ token.name | capitalizefirstchar }}{{ entry.name | upper }}();
+          {%- for tok in entry.entry -%}
+            {%- if tok.type == "Nonterminal" %}
           {{ token.name | lower }}.{{ tok.name | lower}} = parse{{ tok.tokentype }}();
-        {% elif tok.type == "Terminal" %}
+            {%- elif tok.type == "Terminal" %}
           {{ token.name | lower }}.{{ tok.name | upper}} = consume(Terminals.{{ tok.name | upper}});
-        {% else %}
+            {%- else %}
           // Epsilon
-        {% endif -%}
-    {% endfor %}
+            {%- endif %}
+          {%- endfor %}
           return {{ token.name | lower }};
         }
         {% endfor -%}
         default:
-          throw new NotImplementedException();
+          throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal '{{ token.name }}' unexpectedly.", terminal.ToString()), token.Row, token.Column);
       }
     }
     {% endfor %}
 
-    private class GrammarError : Exception
+{#    private class GrammarError : Exception
     {
       public GrammarError(String ErrorMessage) :base (ErrorMessage)
       {
 
       }
-    }
+
+      public GrammarError(String ErrorMessage, int Line, int Column) :
+        this(
+          String.Format("[PARSER] (Line: {0}, Column: {1}) {2}", 
+            Line, 
+            Column, 
+            ErrorMessage))
+      {
+
+      }
+    } #}
   }
 }

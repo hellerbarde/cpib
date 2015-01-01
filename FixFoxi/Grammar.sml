@@ -1,5 +1,5 @@
-datatype term
-   = ADDOPR
+datatype term  =
+     ADDOPR
    | ARRAY
    | BECOMES
    | BOOLOPR
@@ -92,7 +92,7 @@ val string_of_term =
 
 
 datatype nonterm = 
-    arrayAccess 
+      arrayAccess 
     | arrayContent 
     | arrayDecl 
     | arrayIndex
@@ -347,7 +347,7 @@ val productions =
 
 (repArrayLength ,
 [[],
-[T COMMA, N expr]]),
+[T COMMA, N expr, N repArrayLength]]),
 
     (cmd, [
         [T SKIP],

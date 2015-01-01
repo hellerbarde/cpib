@@ -11,13 +11,14 @@ namespace Compiler
 
     public override void Handle(Scanner scanner, char data)
     {
+      scanner.CurrentState = new DefaultState();
       if (data == '.') {
         scanner.AddToken(scanner.Keywords[".."]);
-        scanner.CurrentState = new DefaultState();
-        scanner.CurrentState.Handle(scanner, data);
+        //scanner.CurrentState = new DefaultState();
+        //scanner.CurrentState.Handle(scanner, data);
       }
       else {
-        throw new LexicalException("Found '.'; '..' expected.");
+        throw new LexicalException("Found '"+data+"'; '..' expected.");
       }
     }
   }

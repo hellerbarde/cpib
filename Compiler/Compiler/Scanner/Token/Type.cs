@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public enum Type
-    {
-        INT32,
-        BOOL,
-        ARRAY
-    }
+  public enum Type
+  {
+    INT32,
+    BOOL,
+    DECIMAL
+  }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public class TypeToken : GenericParamToken<Type>
+  public class TypeToken : GenericParamToken<Type>
+  {
+    public TypeToken(Type value) : base(Terminals.TYPE, value)
     {
-        public TypeToken(Type value) : base(Terminals.TYPE, value) { }
     }
+  }
 }

@@ -37,11 +37,13 @@ namespace Compiler
 
     public Scanner()
     {
+      #region keywords
       Keywords = new Dictionary<string, Token>();
       Keywords.Add("div", new OperatorToken(Terminals.MULTOPR, Operators.DIV));
       Keywords.Add("mod", new OperatorToken(Terminals.MULTOPR, Operators.MOD));
       Keywords.Add("bool", new TypeToken(Type.BOOL));
       Keywords.Add("int32", new TypeToken(Type.INT32));
+      Keywords.Add("decimal", new TypeToken(Type.DECIMAL));
       Keywords.Add("call", new Token(Terminals.CALL));
       Keywords.Add("const", new ChangeModeToken(ChangeMode.CONST));
       Keywords.Add("var", new ChangeModeToken(ChangeMode.VAR));
@@ -72,8 +74,9 @@ namespace Compiler
       Keywords.Add("then", new Token(Terminals.THEN));
       Keywords.Add("while", new Token(Terminals.WHILE));
       Keywords.Add("..", new Token(Terminals.RANGE));
-      Keywords.Add("array", new TypeToken(Type.ARRAY));
+      Keywords.Add("array", new Token(Terminals.ARRAY));
       Keywords.Add("fill", new Token(Terminals.FILL));
+      #endregion
     }
 
     /// <summary>
@@ -102,9 +105,10 @@ namespace Compiler
           if (!(CurrentState is DefaultState)) {
             throw new LexicalException("Unexpected EOF (end of file)");
           }
-          TokenList.Add(new Token(Terminals.SENTINEL)); //Add SENTINEL Token to the end
         } catch (LexicalException ex) {
           throw new LexicalException(String.Format("Row: {0} Col: {1} Msg: {2}", Row, Col, ex.Message));
+        } finally {
+          reader.Close();
         }
         return TokenList;
       }
@@ -116,8 +120,8 @@ namespace Compiler
     /// <param name="token">Token to append to the token list</param>
     public void AddToken(Token token)
     {
-      token.Column = Col;
       token.Row = Row;
+      token.Column = Col;
       TokenList.Add(token);
     }
   }

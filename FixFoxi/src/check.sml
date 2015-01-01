@@ -1,4 +1,4 @@
 
 use "use.sml";
-use "../grammar-janis.sml";
+use "../Grammar.sml";
 dispDiagnosis result;

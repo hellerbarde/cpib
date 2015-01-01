@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public enum FlowMode
-    {
-        IN,
-        INOUT,
-        OUT,
-    }
+  public enum FlowMode
+  {
+    IN,
+    INOUT,
+    OUT,
+  }
 }

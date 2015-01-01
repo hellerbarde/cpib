@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public enum ChangeMode
-    {
-        CONST,
-        VAR,
-    }
+  public enum ChangeMode
+  {
+    CONST,
+    VAR,
+  }
 }

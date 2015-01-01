@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public class ChangeModeToken : GenericParamToken<ChangeMode>
+  public class ChangeModeToken : GenericParamToken<ChangeMode>
+  {
+    public ChangeModeToken(ChangeMode value) : base(Terminals.CHANGEMODE, value)
     {
-        public ChangeModeToken(ChangeMode value) : base(Terminals.CHANGEMODE, value) { }
     }
+  }
 }

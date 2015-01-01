@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public class FlowModeToken : GenericParamToken<FlowMode>
+  public class FlowModeToken : GenericParamToken<FlowMode>
+  {
+    public FlowModeToken(FlowMode value) : base(Terminals.FLOWMODE, value)
     {
-        public FlowModeToken(FlowMode value) : base(Terminals.FLOWMODE, value) { }
     }
+  }
 }

@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public class MechModeToken : GenericParamToken<MechMode>
+  public class MechModeToken : GenericParamToken<MechMode>
+  {
+    public MechModeToken(MechMode value) : base(Terminals.MECHMODE, value)
     {
-        public MechModeToken(MechMode value) : base(Terminals.MECHMODE, value) { }
     }
+  }
 }

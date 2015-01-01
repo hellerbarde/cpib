@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace Compiler
 {
-    public enum MechMode
-    {
-        COPY,
-        REF,
-    }
+  public enum MechMode
+  {
+    COPY,
+    REF,
+  }
 }

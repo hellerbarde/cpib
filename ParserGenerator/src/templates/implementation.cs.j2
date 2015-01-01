@@ -3,24 +3,24 @@ using System.Text;
 
 namespace Compiler
 {
-  public class {{ line.name | capitalizefirstchar }}{{ entry.name | capitalize }} : I{{ line.name | capitalizefirstchar }}
+  public partial class {{ line.name | capitalizefirstchar }}{{ entry.name | upper }} : I{{ line.name | capitalizefirstchar }}
   {
 {%- for token in entry.entry %}
   {%- if token.type == "Nonterminal" %}
     public I{{ token.tokentype | capitalizefirstchar }} {{ token.name | lower }} { get; set; }
   {% elif token.type == "Terminal" %}
-    public Token {{ token.name | upper }} { get; set; } 
+    public Tokennode {{ token.name | upper }} { get; set; } 
   {% else %}
     // Epsilon
   {% endif -%}
 {% endfor %}
-    public {{ line.name | capitalizefirstchar }}{{ entry.name | capitalize }}()
+    public {{ line.name | capitalizefirstchar }}{{ entry.name | upper }}()
     {
     }
 
     public override String ToString()
     {
-      return ("TBD");
+      return ("lalalal");
     }
   }
 }
