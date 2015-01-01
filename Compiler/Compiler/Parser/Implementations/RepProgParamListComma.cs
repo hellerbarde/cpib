@@ -7,9 +7,9 @@ namespace Compiler
   {
     public Tokennode COMMA { get; set; } 
   
-    public IProgParam progparam { get; set; }
+    public IProgParam ProgParam { get; set; }
   
-    public IRepProgParamList repprogparamlist { get; set; }
+    public IRepProgParamList RepProgParamList { get; set; }
   
     public RepProgParamListCOMMA()
     {

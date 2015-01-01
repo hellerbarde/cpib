@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class SliceExprTYPE : ISliceExpr
   {
-    public IExpr expr { get; set; }
+    public IExpr Expr { get; set; }
   
-    public IRepSliceExpr repsliceexpr { get; set; }
+    public IRepSliceExpr RepSliceExpr { get; set; }
   
     public SliceExprTYPE()
     {

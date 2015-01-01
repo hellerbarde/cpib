@@ -7,9 +7,9 @@ namespace Compiler
   {
     public Tokennode COMMA { get; set; } 
   
-    public IExpr expr { get; set; }
+    public IExpr Expr { get; set; }
   
-    public IRepExprList repexprlist { get; set; }
+    public IRepExprList RepExprList { get; set; }
   
     public RepExprListCOMMA()
     {

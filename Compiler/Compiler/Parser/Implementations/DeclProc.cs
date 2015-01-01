@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class DeclPROC : IDecl
   {
-    public IProcDecl procdecl { get; set; }
+    public IProcDecl ProcDecl { get; set; }
   
     public DeclPROC()
     {

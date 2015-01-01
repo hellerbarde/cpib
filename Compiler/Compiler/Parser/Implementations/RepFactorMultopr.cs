@@ -7,9 +7,9 @@ namespace Compiler
   {
     public Tokennode MULTOPR { get; set; } 
   
-    public IFactor factor { get; set; }
+    public IFactor Factor { get; set; }
   
-    public IRepFactor repfactor { get; set; }
+    public IRepFactor RepFactor { get; set; }
   
     public RepFactorMULTOPR()
     {

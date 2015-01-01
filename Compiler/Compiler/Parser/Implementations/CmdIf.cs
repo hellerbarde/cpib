@@ -7,15 +7,15 @@ namespace Compiler
   {
     public Tokennode IF { get; set; } 
   
-    public IExpr expr { get; set; }
+    public IExpr Expr { get; set; }
   
     public Tokennode THEN { get; set; } 
   
-    public ICpsCmd cpscmd { get; set; }
+    public ICpsCmd CpsCmd { get; set; }
   
     public Tokennode ELSE { get; set; } 
   
-    public ICpsCmd cpscmd0 { get; set; }
+    public ICpsCmd CpsCmd2 { get; set; }
   
     public Tokennode ENDIF { get; set; } 
   

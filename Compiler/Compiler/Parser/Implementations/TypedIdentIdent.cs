@@ -9,8 +9,8 @@ namespace Compiler
   
     public Tokennode COLON { get; set; } 
   
-    public ITypeOrArray typeorarray { get; set; }
-  
+    public ITypeOrArray TypeOrArray { get; set; }
+
     public TypedIdentIDENT()
     {
     }

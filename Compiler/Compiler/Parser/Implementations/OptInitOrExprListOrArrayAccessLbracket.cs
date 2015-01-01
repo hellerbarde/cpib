@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class OptInitOrExprListOrArrayAccessLBRACKET : IOptInitOrExprListOrArrayAccess
   {
-    public IArrayIndex arrayindex { get; set; }
+    public IArrayIndex ArrayIndex { get; set; }
   
     public OptInitOrExprListOrArrayAccessLBRACKET()
     {

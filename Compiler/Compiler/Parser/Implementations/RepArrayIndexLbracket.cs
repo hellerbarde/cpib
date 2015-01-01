@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class RepArrayIndexLBRACKET : IRepArrayIndex
   {
-    public IArrayIndex arrayindex { get; set; }
+    public IArrayIndex ArrayIndex { get; set; }
   
     public RepArrayIndexLBRACKET()
     {

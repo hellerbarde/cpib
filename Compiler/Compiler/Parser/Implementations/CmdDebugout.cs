@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode DEBUGOUT { get; set; } 
   
-    public IExpr expr { get; set; }
+    public IExpr Expr { get; set; }
   
     public CmdDEBUGOUT()
     {

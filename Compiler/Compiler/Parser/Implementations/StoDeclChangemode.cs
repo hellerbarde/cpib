@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode CHANGEMODE { get; set; } 
   
-    public ITypedIdent typedident { get; set; }
+    public ITypedIdent TypedIdent { get; set; }
   
     public StoDeclCHANGEMODE()
     {

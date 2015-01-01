@@ -7,7 +7,7 @@ namespace Compiler
   {
 {%- for token in entry.entry %}
   {%- if token.type == "Nonterminal" %}
-    public I{{ token.tokentype | capitalizefirstchar }} {{ token.name | lower }} { get; set; }
+    public I{{ token.tokentype | capitalizefirstchar }} {{ token.name | capitalizefirstchar }} { get; set; }
   {% elif token.type == "Terminal" %}
     public Tokennode {{ token.name | upper }} { get; set; } 
   {% else %}

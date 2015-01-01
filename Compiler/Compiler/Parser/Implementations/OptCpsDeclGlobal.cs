@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode GLOBAL { get; set; } 
   
-    public ICpsDecl cpsdecl { get; set; }
+    public ICpsDecl CpsDecl { get; set; }
   
     public OptCpsDeclGLOBAL()
     {

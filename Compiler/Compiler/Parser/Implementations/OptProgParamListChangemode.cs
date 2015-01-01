@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class OptProgParamListCHANGEMODE : IOptProgParamList
   {
-    public IProgParam progparam { get; set; }
+    public IProgParam ProgParam { get; set; }
   
-    public IRepProgParamList repprogparamlist { get; set; }
+    public IRepProgParamList RepProgParamList { get; set; }
   
     public OptProgParamListCHANGEMODE()
     {

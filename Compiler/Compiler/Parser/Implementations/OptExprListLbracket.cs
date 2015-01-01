@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class OptExprListLBRACKET : IOptExprList
   {
-    public IExpr expr { get; set; }
+    public IExpr Expr { get; set; }
   
-    public IRepExprList repexprlist { get; set; }
+    public IRepExprList RepExprList { get; set; }
   
     public OptExprListLBRACKET()
     {

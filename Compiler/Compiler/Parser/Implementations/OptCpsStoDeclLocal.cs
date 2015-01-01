@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode LOCAL { get; set; } 
   
-    public ICpsStoDecl cpsstodecl { get; set; }
+    public ICpsStoDecl CpsStoDecl { get; set; }
   
     public OptCpsStoDeclLOCAL()
     {

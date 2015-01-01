@@ -7,9 +7,9 @@ namespace Compiler
   {
     public Tokennode COMMA { get; set; } 
   
-    public IExpr expr { get; set; }
+    public IExpr Expr { get; set; }
   
-    public IRepArrayLength reparraylength { get; set; }
+    public IRepArrayLength RepArrayLength { get; set; }
   
     public RepArrayLengthCOMMA()
     {

@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode RANGE { get; set; } 
   
-    public IExpr expr { get; set; }
+    public IExpr Expr { get; set; }
   
     public RepSliceExprRANGE()
     {

@@ -9,9 +9,9 @@ namespace Compiler
   
     public Tokennode IDENT { get; set; } 
   
-    public IExprList exprlist { get; set; }
+    public IExprList ExprList { get; set; }
   
-    public IOptGlobInits optglobinits { get; set; }
+    public IOptGlobInits OptGlobInits { get; set; }
   
     public CmdCALL()
     {

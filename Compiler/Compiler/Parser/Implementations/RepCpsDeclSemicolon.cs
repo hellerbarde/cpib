@@ -7,9 +7,9 @@ namespace Compiler
   {
     public Tokennode SEMICOLON { get; set; } 
   
-    public IDecl decl { get; set; }
+    public IDecl Decl { get; set; }
   
-    public IRepCpsDecl repcpsdecl { get; set; }
+    public IRepCpsDecl RepCpsDecl { get; set; }
   
     public RepCpsDeclSEMICOLON()
     {

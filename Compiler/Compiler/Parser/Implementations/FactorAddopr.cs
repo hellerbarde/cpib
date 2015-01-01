@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class FactorADDOPR : IFactor
   {
-    public IMonadicOpr monadicopr { get; set; }
+    public IMonadicOpr MonadicOpr { get; set; }
   
-    public IFactor factor { get; set; }
+    public IFactor Factor { get; set; }
   
     public FactorADDOPR()
     {

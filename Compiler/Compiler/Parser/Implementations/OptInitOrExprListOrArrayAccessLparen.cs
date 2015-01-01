@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class OptInitOrExprListOrArrayAccessLPAREN : IOptInitOrExprListOrArrayAccess
   {
-    public IExprList exprlist { get; set; }
+    public IExprList ExprList { get; set; }
   
     public OptInitOrExprListOrArrayAccessLPAREN()
     {

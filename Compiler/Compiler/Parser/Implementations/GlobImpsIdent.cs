@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class GlobImpsIDENT : IGlobImps
   {
-    public IGlobImp globimp { get; set; }
+    public IGlobImp GlobImp { get; set; }
   
-    public IRepGlobImps repglobimps { get; set; }
+    public IRepGlobImps RepGlobImps { get; set; }
   
     public GlobImpsIDENT()
     {

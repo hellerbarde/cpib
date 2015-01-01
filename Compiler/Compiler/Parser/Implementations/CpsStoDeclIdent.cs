@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class CpsStoDeclIDENT : ICpsStoDecl
   {
-    public IStoDecl stodecl { get; set; }
+    public IStoDecl StoDecl { get; set; }
   
-    public IRepCpsStoDecl repcpsstodecl { get; set; }
+    public IRepCpsStoDecl RepCpsStoDecl { get; set; }
   
     public CpsStoDeclIDENT()
     {

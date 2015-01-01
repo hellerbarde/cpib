@@ -40,7 +40,7 @@ def parse_entry_list(string):
     result = list()
     name = str()
     tokentype = str()
-    token = str()
+    # token = str()
     for part in string.split():
         if is_nonterminal(part):
             tokentype = parse_nonterminal(part)
@@ -48,7 +48,7 @@ def parse_entry_list(string):
             tokentype = part
         list_of_tokens[tokentype] += 1
         if list_of_tokens[tokentype] > 1:
-            name = tokentype + str(list_of_tokens[token])
+            name = tokentype + str(list_of_tokens[tokentype])
         else:
             name = tokentype
         result.append(NonterminalEntry(name, tokentype)

@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class FactorLBRACKET : IFactor
   {
-    public IArrayLiteral arrayliteral { get; set; }
+    public IArrayLiteral ArrayLiteral { get; set; }
   
     public FactorLBRACKET()
     {

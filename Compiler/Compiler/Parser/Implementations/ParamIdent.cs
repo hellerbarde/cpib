@@ -5,11 +5,11 @@ namespace Compiler
 {
   public partial class ParamIDENT : IParam
   {
-    public IOptMechmode optmechmode { get; set; }
+    public IOptMechmode OptMechmode { get; set; }
   
-    public IOptChangemode optchangemode { get; set; }
+    public IOptChangemode OptChangemode { get; set; }
   
-    public ITypedIdent typedident { get; set; }
+    public ITypedIdent TypedIdent { get; set; }
   
     public ParamIDENT()
     {

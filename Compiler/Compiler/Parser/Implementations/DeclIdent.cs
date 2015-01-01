@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class DeclIDENT : IDecl
   {
-    public IStoDecl stodecl { get; set; }
+    public IStoDecl StoDecl { get; set; }
   
     public DeclIDENT()
     {

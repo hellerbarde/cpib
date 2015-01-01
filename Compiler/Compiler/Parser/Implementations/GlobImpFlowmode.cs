@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode FLOWMODE { get; set; } 
   
-    public IOptChangemode optchangemode { get; set; }
+    public IOptChangemode OptChangemode { get; set; }
   
     public Tokennode IDENT { get; set; } 
   

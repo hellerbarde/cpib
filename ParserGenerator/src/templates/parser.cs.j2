@@ -60,17 +60,17 @@ namespace Compiler
         {%- for entry in token.columns %}
         case Terminals.{{ entry.name | upper }}:
         {
-          var {{ token.name | lower }} = new {{ token.name | capitalizefirstchar }}{{ entry.name | upper }}();
+          var {{ token.name | capitalizefirstchar }} = new {{ token.name | capitalizefirstchar }}{{ entry.name | upper }}();
           {%- for tok in entry.entry -%}
             {%- if tok.type == "Nonterminal" %}
-          {{ token.name | lower }}.{{ tok.name | lower}} = parse{{ tok.tokentype }}();
+          {{ token.name | capitalizefirstchar }}.{{ tok.name | capitalizefirstchar}} = parse{{ tok.tokentype }}();
             {%- elif tok.type == "Terminal" %}
-          {{ token.name | lower }}.{{ tok.name | upper}} = consume(Terminals.{{ tok.name | upper}});
+          {{ token.name | capitalizefirstchar }}.{{ tok.name | upper}} = consume(Terminals.{{ tok.name | upper}});
             {%- else %}
           // Epsilon
             {%- endif %}
           {%- endfor %}
-          return {{ token.name | lower }};
+          return {{ token.name | capitalizefirstchar }};
         }
         {% endfor -%}
         default:

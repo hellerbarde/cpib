@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class CpsDeclIDENT : ICpsDecl
   {
-    public IDecl decl { get; set; }
+    public IDecl Decl { get; set; }
   
-    public IRepCpsDecl repcpsdecl { get; set; }
+    public IRepCpsDecl RepCpsDecl { get; set; }
   
     public CpsDeclIDENT()
     {

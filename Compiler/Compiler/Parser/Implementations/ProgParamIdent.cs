@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class ProgParamIDENT : IProgParam
   {
-    public IOptChangemode optchangemode { get; set; }
+    public IOptChangemode OptChangemode { get; set; }
   
-    public ITypedIdent typedident { get; set; }
+    public ITypedIdent TypedIdent { get; set; }
   
     public ProgParamIDENT()
     {

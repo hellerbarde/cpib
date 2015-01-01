@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode IDENT { get; set; } 
   
-    public IOptInitOrExprListOrArrayAccess optinitorexprlistorarrayaccess { get; set; }
+    public IOptInitOrExprListOrArrayAccess OptInitOrExprListOrArrayAccess { get; set; }
   
     public FactorIDENT()
     {

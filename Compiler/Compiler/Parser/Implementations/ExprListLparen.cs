@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode LPAREN { get; set; } 
   
-    public IOptExprList optexprlist { get; set; }
+    public IOptExprList OptExprList { get; set; }
   
     public Tokennode RPAREN { get; set; } 
   

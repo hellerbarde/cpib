@@ -9,7 +9,7 @@ namespace Compiler
   
     public Tokennode IDENT { get; set; } 
   
-    public IRepIdents repidents { get; set; }
+    public IRepIdents RepIdents { get; set; }
   
     public RepIdentsCOMMA()
     {

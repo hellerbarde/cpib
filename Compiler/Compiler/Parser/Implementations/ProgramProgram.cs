@@ -9,13 +9,13 @@ namespace Compiler
   
     public Tokennode IDENT { get; set; } 
   
-    public IProgParamList progparamlist { get; set; }
+    public IProgParamList ProgParamList { get; set; }
   
-    public IOptCpsDecl optcpsdecl { get; set; }
+    public IOptCpsDecl OptCpsDecl { get; set; }
   
     public Tokennode DO { get; set; } 
   
-    public ICpsCmd cpscmd { get; set; }
+    public ICpsCmd CpsCmd { get; set; }
   
     public Tokennode ENDPROGRAM { get; set; } 
   

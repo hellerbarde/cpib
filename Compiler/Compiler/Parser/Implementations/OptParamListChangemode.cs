@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class OptParamListCHANGEMODE : IOptParamList
   {
-    public IParam param { get; set; }
+    public IParam Param { get; set; }
   
-    public IRepParamList repparamlist { get; set; }
+    public IRepParamList RepParamList { get; set; }
   
     public OptParamListCHANGEMODE()
     {

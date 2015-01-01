@@ -7,11 +7,11 @@ namespace Compiler
   {
     public Tokennode LBRACKET { get; set; } 
   
-    public ISliceExpr sliceexpr { get; set; }
+    public ISliceExpr SliceExpr { get; set; }
   
     public Tokennode RBRACKET { get; set; } 
   
-    public IRepArrayIndex reparrayindex { get; set; }
+    public IRepArrayIndex RepArrayIndex { get; set; }
   
     public ArrayIndexLBRACKET()
     {

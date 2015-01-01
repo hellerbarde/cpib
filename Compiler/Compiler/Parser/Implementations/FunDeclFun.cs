@@ -9,19 +9,19 @@ namespace Compiler
   
     public Tokennode IDENT { get; set; } 
   
-    public IParamList paramlist { get; set; }
+    public IParamList ParamList { get; set; }
   
     public Tokennode RETURNS { get; set; } 
   
-    public IStoDecl stodecl { get; set; }
+    public IStoDecl StoDecl { get; set; }
   
-    public IOptGlobImps optglobimps { get; set; }
+    public IOptGlobImps OptGlobImps { get; set; }
   
-    public IOptCpsStoDecl optcpsstodecl { get; set; }
+    public IOptCpsStoDecl OptCpsStoDecl { get; set; }
   
     public Tokennode DO { get; set; } 
   
-    public ICpsCmd cpscmd { get; set; }
+    public ICpsCmd CpsCmd { get; set; }
   
     public Tokennode ENDFUN { get; set; } 
   

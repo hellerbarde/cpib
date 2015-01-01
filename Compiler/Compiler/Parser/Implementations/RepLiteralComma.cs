@@ -9,7 +9,7 @@ namespace Compiler
   
     public Tokennode LITERAL { get; set; } 
   
-    public IRepLiteral repliteral { get; set; }
+    public IRepLiteral RepLiteral { get; set; }
   
     public RepLiteralCOMMA()
     {

@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode LBRACKET { get; set; } 
   
-    public IArrayContent arraycontent { get; set; }
+    public IArrayContent ArrayContent { get; set; }
   
     public Tokennode RBRACKET { get; set; } 
   

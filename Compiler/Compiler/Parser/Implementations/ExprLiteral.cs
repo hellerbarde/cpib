@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class ExprLITERAL : IExpr
   {
-    public ITerm1 term1 { get; set; }
+    public ITerm1 Term1 { get; set; }
   
-    public IRepTerm1 repterm1 { get; set; }
+    public IRepTerm1 RepTerm1 { get; set; }
   
     public ExprLITERAL()
     {

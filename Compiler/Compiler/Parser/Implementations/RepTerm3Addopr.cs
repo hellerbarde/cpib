@@ -7,9 +7,9 @@ namespace Compiler
   {
     public Tokennode ADDOPR { get; set; } 
   
-    public ITerm3 term3 { get; set; }
+    public ITerm3 Term3 { get; set; }
   
-    public IRepTerm3 repterm3 { get; set; }
+    public IRepTerm3 RepTerm3 { get; set; }
   
     public RepTerm3ADDOPR()
     {

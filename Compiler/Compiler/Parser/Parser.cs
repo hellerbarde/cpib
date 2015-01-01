@@ -46,15 +46,15 @@ namespace Compiler
       switch (terminal) {
         case Terminals.PROGRAM:
         {
-          var program = new ProgramPROGRAM();
-          program.PROGRAM = consume(Terminals.PROGRAM);
-          program.IDENT = consume(Terminals.IDENT);
-          program.progparamlist = parseprogParamList();
-          program.optcpsdecl = parseoptCpsDecl();
-          program.DO = consume(Terminals.DO);
-          program.cpscmd = parsecpsCmd();
-          program.ENDPROGRAM = consume(Terminals.ENDPROGRAM);
-          return program;
+          var Program = new ProgramPROGRAM();
+          Program.PROGRAM = consume(Terminals.PROGRAM);
+          Program.IDENT = consume(Terminals.IDENT);
+          Program.ProgParamList = parseprogParamList();
+          Program.OptCpsDecl = parseoptCpsDecl();
+          Program.DO = consume(Terminals.DO);
+          Program.CpsCmd = parsecpsCmd();
+          Program.ENDPROGRAM = consume(Terminals.ENDPROGRAM);
+          return Program;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'program' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -66,30 +66,30 @@ namespace Compiler
       switch (terminal) {
         case Terminals.CHANGEMODE:
         {
-          var decl = new DeclCHANGEMODE();
-          decl.stodecl = parsestoDecl();
-          return decl;
+          var Decl = new DeclCHANGEMODE();
+          Decl.StoDecl = parsestoDecl();
+          return Decl;
         }
         
         case Terminals.IDENT:
         {
-          var decl = new DeclIDENT();
-          decl.stodecl = parsestoDecl();
-          return decl;
+          var Decl = new DeclIDENT();
+          Decl.StoDecl = parsestoDecl();
+          return Decl;
         }
         
         case Terminals.FUN:
         {
-          var decl = new DeclFUN();
-          decl.fundecl = parsefunDecl();
-          return decl;
+          var Decl = new DeclFUN();
+          Decl.FunDecl = parsefunDecl();
+          return Decl;
         }
         
         case Terminals.PROC:
         {
-          var decl = new DeclPROC();
-          decl.procdecl = parseprocDecl();
-          return decl;
+          var Decl = new DeclPROC();
+          Decl.ProcDecl = parseprocDecl();
+          return Decl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'decl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -101,17 +101,17 @@ namespace Compiler
       switch (terminal) {
         case Terminals.IDENT:
         {
-          var stodecl = new StoDeclIDENT();
-          stodecl.typedident = parsetypedIdent();
-          return stodecl;
+          var StoDecl = new StoDeclIDENT();
+          StoDecl.TypedIdent = parsetypedIdent();
+          return StoDecl;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var stodecl = new StoDeclCHANGEMODE();
-          stodecl.CHANGEMODE = consume(Terminals.CHANGEMODE);
-          stodecl.typedident = parsetypedIdent();
-          return stodecl;
+          var StoDecl = new StoDeclCHANGEMODE();
+          StoDecl.CHANGEMODE = consume(Terminals.CHANGEMODE);
+          StoDecl.TypedIdent = parsetypedIdent();
+          return StoDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'stoDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -123,18 +123,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.FUN:
         {
-          var fundecl = new FunDeclFUN();
-          fundecl.FUN = consume(Terminals.FUN);
-          fundecl.IDENT = consume(Terminals.IDENT);
-          fundecl.paramlist = parseparamList();
-          fundecl.RETURNS = consume(Terminals.RETURNS);
-          fundecl.stodecl = parsestoDecl();
-          fundecl.optglobimps = parseoptGlobImps();
-          fundecl.optcpsstodecl = parseoptCpsStoDecl();
-          fundecl.DO = consume(Terminals.DO);
-          fundecl.cpscmd = parsecpsCmd();
-          fundecl.ENDFUN = consume(Terminals.ENDFUN);
-          return fundecl;
+          var FunDecl = new FunDeclFUN();
+          FunDecl.FUN = consume(Terminals.FUN);
+          FunDecl.IDENT = consume(Terminals.IDENT);
+          FunDecl.ParamList = parseparamList();
+          FunDecl.RETURNS = consume(Terminals.RETURNS);
+          FunDecl.StoDecl = parsestoDecl();
+          FunDecl.OptGlobImps = parseoptGlobImps();
+          FunDecl.OptCpsStoDecl = parseoptCpsStoDecl();
+          FunDecl.DO = consume(Terminals.DO);
+          FunDecl.CpsCmd = parsecpsCmd();
+          FunDecl.ENDFUN = consume(Terminals.ENDFUN);
+          return FunDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'funDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -146,16 +146,16 @@ namespace Compiler
       switch (terminal) {
         case Terminals.PROC:
         {
-          var procdecl = new ProcDeclPROC();
-          procdecl.PROC = consume(Terminals.PROC);
-          procdecl.IDENT = consume(Terminals.IDENT);
-          procdecl.paramlist = parseparamList();
-          procdecl.optglobimps = parseoptGlobImps();
-          procdecl.optcpsstodecl = parseoptCpsStoDecl();
-          procdecl.DO = consume(Terminals.DO);
-          procdecl.cpscmd = parsecpsCmd();
-          procdecl.ENDPROC = consume(Terminals.ENDPROC);
-          return procdecl;
+          var ProcDecl = new ProcDeclPROC();
+          ProcDecl.PROC = consume(Terminals.PROC);
+          ProcDecl.IDENT = consume(Terminals.IDENT);
+          ProcDecl.ParamList = parseparamList();
+          ProcDecl.OptGlobImps = parseoptGlobImps();
+          ProcDecl.OptCpsStoDecl = parseoptCpsStoDecl();
+          ProcDecl.DO = consume(Terminals.DO);
+          ProcDecl.CpsCmd = parsecpsCmd();
+          ProcDecl.ENDPROC = consume(Terminals.ENDPROC);
+          return ProcDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'procDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -167,24 +167,24 @@ namespace Compiler
       switch (terminal) {
         case Terminals.GLOBAL:
         {
-          var optglobimps = new OptGlobImpsGLOBAL();
-          optglobimps.GLOBAL = consume(Terminals.GLOBAL);
-          optglobimps.globimps = parseglobImps();
-          return optglobimps;
+          var OptGlobImps = new OptGlobImpsGLOBAL();
+          OptGlobImps.GLOBAL = consume(Terminals.GLOBAL);
+          OptGlobImps.GlobImps = parseglobImps();
+          return OptGlobImps;
         }
         
         case Terminals.DO:
         {
-          var optglobimps = new OptGlobImpsDO();
+          var OptGlobImps = new OptGlobImpsDO();
           // Epsilon
-          return optglobimps;
+          return OptGlobImps;
         }
         
         case Terminals.LOCAL:
         {
-          var optglobimps = new OptGlobImpsLOCAL();
+          var OptGlobImps = new OptGlobImpsLOCAL();
           // Epsilon
-          return optglobimps;
+          return OptGlobImps;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optGlobImps' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -196,26 +196,26 @@ namespace Compiler
       switch (terminal) {
         case Terminals.FLOWMODE:
         {
-          var globimps = new GlobImpsFLOWMODE();
-          globimps.globimp = parseglobImp();
-          globimps.repglobimps = parserepGlobImps();
-          return globimps;
+          var GlobImps = new GlobImpsFLOWMODE();
+          GlobImps.GlobImp = parseglobImp();
+          GlobImps.RepGlobImps = parserepGlobImps();
+          return GlobImps;
         }
         
         case Terminals.IDENT:
         {
-          var globimps = new GlobImpsIDENT();
-          globimps.globimp = parseglobImp();
-          globimps.repglobimps = parserepGlobImps();
-          return globimps;
+          var GlobImps = new GlobImpsIDENT();
+          GlobImps.GlobImp = parseglobImp();
+          GlobImps.RepGlobImps = parserepGlobImps();
+          return GlobImps;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var globimps = new GlobImpsCHANGEMODE();
-          globimps.globimp = parseglobImp();
-          globimps.repglobimps = parserepGlobImps();
-          return globimps;
+          var GlobImps = new GlobImpsCHANGEMODE();
+          GlobImps.GlobImp = parseglobImp();
+          GlobImps.RepGlobImps = parserepGlobImps();
+          return GlobImps;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'globImps' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -227,25 +227,25 @@ namespace Compiler
       switch (terminal) {
         case Terminals.COMMA:
         {
-          var repglobimps = new RepGlobImpsCOMMA();
-          repglobimps.COMMA = consume(Terminals.COMMA);
-          repglobimps.globimp = parseglobImp();
-          repglobimps.repglobimps = parserepGlobImps();
-          return repglobimps;
+          var RepGlobImps = new RepGlobImpsCOMMA();
+          RepGlobImps.COMMA = consume(Terminals.COMMA);
+          RepGlobImps.GlobImp = parseglobImp();
+          RepGlobImps.RepGlobImps = parserepGlobImps();
+          return RepGlobImps;
         }
         
         case Terminals.DO:
         {
-          var repglobimps = new RepGlobImpsDO();
+          var RepGlobImps = new RepGlobImpsDO();
           // Epsilon
-          return repglobimps;
+          return RepGlobImps;
         }
         
         case Terminals.LOCAL:
         {
-          var repglobimps = new RepGlobImpsLOCAL();
+          var RepGlobImps = new RepGlobImpsLOCAL();
           // Epsilon
-          return repglobimps;
+          return RepGlobImps;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repGlobImps' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -257,16 +257,16 @@ namespace Compiler
       switch (terminal) {
         case Terminals.CHANGEMODE:
         {
-          var optchangemode = new OptChangemodeCHANGEMODE();
-          optchangemode.CHANGEMODE = consume(Terminals.CHANGEMODE);
-          return optchangemode;
+          var OptChangemode = new OptChangemodeCHANGEMODE();
+          OptChangemode.CHANGEMODE = consume(Terminals.CHANGEMODE);
+          return OptChangemode;
         }
         
         case Terminals.IDENT:
         {
-          var optchangemode = new OptChangemodeIDENT();
+          var OptChangemode = new OptChangemodeIDENT();
           // Epsilon
-          return optchangemode;
+          return OptChangemode;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optChangemode' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -278,23 +278,23 @@ namespace Compiler
       switch (terminal) {
         case Terminals.MECHMODE:
         {
-          var optmechmode = new OptMechmodeMECHMODE();
-          optmechmode.MECHMODE = consume(Terminals.MECHMODE);
-          return optmechmode;
+          var OptMechmode = new OptMechmodeMECHMODE();
+          OptMechmode.MECHMODE = consume(Terminals.MECHMODE);
+          return OptMechmode;
         }
         
         case Terminals.IDENT:
         {
-          var optmechmode = new OptMechmodeIDENT();
+          var OptMechmode = new OptMechmodeIDENT();
           // Epsilon
-          return optmechmode;
+          return OptMechmode;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var optmechmode = new OptMechmodeCHANGEMODE();
+          var OptMechmode = new OptMechmodeCHANGEMODE();
           // Epsilon
-          return optmechmode;
+          return OptMechmode;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optMechmode' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -306,27 +306,27 @@ namespace Compiler
       switch (terminal) {
         case Terminals.IDENT:
         {
-          var globimp = new GlobImpIDENT();
-          globimp.optchangemode = parseoptChangemode();
-          globimp.IDENT = consume(Terminals.IDENT);
-          return globimp;
+          var GlobImp = new GlobImpIDENT();
+          GlobImp.OptChangemode = parseoptChangemode();
+          GlobImp.IDENT = consume(Terminals.IDENT);
+          return GlobImp;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var globimp = new GlobImpCHANGEMODE();
-          globimp.optchangemode = parseoptChangemode();
-          globimp.IDENT = consume(Terminals.IDENT);
-          return globimp;
+          var GlobImp = new GlobImpCHANGEMODE();
+          GlobImp.OptChangemode = parseoptChangemode();
+          GlobImp.IDENT = consume(Terminals.IDENT);
+          return GlobImp;
         }
         
         case Terminals.FLOWMODE:
         {
-          var globimp = new GlobImpFLOWMODE();
-          globimp.FLOWMODE = consume(Terminals.FLOWMODE);
-          globimp.optchangemode = parseoptChangemode();
-          globimp.IDENT = consume(Terminals.IDENT);
-          return globimp;
+          var GlobImp = new GlobImpFLOWMODE();
+          GlobImp.FLOWMODE = consume(Terminals.FLOWMODE);
+          GlobImp.OptChangemode = parseoptChangemode();
+          GlobImp.IDENT = consume(Terminals.IDENT);
+          return GlobImp;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'globImp' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -338,17 +338,17 @@ namespace Compiler
       switch (terminal) {
         case Terminals.GLOBAL:
         {
-          var optcpsdecl = new OptCpsDeclGLOBAL();
-          optcpsdecl.GLOBAL = consume(Terminals.GLOBAL);
-          optcpsdecl.cpsdecl = parsecpsDecl();
-          return optcpsdecl;
+          var OptCpsDecl = new OptCpsDeclGLOBAL();
+          OptCpsDecl.GLOBAL = consume(Terminals.GLOBAL);
+          OptCpsDecl.CpsDecl = parsecpsDecl();
+          return OptCpsDecl;
         }
         
         case Terminals.DO:
         {
-          var optcpsdecl = new OptCpsDeclDO();
+          var OptCpsDecl = new OptCpsDeclDO();
           // Epsilon
-          return optcpsdecl;
+          return OptCpsDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optCpsDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -360,34 +360,34 @@ namespace Compiler
       switch (terminal) {
         case Terminals.PROC:
         {
-          var cpsdecl = new CpsDeclPROC();
-          cpsdecl.decl = parsedecl();
-          cpsdecl.repcpsdecl = parserepCpsDecl();
-          return cpsdecl;
+          var CpsDecl = new CpsDeclPROC();
+          CpsDecl.Decl = parsedecl();
+          CpsDecl.RepCpsDecl = parserepCpsDecl();
+          return CpsDecl;
         }
         
         case Terminals.FUN:
         {
-          var cpsdecl = new CpsDeclFUN();
-          cpsdecl.decl = parsedecl();
-          cpsdecl.repcpsdecl = parserepCpsDecl();
-          return cpsdecl;
+          var CpsDecl = new CpsDeclFUN();
+          CpsDecl.Decl = parsedecl();
+          CpsDecl.RepCpsDecl = parserepCpsDecl();
+          return CpsDecl;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var cpsdecl = new CpsDeclCHANGEMODE();
-          cpsdecl.decl = parsedecl();
-          cpsdecl.repcpsdecl = parserepCpsDecl();
-          return cpsdecl;
+          var CpsDecl = new CpsDeclCHANGEMODE();
+          CpsDecl.Decl = parsedecl();
+          CpsDecl.RepCpsDecl = parserepCpsDecl();
+          return CpsDecl;
         }
         
         case Terminals.IDENT:
         {
-          var cpsdecl = new CpsDeclIDENT();
-          cpsdecl.decl = parsedecl();
-          cpsdecl.repcpsdecl = parserepCpsDecl();
-          return cpsdecl;
+          var CpsDecl = new CpsDeclIDENT();
+          CpsDecl.Decl = parsedecl();
+          CpsDecl.RepCpsDecl = parserepCpsDecl();
+          return CpsDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'cpsDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -399,18 +399,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.SEMICOLON:
         {
-          var repcpsdecl = new RepCpsDeclSEMICOLON();
-          repcpsdecl.SEMICOLON = consume(Terminals.SEMICOLON);
-          repcpsdecl.decl = parsedecl();
-          repcpsdecl.repcpsdecl = parserepCpsDecl();
-          return repcpsdecl;
+          var RepCpsDecl = new RepCpsDeclSEMICOLON();
+          RepCpsDecl.SEMICOLON = consume(Terminals.SEMICOLON);
+          RepCpsDecl.Decl = parsedecl();
+          RepCpsDecl.RepCpsDecl = parserepCpsDecl();
+          return RepCpsDecl;
         }
         
         case Terminals.DO:
         {
-          var repcpsdecl = new RepCpsDeclDO();
+          var RepCpsDecl = new RepCpsDeclDO();
           // Epsilon
-          return repcpsdecl;
+          return RepCpsDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repCpsDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -422,17 +422,17 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LOCAL:
         {
-          var optcpsstodecl = new OptCpsStoDeclLOCAL();
-          optcpsstodecl.LOCAL = consume(Terminals.LOCAL);
-          optcpsstodecl.cpsstodecl = parsecpsStoDecl();
-          return optcpsstodecl;
+          var OptCpsStoDecl = new OptCpsStoDeclLOCAL();
+          OptCpsStoDecl.LOCAL = consume(Terminals.LOCAL);
+          OptCpsStoDecl.CpsStoDecl = parsecpsStoDecl();
+          return OptCpsStoDecl;
         }
         
         case Terminals.DO:
         {
-          var optcpsstodecl = new OptCpsStoDeclDO();
+          var OptCpsStoDecl = new OptCpsStoDeclDO();
           // Epsilon
-          return optcpsstodecl;
+          return OptCpsStoDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optCpsStoDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -444,18 +444,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.CHANGEMODE:
         {
-          var cpsstodecl = new CpsStoDeclCHANGEMODE();
-          cpsstodecl.stodecl = parsestoDecl();
-          cpsstodecl.repcpsstodecl = parserepCpsStoDecl();
-          return cpsstodecl;
+          var CpsStoDecl = new CpsStoDeclCHANGEMODE();
+          CpsStoDecl.StoDecl = parsestoDecl();
+          CpsStoDecl.RepCpsStoDecl = parserepCpsStoDecl();
+          return CpsStoDecl;
         }
         
         case Terminals.IDENT:
         {
-          var cpsstodecl = new CpsStoDeclIDENT();
-          cpsstodecl.stodecl = parsestoDecl();
-          cpsstodecl.repcpsstodecl = parserepCpsStoDecl();
-          return cpsstodecl;
+          var CpsStoDecl = new CpsStoDeclIDENT();
+          CpsStoDecl.StoDecl = parsestoDecl();
+          CpsStoDecl.RepCpsStoDecl = parserepCpsStoDecl();
+          return CpsStoDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'cpsStoDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -467,18 +467,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.SEMICOLON:
         {
-          var repcpsstodecl = new RepCpsStoDeclSEMICOLON();
-          repcpsstodecl.SEMICOLON = consume(Terminals.SEMICOLON);
-          repcpsstodecl.stodecl = parsestoDecl();
-          repcpsstodecl.repcpsstodecl = parserepCpsStoDecl();
-          return repcpsstodecl;
+          var RepCpsStoDecl = new RepCpsStoDeclSEMICOLON();
+          RepCpsStoDecl.SEMICOLON = consume(Terminals.SEMICOLON);
+          RepCpsStoDecl.StoDecl = parsestoDecl();
+          RepCpsStoDecl.RepCpsStoDecl = parserepCpsStoDecl();
+          return RepCpsStoDecl;
         }
         
         case Terminals.DO:
         {
-          var repcpsstodecl = new RepCpsStoDeclDO();
+          var RepCpsStoDecl = new RepCpsStoDeclDO();
           // Epsilon
-          return repcpsstodecl;
+          return RepCpsStoDecl;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repCpsStoDecl' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -490,11 +490,11 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LPAREN:
         {
-          var progparamlist = new ProgParamListLPAREN();
-          progparamlist.LPAREN = consume(Terminals.LPAREN);
-          progparamlist.optprogparamlist = parseoptProgParamList();
-          progparamlist.RPAREN = consume(Terminals.RPAREN);
-          return progparamlist;
+          var ProgParamList = new ProgParamListLPAREN();
+          ProgParamList.LPAREN = consume(Terminals.LPAREN);
+          ProgParamList.OptProgParamList = parseoptProgParamList();
+          ProgParamList.RPAREN = consume(Terminals.RPAREN);
+          return ProgParamList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'progParamList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -506,33 +506,33 @@ namespace Compiler
       switch (terminal) {
         case Terminals.FLOWMODE:
         {
-          var optprogparamlist = new OptProgParamListFLOWMODE();
-          optprogparamlist.progparam = parseprogParam();
-          optprogparamlist.repprogparamlist = parserepProgParamList();
-          return optprogparamlist;
+          var OptProgParamList = new OptProgParamListFLOWMODE();
+          OptProgParamList.ProgParam = parseprogParam();
+          OptProgParamList.RepProgParamList = parserepProgParamList();
+          return OptProgParamList;
         }
         
         case Terminals.IDENT:
         {
-          var optprogparamlist = new OptProgParamListIDENT();
-          optprogparamlist.progparam = parseprogParam();
-          optprogparamlist.repprogparamlist = parserepProgParamList();
-          return optprogparamlist;
+          var OptProgParamList = new OptProgParamListIDENT();
+          OptProgParamList.ProgParam = parseprogParam();
+          OptProgParamList.RepProgParamList = parserepProgParamList();
+          return OptProgParamList;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var optprogparamlist = new OptProgParamListCHANGEMODE();
-          optprogparamlist.progparam = parseprogParam();
-          optprogparamlist.repprogparamlist = parserepProgParamList();
-          return optprogparamlist;
+          var OptProgParamList = new OptProgParamListCHANGEMODE();
+          OptProgParamList.ProgParam = parseprogParam();
+          OptProgParamList.RepProgParamList = parserepProgParamList();
+          return OptProgParamList;
         }
         
         case Terminals.RPAREN:
         {
-          var optprogparamlist = new OptProgParamListRPAREN();
+          var OptProgParamList = new OptProgParamListRPAREN();
           // Epsilon
-          return optprogparamlist;
+          return OptProgParamList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optProgParamList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -544,18 +544,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.COMMA:
         {
-          var repprogparamlist = new RepProgParamListCOMMA();
-          repprogparamlist.COMMA = consume(Terminals.COMMA);
-          repprogparamlist.progparam = parseprogParam();
-          repprogparamlist.repprogparamlist = parserepProgParamList();
-          return repprogparamlist;
+          var RepProgParamList = new RepProgParamListCOMMA();
+          RepProgParamList.COMMA = consume(Terminals.COMMA);
+          RepProgParamList.ProgParam = parseprogParam();
+          RepProgParamList.RepProgParamList = parserepProgParamList();
+          return RepProgParamList;
         }
         
         case Terminals.RPAREN:
         {
-          var repprogparamlist = new RepProgParamListRPAREN();
+          var RepProgParamList = new RepProgParamListRPAREN();
           // Epsilon
-          return repprogparamlist;
+          return RepProgParamList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repProgParamList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -567,27 +567,27 @@ namespace Compiler
       switch (terminal) {
         case Terminals.IDENT:
         {
-          var progparam = new ProgParamIDENT();
-          progparam.optchangemode = parseoptChangemode();
-          progparam.typedident = parsetypedIdent();
-          return progparam;
+          var ProgParam = new ProgParamIDENT();
+          ProgParam.OptChangemode = parseoptChangemode();
+          ProgParam.TypedIdent = parsetypedIdent();
+          return ProgParam;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var progparam = new ProgParamCHANGEMODE();
-          progparam.optchangemode = parseoptChangemode();
-          progparam.typedident = parsetypedIdent();
-          return progparam;
+          var ProgParam = new ProgParamCHANGEMODE();
+          ProgParam.OptChangemode = parseoptChangemode();
+          ProgParam.TypedIdent = parsetypedIdent();
+          return ProgParam;
         }
         
         case Terminals.FLOWMODE:
         {
-          var progparam = new ProgParamFLOWMODE();
-          progparam.FLOWMODE = consume(Terminals.FLOWMODE);
-          progparam.optchangemode = parseoptChangemode();
-          progparam.typedident = parsetypedIdent();
-          return progparam;
+          var ProgParam = new ProgParamFLOWMODE();
+          ProgParam.FLOWMODE = consume(Terminals.FLOWMODE);
+          ProgParam.OptChangemode = parseoptChangemode();
+          ProgParam.TypedIdent = parsetypedIdent();
+          return ProgParam;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'progParam' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -599,11 +599,11 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LPAREN:
         {
-          var paramlist = new ParamListLPAREN();
-          paramlist.LPAREN = consume(Terminals.LPAREN);
-          paramlist.optparamlist = parseoptParamList();
-          paramlist.RPAREN = consume(Terminals.RPAREN);
-          return paramlist;
+          var ParamList = new ParamListLPAREN();
+          ParamList.LPAREN = consume(Terminals.LPAREN);
+          ParamList.OptParamList = parseoptParamList();
+          ParamList.RPAREN = consume(Terminals.RPAREN);
+          return ParamList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'paramList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -615,41 +615,41 @@ namespace Compiler
       switch (terminal) {
         case Terminals.FLOWMODE:
         {
-          var optparamlist = new OptParamListFLOWMODE();
-          optparamlist.param = parseparam();
-          optparamlist.repparamlist = parserepParamList();
-          return optparamlist;
+          var OptParamList = new OptParamListFLOWMODE();
+          OptParamList.Param = parseparam();
+          OptParamList.RepParamList = parserepParamList();
+          return OptParamList;
         }
         
         case Terminals.IDENT:
         {
-          var optparamlist = new OptParamListIDENT();
-          optparamlist.param = parseparam();
-          optparamlist.repparamlist = parserepParamList();
-          return optparamlist;
+          var OptParamList = new OptParamListIDENT();
+          OptParamList.Param = parseparam();
+          OptParamList.RepParamList = parserepParamList();
+          return OptParamList;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var optparamlist = new OptParamListCHANGEMODE();
-          optparamlist.param = parseparam();
-          optparamlist.repparamlist = parserepParamList();
-          return optparamlist;
+          var OptParamList = new OptParamListCHANGEMODE();
+          OptParamList.Param = parseparam();
+          OptParamList.RepParamList = parserepParamList();
+          return OptParamList;
         }
         
         case Terminals.MECHMODE:
         {
-          var optparamlist = new OptParamListMECHMODE();
-          optparamlist.param = parseparam();
-          optparamlist.repparamlist = parserepParamList();
-          return optparamlist;
+          var OptParamList = new OptParamListMECHMODE();
+          OptParamList.Param = parseparam();
+          OptParamList.RepParamList = parserepParamList();
+          return OptParamList;
         }
         
         case Terminals.RPAREN:
         {
-          var optparamlist = new OptParamListRPAREN();
+          var OptParamList = new OptParamListRPAREN();
           // Epsilon
-          return optparamlist;
+          return OptParamList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optParamList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -661,18 +661,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.COMMA:
         {
-          var repparamlist = new RepParamListCOMMA();
-          repparamlist.COMMA = consume(Terminals.COMMA);
-          repparamlist.param = parseparam();
-          repparamlist.repparamlist = parserepParamList();
-          return repparamlist;
+          var RepParamList = new RepParamListCOMMA();
+          RepParamList.COMMA = consume(Terminals.COMMA);
+          RepParamList.Param = parseparam();
+          RepParamList.RepParamList = parserepParamList();
+          return RepParamList;
         }
         
         case Terminals.RPAREN:
         {
-          var repparamlist = new RepParamListRPAREN();
+          var RepParamList = new RepParamListRPAREN();
           // Epsilon
-          return repparamlist;
+          return RepParamList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repParamList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -684,39 +684,39 @@ namespace Compiler
       switch (terminal) {
         case Terminals.IDENT:
         {
-          var param = new ParamIDENT();
-          param.optmechmode = parseoptMechmode();
-          param.optchangemode = parseoptChangemode();
-          param.typedident = parsetypedIdent();
-          return param;
+          var Param = new ParamIDENT();
+          Param.OptMechmode = parseoptMechmode();
+          Param.OptChangemode = parseoptChangemode();
+          Param.TypedIdent = parsetypedIdent();
+          return Param;
         }
         
         case Terminals.CHANGEMODE:
         {
-          var param = new ParamCHANGEMODE();
-          param.optmechmode = parseoptMechmode();
-          param.optchangemode = parseoptChangemode();
-          param.typedident = parsetypedIdent();
-          return param;
+          var Param = new ParamCHANGEMODE();
+          Param.OptMechmode = parseoptMechmode();
+          Param.OptChangemode = parseoptChangemode();
+          Param.TypedIdent = parsetypedIdent();
+          return Param;
         }
         
         case Terminals.MECHMODE:
         {
-          var param = new ParamMECHMODE();
-          param.optmechmode = parseoptMechmode();
-          param.optchangemode = parseoptChangemode();
-          param.typedident = parsetypedIdent();
-          return param;
+          var Param = new ParamMECHMODE();
+          Param.OptMechmode = parseoptMechmode();
+          Param.OptChangemode = parseoptChangemode();
+          Param.TypedIdent = parsetypedIdent();
+          return Param;
         }
         
         case Terminals.FLOWMODE:
         {
-          var param = new ParamFLOWMODE();
-          param.FLOWMODE = consume(Terminals.FLOWMODE);
-          param.optmechmode = parseoptMechmode();
-          param.optchangemode = parseoptChangemode();
-          param.typedident = parsetypedIdent();
-          return param;
+          var Param = new ParamFLOWMODE();
+          Param.FLOWMODE = consume(Terminals.FLOWMODE);
+          Param.OptMechmode = parseoptMechmode();
+          Param.OptChangemode = parseoptChangemode();
+          Param.TypedIdent = parsetypedIdent();
+          return Param;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'param' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -728,11 +728,11 @@ namespace Compiler
       switch (terminal) {
         case Terminals.IDENT:
         {
-          var typedident = new TypedIdentIDENT();
-          typedident.IDENT = consume(Terminals.IDENT);
-          typedident.COLON = consume(Terminals.COLON);
-          typedident.typeorarray = parsetypeOrArray();
-          return typedident;
+          var TypedIdent = new TypedIdentIDENT();
+          TypedIdent.IDENT = consume(Terminals.IDENT);
+          TypedIdent.COLON = consume(Terminals.COLON);
+          TypedIdent.TypeOrArray = parsetypeOrArray();
+          return TypedIdent;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'typedIdent' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -744,21 +744,21 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var typeorarray = new TypeOrArrayTYPE();
-          typeorarray.TYPE = consume(Terminals.TYPE);
-          return typeorarray;
+          var TypeOrArray = new TypeOrArrayTYPE();
+          TypeOrArray.TYPE = consume(Terminals.TYPE);
+          return TypeOrArray;
         }
         
         case Terminals.ARRAY:
         {
-          var typeorarray = new TypeOrArrayARRAY();
-          typeorarray.ARRAY = consume(Terminals.ARRAY);
-          typeorarray.LPAREN = consume(Terminals.LPAREN);
-          typeorarray.expr = parseexpr();
-          typeorarray.reparraylength = parserepArrayLength();
-          typeorarray.RPAREN = consume(Terminals.RPAREN);
-          typeorarray.TYPE = consume(Terminals.TYPE);
-          return typeorarray;
+          var TypeOrArray = new TypeOrArrayARRAY();
+          TypeOrArray.ARRAY = consume(Terminals.ARRAY);
+          TypeOrArray.LPAREN = consume(Terminals.LPAREN);
+          TypeOrArray.Expr = parseexpr();
+          TypeOrArray.RepArrayLength = parserepArrayLength();
+          TypeOrArray.RPAREN = consume(Terminals.RPAREN);
+          TypeOrArray.TYPE = consume(Terminals.TYPE);
+          return TypeOrArray;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'typeOrArray' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -770,18 +770,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.RPAREN:
         {
-          var reparraylength = new RepArrayLengthRPAREN();
+          var RepArrayLength = new RepArrayLengthRPAREN();
           // Epsilon
-          return reparraylength;
+          return RepArrayLength;
         }
         
         case Terminals.COMMA:
         {
-          var reparraylength = new RepArrayLengthCOMMA();
-          reparraylength.COMMA = consume(Terminals.COMMA);
-          reparraylength.expr = parseexpr();
-          reparraylength.reparraylength = parserepArrayLength();
-          return reparraylength;
+          var RepArrayLength = new RepArrayLengthCOMMA();
+          RepArrayLength.COMMA = consume(Terminals.COMMA);
+          RepArrayLength.Expr = parseexpr();
+          RepArrayLength.RepArrayLength = parserepArrayLength();
+          return RepArrayLength;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repArrayLength' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -793,129 +793,129 @@ namespace Compiler
       switch (terminal) {
         case Terminals.SKIP:
         {
-          var cmd = new CmdSKIP();
-          cmd.SKIP = consume(Terminals.SKIP);
-          return cmd;
+          var Cmd = new CmdSKIP();
+          Cmd.SKIP = consume(Terminals.SKIP);
+          return Cmd;
         }
         
         case Terminals.TYPE:
         {
-          var cmd = new CmdTYPE();
-          cmd.expr = parseexpr();
-          cmd.BECOMES = consume(Terminals.BECOMES);
-          cmd.optfill = parseoptFill();
-          cmd.expr0 = parseexpr();
-          return cmd;
+          var Cmd = new CmdTYPE();
+          Cmd.Expr = parseexpr();
+          Cmd.BECOMES = consume(Terminals.BECOMES);
+          Cmd.OptFill = parseoptFill();
+          Cmd.Expr2 = parseexpr();
+          return Cmd;
         }
         
         case Terminals.LPAREN:
         {
-          var cmd = new CmdLPAREN();
-          cmd.expr = parseexpr();
-          cmd.BECOMES = consume(Terminals.BECOMES);
-          cmd.optfill = parseoptFill();
-          cmd.expr0 = parseexpr();
-          return cmd;
+          var Cmd = new CmdLPAREN();
+          Cmd.Expr = parseexpr();
+          Cmd.BECOMES = consume(Terminals.BECOMES);
+          Cmd.OptFill = parseoptFill();
+          Cmd.Expr2 = parseexpr();
+          return Cmd;
         }
         
         case Terminals.ADDOPR:
         {
-          var cmd = new CmdADDOPR();
-          cmd.expr = parseexpr();
-          cmd.BECOMES = consume(Terminals.BECOMES);
-          cmd.optfill = parseoptFill();
-          cmd.expr0 = parseexpr();
-          return cmd;
+          var Cmd = new CmdADDOPR();
+          Cmd.Expr = parseexpr();
+          Cmd.BECOMES = consume(Terminals.BECOMES);
+          Cmd.OptFill = parseoptFill();
+          Cmd.Expr2 = parseexpr();
+          return Cmd;
         }
         
         case Terminals.NOT:
         {
-          var cmd = new CmdNOT();
-          cmd.expr = parseexpr();
-          cmd.BECOMES = consume(Terminals.BECOMES);
-          cmd.optfill = parseoptFill();
-          cmd.expr0 = parseexpr();
-          return cmd;
+          var Cmd = new CmdNOT();
+          Cmd.Expr = parseexpr();
+          Cmd.BECOMES = consume(Terminals.BECOMES);
+          Cmd.OptFill = parseoptFill();
+          Cmd.Expr2 = parseexpr();
+          return Cmd;
         }
         
         case Terminals.IDENT:
         {
-          var cmd = new CmdIDENT();
-          cmd.expr = parseexpr();
-          cmd.BECOMES = consume(Terminals.BECOMES);
-          cmd.optfill = parseoptFill();
-          cmd.expr0 = parseexpr();
-          return cmd;
+          var Cmd = new CmdIDENT();
+          Cmd.Expr = parseexpr();
+          Cmd.BECOMES = consume(Terminals.BECOMES);
+          Cmd.OptFill = parseoptFill();
+          Cmd.Expr2 = parseexpr();
+          return Cmd;
         }
         
         case Terminals.LBRACKET:
         {
-          var cmd = new CmdLBRACKET();
-          cmd.expr = parseexpr();
-          cmd.BECOMES = consume(Terminals.BECOMES);
-          cmd.optfill = parseoptFill();
-          cmd.expr0 = parseexpr();
-          return cmd;
+          var Cmd = new CmdLBRACKET();
+          Cmd.Expr = parseexpr();
+          Cmd.BECOMES = consume(Terminals.BECOMES);
+          Cmd.OptFill = parseoptFill();
+          Cmd.Expr2 = parseexpr();
+          return Cmd;
         }
         
         case Terminals.LITERAL:
         {
-          var cmd = new CmdLITERAL();
-          cmd.expr = parseexpr();
-          cmd.BECOMES = consume(Terminals.BECOMES);
-          cmd.optfill = parseoptFill();
-          cmd.expr0 = parseexpr();
-          return cmd;
+          var Cmd = new CmdLITERAL();
+          Cmd.Expr = parseexpr();
+          Cmd.BECOMES = consume(Terminals.BECOMES);
+          Cmd.OptFill = parseoptFill();
+          Cmd.Expr2 = parseexpr();
+          return Cmd;
         }
         
         case Terminals.IF:
         {
-          var cmd = new CmdIF();
-          cmd.IF = consume(Terminals.IF);
-          cmd.expr = parseexpr();
-          cmd.THEN = consume(Terminals.THEN);
-          cmd.cpscmd = parsecpsCmd();
-          cmd.ELSE = consume(Terminals.ELSE);
-          cmd.cpscmd0 = parsecpsCmd();
-          cmd.ENDIF = consume(Terminals.ENDIF);
-          return cmd;
+          var Cmd = new CmdIF();
+          Cmd.IF = consume(Terminals.IF);
+          Cmd.Expr = parseexpr();
+          Cmd.THEN = consume(Terminals.THEN);
+          Cmd.CpsCmd = parsecpsCmd();
+          Cmd.ELSE = consume(Terminals.ELSE);
+          Cmd.CpsCmd2 = parsecpsCmd();
+          Cmd.ENDIF = consume(Terminals.ENDIF);
+          return Cmd;
         }
         
         case Terminals.WHILE:
         {
-          var cmd = new CmdWHILE();
-          cmd.WHILE = consume(Terminals.WHILE);
-          cmd.expr = parseexpr();
-          cmd.DO = consume(Terminals.DO);
-          cmd.cpscmd = parsecpsCmd();
-          cmd.ENDWHILE = consume(Terminals.ENDWHILE);
-          return cmd;
+          var Cmd = new CmdWHILE();
+          Cmd.WHILE = consume(Terminals.WHILE);
+          Cmd.Expr = parseexpr();
+          Cmd.DO = consume(Terminals.DO);
+          Cmd.CpsCmd = parsecpsCmd();
+          Cmd.ENDWHILE = consume(Terminals.ENDWHILE);
+          return Cmd;
         }
         
         case Terminals.CALL:
         {
-          var cmd = new CmdCALL();
-          cmd.CALL = consume(Terminals.CALL);
-          cmd.IDENT = consume(Terminals.IDENT);
-          cmd.exprlist = parseexprList();
-          cmd.optglobinits = parseoptGlobInits();
-          return cmd;
+          var Cmd = new CmdCALL();
+          Cmd.CALL = consume(Terminals.CALL);
+          Cmd.IDENT = consume(Terminals.IDENT);
+          Cmd.ExprList = parseexprList();
+          Cmd.OptGlobInits = parseoptGlobInits();
+          return Cmd;
         }
         
         case Terminals.DEBUGIN:
         {
-          var cmd = new CmdDEBUGIN();
-          cmd.DEBUGIN = consume(Terminals.DEBUGIN);
-          cmd.expr = parseexpr();
-          return cmd;
+          var Cmd = new CmdDEBUGIN();
+          Cmd.DEBUGIN = consume(Terminals.DEBUGIN);
+          Cmd.Expr = parseexpr();
+          return Cmd;
         }
         
         case Terminals.DEBUGOUT:
         {
-          var cmd = new CmdDEBUGOUT();
-          cmd.DEBUGOUT = consume(Terminals.DEBUGOUT);
-          cmd.expr = parseexpr();
-          return cmd;
+          var Cmd = new CmdDEBUGOUT();
+          Cmd.DEBUGOUT = consume(Terminals.DEBUGOUT);
+          Cmd.Expr = parseexpr();
+          return Cmd;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'cmd' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -927,106 +927,106 @@ namespace Compiler
       switch (terminal) {
         case Terminals.DEBUGOUT:
         {
-          var cpscmd = new CpsCmdDEBUGOUT();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdDEBUGOUT();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.DEBUGIN:
         {
-          var cpscmd = new CpsCmdDEBUGIN();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdDEBUGIN();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.CALL:
         {
-          var cpscmd = new CpsCmdCALL();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdCALL();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.WHILE:
         {
-          var cpscmd = new CpsCmdWHILE();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdWHILE();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.IF:
         {
-          var cpscmd = new CpsCmdIF();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdIF();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.TYPE:
         {
-          var cpscmd = new CpsCmdTYPE();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdTYPE();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.LPAREN:
         {
-          var cpscmd = new CpsCmdLPAREN();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdLPAREN();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.ADDOPR:
         {
-          var cpscmd = new CpsCmdADDOPR();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdADDOPR();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.NOT:
         {
-          var cpscmd = new CpsCmdNOT();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdNOT();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.IDENT:
         {
-          var cpscmd = new CpsCmdIDENT();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdIDENT();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.LBRACKET:
         {
-          var cpscmd = new CpsCmdLBRACKET();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdLBRACKET();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.LITERAL:
         {
-          var cpscmd = new CpsCmdLITERAL();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdLITERAL();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         
         case Terminals.SKIP:
         {
-          var cpscmd = new CpsCmdSKIP();
-          cpscmd.cmd = parsecmd();
-          cpscmd.repcpscmd = parserepCpsCmd();
-          return cpscmd;
+          var CpsCmd = new CpsCmdSKIP();
+          CpsCmd.Cmd = parsecmd();
+          CpsCmd.RepCpsCmd = parserepCpsCmd();
+          return CpsCmd;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'cpsCmd' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1038,53 +1038,53 @@ namespace Compiler
       switch (terminal) {
         case Terminals.SEMICOLON:
         {
-          var repcpscmd = new RepCpsCmdSEMICOLON();
-          repcpscmd.SEMICOLON = consume(Terminals.SEMICOLON);
-          repcpscmd.cmd = parsecmd();
-          repcpscmd.repcpscmd = parserepCpsCmd();
-          return repcpscmd;
+          var RepCpsCmd = new RepCpsCmdSEMICOLON();
+          RepCpsCmd.SEMICOLON = consume(Terminals.SEMICOLON);
+          RepCpsCmd.Cmd = parsecmd();
+          RepCpsCmd.RepCpsCmd = parserepCpsCmd();
+          return RepCpsCmd;
         }
         
         case Terminals.ENDWHILE:
         {
-          var repcpscmd = new RepCpsCmdENDWHILE();
+          var RepCpsCmd = new RepCpsCmdENDWHILE();
           // Epsilon
-          return repcpscmd;
+          return RepCpsCmd;
         }
         
         case Terminals.ENDIF:
         {
-          var repcpscmd = new RepCpsCmdENDIF();
+          var RepCpsCmd = new RepCpsCmdENDIF();
           // Epsilon
-          return repcpscmd;
+          return RepCpsCmd;
         }
         
         case Terminals.ELSE:
         {
-          var repcpscmd = new RepCpsCmdELSE();
+          var RepCpsCmd = new RepCpsCmdELSE();
           // Epsilon
-          return repcpscmd;
+          return RepCpsCmd;
         }
         
         case Terminals.ENDPROC:
         {
-          var repcpscmd = new RepCpsCmdENDPROC();
+          var RepCpsCmd = new RepCpsCmdENDPROC();
           // Epsilon
-          return repcpscmd;
+          return RepCpsCmd;
         }
         
         case Terminals.ENDFUN:
         {
-          var repcpscmd = new RepCpsCmdENDFUN();
+          var RepCpsCmd = new RepCpsCmdENDFUN();
           // Epsilon
-          return repcpscmd;
+          return RepCpsCmd;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var repcpscmd = new RepCpsCmdENDPROGRAM();
+          var RepCpsCmd = new RepCpsCmdENDPROGRAM();
           // Epsilon
-          return repcpscmd;
+          return RepCpsCmd;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repCpsCmd' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1096,58 +1096,58 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var optfill = new OptFillTYPE();
+          var OptFill = new OptFillTYPE();
           // Epsilon
-          return optfill;
+          return OptFill;
         }
         
         case Terminals.LPAREN:
         {
-          var optfill = new OptFillLPAREN();
+          var OptFill = new OptFillLPAREN();
           // Epsilon
-          return optfill;
+          return OptFill;
         }
         
         case Terminals.ADDOPR:
         {
-          var optfill = new OptFillADDOPR();
+          var OptFill = new OptFillADDOPR();
           // Epsilon
-          return optfill;
+          return OptFill;
         }
         
         case Terminals.NOT:
         {
-          var optfill = new OptFillNOT();
+          var OptFill = new OptFillNOT();
           // Epsilon
-          return optfill;
+          return OptFill;
         }
         
         case Terminals.IDENT:
         {
-          var optfill = new OptFillIDENT();
+          var OptFill = new OptFillIDENT();
           // Epsilon
-          return optfill;
+          return OptFill;
         }
         
         case Terminals.LBRACKET:
         {
-          var optfill = new OptFillLBRACKET();
+          var OptFill = new OptFillLBRACKET();
           // Epsilon
-          return optfill;
+          return OptFill;
         }
         
         case Terminals.LITERAL:
         {
-          var optfill = new OptFillLITERAL();
+          var OptFill = new OptFillLITERAL();
           // Epsilon
-          return optfill;
+          return OptFill;
         }
         
         case Terminals.FILL:
         {
-          var optfill = new OptFillFILL();
-          optfill.FILL = consume(Terminals.FILL);
-          return optfill;
+          var OptFill = new OptFillFILL();
+          OptFill.FILL = consume(Terminals.FILL);
+          return OptFill;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optFill' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1159,60 +1159,60 @@ namespace Compiler
       switch (terminal) {
         case Terminals.INIT:
         {
-          var optglobinits = new OptGlobInitsINIT();
-          optglobinits.INIT = consume(Terminals.INIT);
-          optglobinits.IDENT = consume(Terminals.IDENT);
-          optglobinits.repidents = parserepIdents();
-          return optglobinits;
+          var OptGlobInits = new OptGlobInitsINIT();
+          OptGlobInits.INIT = consume(Terminals.INIT);
+          OptGlobInits.IDENT = consume(Terminals.IDENT);
+          OptGlobInits.RepIdents = parserepIdents();
+          return OptGlobInits;
         }
         
         case Terminals.ENDWHILE:
         {
-          var optglobinits = new OptGlobInitsENDWHILE();
+          var OptGlobInits = new OptGlobInitsENDWHILE();
           // Epsilon
-          return optglobinits;
+          return OptGlobInits;
         }
         
         case Terminals.ENDIF:
         {
-          var optglobinits = new OptGlobInitsENDIF();
+          var OptGlobInits = new OptGlobInitsENDIF();
           // Epsilon
-          return optglobinits;
+          return OptGlobInits;
         }
         
         case Terminals.ELSE:
         {
-          var optglobinits = new OptGlobInitsELSE();
+          var OptGlobInits = new OptGlobInitsELSE();
           // Epsilon
-          return optglobinits;
+          return OptGlobInits;
         }
         
         case Terminals.ENDPROC:
         {
-          var optglobinits = new OptGlobInitsENDPROC();
+          var OptGlobInits = new OptGlobInitsENDPROC();
           // Epsilon
-          return optglobinits;
+          return OptGlobInits;
         }
         
         case Terminals.ENDFUN:
         {
-          var optglobinits = new OptGlobInitsENDFUN();
+          var OptGlobInits = new OptGlobInitsENDFUN();
           // Epsilon
-          return optglobinits;
+          return OptGlobInits;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var optglobinits = new OptGlobInitsENDPROGRAM();
+          var OptGlobInits = new OptGlobInitsENDPROGRAM();
           // Epsilon
-          return optglobinits;
+          return OptGlobInits;
         }
         
         case Terminals.SEMICOLON:
         {
-          var optglobinits = new OptGlobInitsSEMICOLON();
+          var OptGlobInits = new OptGlobInitsSEMICOLON();
           // Epsilon
-          return optglobinits;
+          return OptGlobInits;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optGlobInits' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1224,60 +1224,60 @@ namespace Compiler
       switch (terminal) {
         case Terminals.COMMA:
         {
-          var repidents = new RepIdentsCOMMA();
-          repidents.COMMA = consume(Terminals.COMMA);
-          repidents.IDENT = consume(Terminals.IDENT);
-          repidents.repidents = parserepIdents();
-          return repidents;
+          var RepIdents = new RepIdentsCOMMA();
+          RepIdents.COMMA = consume(Terminals.COMMA);
+          RepIdents.IDENT = consume(Terminals.IDENT);
+          RepIdents.RepIdents = parserepIdents();
+          return RepIdents;
         }
         
         case Terminals.ENDWHILE:
         {
-          var repidents = new RepIdentsENDWHILE();
+          var RepIdents = new RepIdentsENDWHILE();
           // Epsilon
-          return repidents;
+          return RepIdents;
         }
         
         case Terminals.ENDIF:
         {
-          var repidents = new RepIdentsENDIF();
+          var RepIdents = new RepIdentsENDIF();
           // Epsilon
-          return repidents;
+          return RepIdents;
         }
         
         case Terminals.ELSE:
         {
-          var repidents = new RepIdentsELSE();
+          var RepIdents = new RepIdentsELSE();
           // Epsilon
-          return repidents;
+          return RepIdents;
         }
         
         case Terminals.ENDPROC:
         {
-          var repidents = new RepIdentsENDPROC();
+          var RepIdents = new RepIdentsENDPROC();
           // Epsilon
-          return repidents;
+          return RepIdents;
         }
         
         case Terminals.ENDFUN:
         {
-          var repidents = new RepIdentsENDFUN();
+          var RepIdents = new RepIdentsENDFUN();
           // Epsilon
-          return repidents;
+          return RepIdents;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var repidents = new RepIdentsENDPROGRAM();
+          var RepIdents = new RepIdentsENDPROGRAM();
           // Epsilon
-          return repidents;
+          return RepIdents;
         }
         
         case Terminals.SEMICOLON:
         {
-          var repidents = new RepIdentsSEMICOLON();
+          var RepIdents = new RepIdentsSEMICOLON();
           // Epsilon
-          return repidents;
+          return RepIdents;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repIdents' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1289,58 +1289,58 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var expr = new ExprTYPE();
-          expr.term1 = parseterm1();
-          expr.repterm1 = parserepTerm1();
-          return expr;
+          var Expr = new ExprTYPE();
+          Expr.Term1 = parseterm1();
+          Expr.RepTerm1 = parserepTerm1();
+          return Expr;
         }
         
         case Terminals.LPAREN:
         {
-          var expr = new ExprLPAREN();
-          expr.term1 = parseterm1();
-          expr.repterm1 = parserepTerm1();
-          return expr;
+          var Expr = new ExprLPAREN();
+          Expr.Term1 = parseterm1();
+          Expr.RepTerm1 = parserepTerm1();
+          return Expr;
         }
         
         case Terminals.ADDOPR:
         {
-          var expr = new ExprADDOPR();
-          expr.term1 = parseterm1();
-          expr.repterm1 = parserepTerm1();
-          return expr;
+          var Expr = new ExprADDOPR();
+          Expr.Term1 = parseterm1();
+          Expr.RepTerm1 = parserepTerm1();
+          return Expr;
         }
         
         case Terminals.NOT:
         {
-          var expr = new ExprNOT();
-          expr.term1 = parseterm1();
-          expr.repterm1 = parserepTerm1();
-          return expr;
+          var Expr = new ExprNOT();
+          Expr.Term1 = parseterm1();
+          Expr.RepTerm1 = parserepTerm1();
+          return Expr;
         }
         
         case Terminals.IDENT:
         {
-          var expr = new ExprIDENT();
-          expr.term1 = parseterm1();
-          expr.repterm1 = parserepTerm1();
-          return expr;
+          var Expr = new ExprIDENT();
+          Expr.Term1 = parseterm1();
+          Expr.RepTerm1 = parserepTerm1();
+          return Expr;
         }
         
         case Terminals.LBRACKET:
         {
-          var expr = new ExprLBRACKET();
-          expr.term1 = parseterm1();
-          expr.repterm1 = parserepTerm1();
-          return expr;
+          var Expr = new ExprLBRACKET();
+          Expr.Term1 = parseterm1();
+          Expr.RepTerm1 = parserepTerm1();
+          return Expr;
         }
         
         case Terminals.LITERAL:
         {
-          var expr = new ExprLITERAL();
-          expr.term1 = parseterm1();
-          expr.repterm1 = parserepTerm1();
-          return expr;
+          var Expr = new ExprLITERAL();
+          Expr.Term1 = parseterm1();
+          Expr.RepTerm1 = parserepTerm1();
+          return Expr;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'expr' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1352,109 +1352,109 @@ namespace Compiler
       switch (terminal) {
         case Terminals.BOOLOPR:
         {
-          var repterm1 = new RepTerm1BOOLOPR();
-          repterm1.BOOLOPR = consume(Terminals.BOOLOPR);
-          repterm1.term1 = parseterm1();
-          repterm1.repterm1 = parserepTerm1();
-          return repterm1;
+          var RepTerm1 = new RepTerm1BOOLOPR();
+          RepTerm1.BOOLOPR = consume(Terminals.BOOLOPR);
+          RepTerm1.Term1 = parseterm1();
+          RepTerm1.RepTerm1 = parserepTerm1();
+          return RepTerm1;
         }
         
         case Terminals.RBRACKET:
         {
-          var repterm1 = new RepTerm1RBRACKET();
+          var RepTerm1 = new RepTerm1RBRACKET();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.RANGE:
         {
-          var repterm1 = new RepTerm1RANGE();
+          var RepTerm1 = new RepTerm1RANGE();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.DO:
         {
-          var repterm1 = new RepTerm1DO();
+          var RepTerm1 = new RepTerm1DO();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.THEN:
         {
-          var repterm1 = new RepTerm1THEN();
+          var RepTerm1 = new RepTerm1THEN();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.ENDWHILE:
         {
-          var repterm1 = new RepTerm1ENDWHILE();
+          var RepTerm1 = new RepTerm1ENDWHILE();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.ENDIF:
         {
-          var repterm1 = new RepTerm1ENDIF();
+          var RepTerm1 = new RepTerm1ENDIF();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.ELSE:
         {
-          var repterm1 = new RepTerm1ELSE();
+          var RepTerm1 = new RepTerm1ELSE();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.ENDPROC:
         {
-          var repterm1 = new RepTerm1ENDPROC();
+          var RepTerm1 = new RepTerm1ENDPROC();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.ENDFUN:
         {
-          var repterm1 = new RepTerm1ENDFUN();
+          var RepTerm1 = new RepTerm1ENDFUN();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var repterm1 = new RepTerm1ENDPROGRAM();
+          var RepTerm1 = new RepTerm1ENDPROGRAM();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.SEMICOLON:
         {
-          var repterm1 = new RepTerm1SEMICOLON();
+          var RepTerm1 = new RepTerm1SEMICOLON();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.BECOMES:
         {
-          var repterm1 = new RepTerm1BECOMES();
+          var RepTerm1 = new RepTerm1BECOMES();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.RPAREN:
         {
-          var repterm1 = new RepTerm1RPAREN();
+          var RepTerm1 = new RepTerm1RPAREN();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         
         case Terminals.COMMA:
         {
-          var repterm1 = new RepTerm1COMMA();
+          var RepTerm1 = new RepTerm1COMMA();
           // Epsilon
-          return repterm1;
+          return RepTerm1;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repTerm1' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1466,58 +1466,58 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var term1 = new Term1TYPE();
-          term1.term2 = parseterm2();
-          term1.repterm2 = parserepTerm2();
-          return term1;
+          var Term1 = new Term1TYPE();
+          Term1.Term2 = parseterm2();
+          Term1.RepTerm2 = parserepTerm2();
+          return Term1;
         }
         
         case Terminals.LPAREN:
         {
-          var term1 = new Term1LPAREN();
-          term1.term2 = parseterm2();
-          term1.repterm2 = parserepTerm2();
-          return term1;
+          var Term1 = new Term1LPAREN();
+          Term1.Term2 = parseterm2();
+          Term1.RepTerm2 = parserepTerm2();
+          return Term1;
         }
         
         case Terminals.ADDOPR:
         {
-          var term1 = new Term1ADDOPR();
-          term1.term2 = parseterm2();
-          term1.repterm2 = parserepTerm2();
-          return term1;
+          var Term1 = new Term1ADDOPR();
+          Term1.Term2 = parseterm2();
+          Term1.RepTerm2 = parserepTerm2();
+          return Term1;
         }
         
         case Terminals.NOT:
         {
-          var term1 = new Term1NOT();
-          term1.term2 = parseterm2();
-          term1.repterm2 = parserepTerm2();
-          return term1;
+          var Term1 = new Term1NOT();
+          Term1.Term2 = parseterm2();
+          Term1.RepTerm2 = parserepTerm2();
+          return Term1;
         }
         
         case Terminals.IDENT:
         {
-          var term1 = new Term1IDENT();
-          term1.term2 = parseterm2();
-          term1.repterm2 = parserepTerm2();
-          return term1;
+          var Term1 = new Term1IDENT();
+          Term1.Term2 = parseterm2();
+          Term1.RepTerm2 = parserepTerm2();
+          return Term1;
         }
         
         case Terminals.LBRACKET:
         {
-          var term1 = new Term1LBRACKET();
-          term1.term2 = parseterm2();
-          term1.repterm2 = parserepTerm2();
-          return term1;
+          var Term1 = new Term1LBRACKET();
+          Term1.Term2 = parseterm2();
+          Term1.RepTerm2 = parserepTerm2();
+          return Term1;
         }
         
         case Terminals.LITERAL:
         {
-          var term1 = new Term1LITERAL();
-          term1.term2 = parseterm2();
-          term1.repterm2 = parserepTerm2();
-          return term1;
+          var Term1 = new Term1LITERAL();
+          Term1.Term2 = parseterm2();
+          Term1.RepTerm2 = parserepTerm2();
+          return Term1;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'term1' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1529,116 +1529,116 @@ namespace Compiler
       switch (terminal) {
         case Terminals.RELOPR:
         {
-          var repterm2 = new RepTerm2RELOPR();
-          repterm2.RELOPR = consume(Terminals.RELOPR);
-          repterm2.term2 = parseterm2();
-          repterm2.repterm2 = parserepTerm2();
-          return repterm2;
+          var RepTerm2 = new RepTerm2RELOPR();
+          RepTerm2.RELOPR = consume(Terminals.RELOPR);
+          RepTerm2.Term2 = parseterm2();
+          RepTerm2.RepTerm2 = parserepTerm2();
+          return RepTerm2;
         }
         
         case Terminals.RBRACKET:
         {
-          var repterm2 = new RepTerm2RBRACKET();
+          var RepTerm2 = new RepTerm2RBRACKET();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.RANGE:
         {
-          var repterm2 = new RepTerm2RANGE();
+          var RepTerm2 = new RepTerm2RANGE();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.DO:
         {
-          var repterm2 = new RepTerm2DO();
+          var RepTerm2 = new RepTerm2DO();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.THEN:
         {
-          var repterm2 = new RepTerm2THEN();
+          var RepTerm2 = new RepTerm2THEN();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.ENDWHILE:
         {
-          var repterm2 = new RepTerm2ENDWHILE();
+          var RepTerm2 = new RepTerm2ENDWHILE();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.ENDIF:
         {
-          var repterm2 = new RepTerm2ENDIF();
+          var RepTerm2 = new RepTerm2ENDIF();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.ELSE:
         {
-          var repterm2 = new RepTerm2ELSE();
+          var RepTerm2 = new RepTerm2ELSE();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.ENDPROC:
         {
-          var repterm2 = new RepTerm2ENDPROC();
+          var RepTerm2 = new RepTerm2ENDPROC();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.ENDFUN:
         {
-          var repterm2 = new RepTerm2ENDFUN();
+          var RepTerm2 = new RepTerm2ENDFUN();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var repterm2 = new RepTerm2ENDPROGRAM();
+          var RepTerm2 = new RepTerm2ENDPROGRAM();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.SEMICOLON:
         {
-          var repterm2 = new RepTerm2SEMICOLON();
+          var RepTerm2 = new RepTerm2SEMICOLON();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.BECOMES:
         {
-          var repterm2 = new RepTerm2BECOMES();
+          var RepTerm2 = new RepTerm2BECOMES();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.RPAREN:
         {
-          var repterm2 = new RepTerm2RPAREN();
+          var RepTerm2 = new RepTerm2RPAREN();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.COMMA:
         {
-          var repterm2 = new RepTerm2COMMA();
+          var RepTerm2 = new RepTerm2COMMA();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         
         case Terminals.BOOLOPR:
         {
-          var repterm2 = new RepTerm2BOOLOPR();
+          var RepTerm2 = new RepTerm2BOOLOPR();
           // Epsilon
-          return repterm2;
+          return RepTerm2;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repTerm2' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1650,58 +1650,58 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var term2 = new Term2TYPE();
-          term2.term3 = parseterm3();
-          term2.repterm3 = parserepTerm3();
-          return term2;
+          var Term2 = new Term2TYPE();
+          Term2.Term3 = parseterm3();
+          Term2.RepTerm3 = parserepTerm3();
+          return Term2;
         }
         
         case Terminals.LPAREN:
         {
-          var term2 = new Term2LPAREN();
-          term2.term3 = parseterm3();
-          term2.repterm3 = parserepTerm3();
-          return term2;
+          var Term2 = new Term2LPAREN();
+          Term2.Term3 = parseterm3();
+          Term2.RepTerm3 = parserepTerm3();
+          return Term2;
         }
         
         case Terminals.ADDOPR:
         {
-          var term2 = new Term2ADDOPR();
-          term2.term3 = parseterm3();
-          term2.repterm3 = parserepTerm3();
-          return term2;
+          var Term2 = new Term2ADDOPR();
+          Term2.Term3 = parseterm3();
+          Term2.RepTerm3 = parserepTerm3();
+          return Term2;
         }
         
         case Terminals.NOT:
         {
-          var term2 = new Term2NOT();
-          term2.term3 = parseterm3();
-          term2.repterm3 = parserepTerm3();
-          return term2;
+          var Term2 = new Term2NOT();
+          Term2.Term3 = parseterm3();
+          Term2.RepTerm3 = parserepTerm3();
+          return Term2;
         }
         
         case Terminals.IDENT:
         {
-          var term2 = new Term2IDENT();
-          term2.term3 = parseterm3();
-          term2.repterm3 = parserepTerm3();
-          return term2;
+          var Term2 = new Term2IDENT();
+          Term2.Term3 = parseterm3();
+          Term2.RepTerm3 = parserepTerm3();
+          return Term2;
         }
         
         case Terminals.LBRACKET:
         {
-          var term2 = new Term2LBRACKET();
-          term2.term3 = parseterm3();
-          term2.repterm3 = parserepTerm3();
-          return term2;
+          var Term2 = new Term2LBRACKET();
+          Term2.Term3 = parseterm3();
+          Term2.RepTerm3 = parserepTerm3();
+          return Term2;
         }
         
         case Terminals.LITERAL:
         {
-          var term2 = new Term2LITERAL();
-          term2.term3 = parseterm3();
-          term2.repterm3 = parserepTerm3();
-          return term2;
+          var Term2 = new Term2LITERAL();
+          Term2.Term3 = parseterm3();
+          Term2.RepTerm3 = parserepTerm3();
+          return Term2;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'term2' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1713,123 +1713,123 @@ namespace Compiler
       switch (terminal) {
         case Terminals.ADDOPR:
         {
-          var repterm3 = new RepTerm3ADDOPR();
-          repterm3.ADDOPR = consume(Terminals.ADDOPR);
-          repterm3.term3 = parseterm3();
-          repterm3.repterm3 = parserepTerm3();
-          return repterm3;
+          var RepTerm3 = new RepTerm3ADDOPR();
+          RepTerm3.ADDOPR = consume(Terminals.ADDOPR);
+          RepTerm3.Term3 = parseterm3();
+          RepTerm3.RepTerm3 = parserepTerm3();
+          return RepTerm3;
         }
         
         case Terminals.RBRACKET:
         {
-          var repterm3 = new RepTerm3RBRACKET();
+          var RepTerm3 = new RepTerm3RBRACKET();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.RANGE:
         {
-          var repterm3 = new RepTerm3RANGE();
+          var RepTerm3 = new RepTerm3RANGE();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.DO:
         {
-          var repterm3 = new RepTerm3DO();
+          var RepTerm3 = new RepTerm3DO();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.THEN:
         {
-          var repterm3 = new RepTerm3THEN();
+          var RepTerm3 = new RepTerm3THEN();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.ENDWHILE:
         {
-          var repterm3 = new RepTerm3ENDWHILE();
+          var RepTerm3 = new RepTerm3ENDWHILE();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.ENDIF:
         {
-          var repterm3 = new RepTerm3ENDIF();
+          var RepTerm3 = new RepTerm3ENDIF();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.ELSE:
         {
-          var repterm3 = new RepTerm3ELSE();
+          var RepTerm3 = new RepTerm3ELSE();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.ENDPROC:
         {
-          var repterm3 = new RepTerm3ENDPROC();
+          var RepTerm3 = new RepTerm3ENDPROC();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.ENDFUN:
         {
-          var repterm3 = new RepTerm3ENDFUN();
+          var RepTerm3 = new RepTerm3ENDFUN();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var repterm3 = new RepTerm3ENDPROGRAM();
+          var RepTerm3 = new RepTerm3ENDPROGRAM();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.SEMICOLON:
         {
-          var repterm3 = new RepTerm3SEMICOLON();
+          var RepTerm3 = new RepTerm3SEMICOLON();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.BECOMES:
         {
-          var repterm3 = new RepTerm3BECOMES();
+          var RepTerm3 = new RepTerm3BECOMES();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.RPAREN:
         {
-          var repterm3 = new RepTerm3RPAREN();
+          var RepTerm3 = new RepTerm3RPAREN();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.COMMA:
         {
-          var repterm3 = new RepTerm3COMMA();
+          var RepTerm3 = new RepTerm3COMMA();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.BOOLOPR:
         {
-          var repterm3 = new RepTerm3BOOLOPR();
+          var RepTerm3 = new RepTerm3BOOLOPR();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         
         case Terminals.RELOPR:
         {
-          var repterm3 = new RepTerm3RELOPR();
+          var RepTerm3 = new RepTerm3RELOPR();
           // Epsilon
-          return repterm3;
+          return RepTerm3;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repTerm3' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1841,58 +1841,58 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var term3 = new Term3TYPE();
-          term3.factor = parsefactor();
-          term3.repfactor = parserepFactor();
-          return term3;
+          var Term3 = new Term3TYPE();
+          Term3.Factor = parsefactor();
+          Term3.RepFactor = parserepFactor();
+          return Term3;
         }
         
         case Terminals.LPAREN:
         {
-          var term3 = new Term3LPAREN();
-          term3.factor = parsefactor();
-          term3.repfactor = parserepFactor();
-          return term3;
+          var Term3 = new Term3LPAREN();
+          Term3.Factor = parsefactor();
+          Term3.RepFactor = parserepFactor();
+          return Term3;
         }
         
         case Terminals.ADDOPR:
         {
-          var term3 = new Term3ADDOPR();
-          term3.factor = parsefactor();
-          term3.repfactor = parserepFactor();
-          return term3;
+          var Term3 = new Term3ADDOPR();
+          Term3.Factor = parsefactor();
+          Term3.RepFactor = parserepFactor();
+          return Term3;
         }
         
         case Terminals.NOT:
         {
-          var term3 = new Term3NOT();
-          term3.factor = parsefactor();
-          term3.repfactor = parserepFactor();
-          return term3;
+          var Term3 = new Term3NOT();
+          Term3.Factor = parsefactor();
+          Term3.RepFactor = parserepFactor();
+          return Term3;
         }
         
         case Terminals.IDENT:
         {
-          var term3 = new Term3IDENT();
-          term3.factor = parsefactor();
-          term3.repfactor = parserepFactor();
-          return term3;
+          var Term3 = new Term3IDENT();
+          Term3.Factor = parsefactor();
+          Term3.RepFactor = parserepFactor();
+          return Term3;
         }
         
         case Terminals.LBRACKET:
         {
-          var term3 = new Term3LBRACKET();
-          term3.factor = parsefactor();
-          term3.repfactor = parserepFactor();
-          return term3;
+          var Term3 = new Term3LBRACKET();
+          Term3.Factor = parsefactor();
+          Term3.RepFactor = parserepFactor();
+          return Term3;
         }
         
         case Terminals.LITERAL:
         {
-          var term3 = new Term3LITERAL();
-          term3.factor = parsefactor();
-          term3.repfactor = parserepFactor();
-          return term3;
+          var Term3 = new Term3LITERAL();
+          Term3.Factor = parsefactor();
+          Term3.RepFactor = parserepFactor();
+          return Term3;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'term3' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -1904,130 +1904,130 @@ namespace Compiler
       switch (terminal) {
         case Terminals.MULTOPR:
         {
-          var repfactor = new RepFactorMULTOPR();
-          repfactor.MULTOPR = consume(Terminals.MULTOPR);
-          repfactor.factor = parsefactor();
-          repfactor.repfactor = parserepFactor();
-          return repfactor;
+          var RepFactor = new RepFactorMULTOPR();
+          RepFactor.MULTOPR = consume(Terminals.MULTOPR);
+          RepFactor.Factor = parsefactor();
+          RepFactor.RepFactor = parserepFactor();
+          return RepFactor;
         }
         
         case Terminals.RBRACKET:
         {
-          var repfactor = new RepFactorRBRACKET();
+          var RepFactor = new RepFactorRBRACKET();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.RANGE:
         {
-          var repfactor = new RepFactorRANGE();
+          var RepFactor = new RepFactorRANGE();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.DO:
         {
-          var repfactor = new RepFactorDO();
+          var RepFactor = new RepFactorDO();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.THEN:
         {
-          var repfactor = new RepFactorTHEN();
+          var RepFactor = new RepFactorTHEN();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.ENDWHILE:
         {
-          var repfactor = new RepFactorENDWHILE();
+          var RepFactor = new RepFactorENDWHILE();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.ENDIF:
         {
-          var repfactor = new RepFactorENDIF();
+          var RepFactor = new RepFactorENDIF();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.ELSE:
         {
-          var repfactor = new RepFactorELSE();
+          var RepFactor = new RepFactorELSE();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.ENDPROC:
         {
-          var repfactor = new RepFactorENDPROC();
+          var RepFactor = new RepFactorENDPROC();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.ENDFUN:
         {
-          var repfactor = new RepFactorENDFUN();
+          var RepFactor = new RepFactorENDFUN();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var repfactor = new RepFactorENDPROGRAM();
+          var RepFactor = new RepFactorENDPROGRAM();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.SEMICOLON:
         {
-          var repfactor = new RepFactorSEMICOLON();
+          var RepFactor = new RepFactorSEMICOLON();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.BECOMES:
         {
-          var repfactor = new RepFactorBECOMES();
+          var RepFactor = new RepFactorBECOMES();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.RPAREN:
         {
-          var repfactor = new RepFactorRPAREN();
+          var RepFactor = new RepFactorRPAREN();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.COMMA:
         {
-          var repfactor = new RepFactorCOMMA();
+          var RepFactor = new RepFactorCOMMA();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.BOOLOPR:
         {
-          var repfactor = new RepFactorBOOLOPR();
+          var RepFactor = new RepFactorBOOLOPR();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.RELOPR:
         {
-          var repfactor = new RepFactorRELOPR();
+          var RepFactor = new RepFactorRELOPR();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         
         case Terminals.ADDOPR:
         {
-          var repfactor = new RepFactorADDOPR();
+          var RepFactor = new RepFactorADDOPR();
           // Epsilon
-          return repfactor;
+          return RepFactor;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repFactor' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2039,59 +2039,59 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LITERAL:
         {
-          var factor = new FactorLITERAL();
-          factor.LITERAL = consume(Terminals.LITERAL);
-          return factor;
+          var Factor = new FactorLITERAL();
+          Factor.LITERAL = consume(Terminals.LITERAL);
+          return Factor;
         }
         
         case Terminals.LBRACKET:
         {
-          var factor = new FactorLBRACKET();
-          factor.arrayliteral = parsearrayLiteral();
-          return factor;
+          var Factor = new FactorLBRACKET();
+          Factor.ArrayLiteral = parsearrayLiteral();
+          return Factor;
         }
         
         case Terminals.IDENT:
         {
-          var factor = new FactorIDENT();
-          factor.IDENT = consume(Terminals.IDENT);
-          factor.optinitorexprlistorarrayaccess = parseoptInitOrExprListOrArrayAccess();
-          return factor;
+          var Factor = new FactorIDENT();
+          Factor.IDENT = consume(Terminals.IDENT);
+          Factor.OptInitOrExprListOrArrayAccess = parseoptInitOrExprListOrArrayAccess();
+          return Factor;
         }
         
         case Terminals.ADDOPR:
         {
-          var factor = new FactorADDOPR();
-          factor.monadicopr = parsemonadicOpr();
-          factor.factor = parsefactor();
-          return factor;
+          var Factor = new FactorADDOPR();
+          Factor.MonadicOpr = parsemonadicOpr();
+          Factor.Factor = parsefactor();
+          return Factor;
         }
         
         case Terminals.NOT:
         {
-          var factor = new FactorNOT();
-          factor.monadicopr = parsemonadicOpr();
-          factor.factor = parsefactor();
-          return factor;
+          var Factor = new FactorNOT();
+          Factor.MonadicOpr = parsemonadicOpr();
+          Factor.Factor = parsefactor();
+          return Factor;
         }
         
         case Terminals.LPAREN:
         {
-          var factor = new FactorLPAREN();
-          factor.LPAREN = consume(Terminals.LPAREN);
-          factor.expr = parseexpr();
-          factor.RPAREN = consume(Terminals.RPAREN);
-          return factor;
+          var Factor = new FactorLPAREN();
+          Factor.LPAREN = consume(Terminals.LPAREN);
+          Factor.Expr = parseexpr();
+          Factor.RPAREN = consume(Terminals.RPAREN);
+          return Factor;
         }
         
         case Terminals.TYPE:
         {
-          var factor = new FactorTYPE();
-          factor.TYPE = consume(Terminals.TYPE);
-          factor.LPAREN = consume(Terminals.LPAREN);
-          factor.expr = parseexpr();
-          factor.RPAREN = consume(Terminals.RPAREN);
-          return factor;
+          var Factor = new FactorTYPE();
+          Factor.TYPE = consume(Terminals.TYPE);
+          Factor.LPAREN = consume(Terminals.LPAREN);
+          Factor.Expr = parseexpr();
+          Factor.RPAREN = consume(Terminals.RPAREN);
+          return Factor;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'factor' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2103,11 +2103,11 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LBRACKET:
         {
-          var arrayliteral = new ArrayLiteralLBRACKET();
-          arrayliteral.LBRACKET = consume(Terminals.LBRACKET);
-          arrayliteral.arraycontent = parsearrayContent();
-          arrayliteral.RBRACKET = consume(Terminals.RBRACKET);
-          return arrayliteral;
+          var ArrayLiteral = new ArrayLiteralLBRACKET();
+          ArrayLiteral.LBRACKET = consume(Terminals.LBRACKET);
+          ArrayLiteral.ArrayContent = parsearrayContent();
+          ArrayLiteral.RBRACKET = consume(Terminals.RBRACKET);
+          return ArrayLiteral;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'arrayLiteral' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2119,18 +2119,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LITERAL:
         {
-          var arraycontent = new ArrayContentLITERAL();
-          arraycontent.LITERAL = consume(Terminals.LITERAL);
-          arraycontent.repliteral = parserepLiteral();
-          return arraycontent;
+          var ArrayContent = new ArrayContentLITERAL();
+          ArrayContent.LITERAL = consume(Terminals.LITERAL);
+          ArrayContent.RepLiteral = parserepLiteral();
+          return ArrayContent;
         }
         
         case Terminals.LBRACKET:
         {
-          var arraycontent = new ArrayContentLBRACKET();
-          arraycontent.arrayliteral = parsearrayLiteral();
-          arraycontent.reparray = parserepArray();
-          return arraycontent;
+          var ArrayContent = new ArrayContentLBRACKET();
+          ArrayContent.ArrayLiteral = parsearrayLiteral();
+          ArrayContent.RepArray = parserepArray();
+          return ArrayContent;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'arrayContent' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2142,18 +2142,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.RBRACKET:
         {
-          var reparray = new RepArrayRBRACKET();
+          var RepArray = new RepArrayRBRACKET();
           // Epsilon
-          return reparray;
+          return RepArray;
         }
         
         case Terminals.COMMA:
         {
-          var reparray = new RepArrayCOMMA();
-          reparray.COMMA = consume(Terminals.COMMA);
-          reparray.arrayliteral = parsearrayLiteral();
-          reparray.reparray = parserepArray();
-          return reparray;
+          var RepArray = new RepArrayCOMMA();
+          RepArray.COMMA = consume(Terminals.COMMA);
+          RepArray.ArrayLiteral = parsearrayLiteral();
+          RepArray.RepArray = parserepArray();
+          return RepArray;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repArray' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2165,18 +2165,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.RBRACKET:
         {
-          var repliteral = new RepLiteralRBRACKET();
+          var RepLiteral = new RepLiteralRBRACKET();
           // Epsilon
-          return repliteral;
+          return RepLiteral;
         }
         
         case Terminals.COMMA:
         {
-          var repliteral = new RepLiteralCOMMA();
-          repliteral.COMMA = consume(Terminals.COMMA);
-          repliteral.LITERAL = consume(Terminals.LITERAL);
-          repliteral.repliteral = parserepLiteral();
-          return repliteral;
+          var RepLiteral = new RepLiteralCOMMA();
+          RepLiteral.COMMA = consume(Terminals.COMMA);
+          RepLiteral.LITERAL = consume(Terminals.LITERAL);
+          RepLiteral.RepLiteral = parserepLiteral();
+          return RepLiteral;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repLiteral' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2188,149 +2188,149 @@ namespace Compiler
       switch (terminal) {
         case Terminals.INIT:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessINIT();
-          optinitorexprlistorarrayaccess.INIT = consume(Terminals.INIT);
-          return optinitorexprlistorarrayaccess;
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessINIT();
+          OptInitOrExprListOrArrayAccess.INIT = consume(Terminals.INIT);
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.LBRACKET:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessLBRACKET();
-          optinitorexprlistorarrayaccess.arrayindex = parsearrayIndex();
-          return optinitorexprlistorarrayaccess;
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessLBRACKET();
+          OptInitOrExprListOrArrayAccess.ArrayIndex = parsearrayIndex();
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.LPAREN:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessLPAREN();
-          optinitorexprlistorarrayaccess.exprlist = parseexprList();
-          return optinitorexprlistorarrayaccess;
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessLPAREN();
+          OptInitOrExprListOrArrayAccess.ExprList = parseexprList();
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.RBRACKET:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessRBRACKET();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessRBRACKET();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.RANGE:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessRANGE();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessRANGE();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.DO:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessDO();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessDO();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.THEN:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessTHEN();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessTHEN();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.ENDWHILE:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessENDWHILE();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessENDWHILE();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.ENDIF:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessENDIF();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessENDIF();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.ELSE:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessELSE();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessELSE();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.ENDPROC:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessENDPROC();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessENDPROC();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.ENDFUN:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessENDFUN();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessENDFUN();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessENDPROGRAM();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessENDPROGRAM();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.SEMICOLON:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessSEMICOLON();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessSEMICOLON();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.BECOMES:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessBECOMES();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessBECOMES();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.RPAREN:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessRPAREN();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessRPAREN();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.COMMA:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessCOMMA();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessCOMMA();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.BOOLOPR:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessBOOLOPR();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessBOOLOPR();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.RELOPR:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessRELOPR();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessRELOPR();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.ADDOPR:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessADDOPR();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessADDOPR();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         
         case Terminals.MULTOPR:
         {
-          var optinitorexprlistorarrayaccess = new OptInitOrExprListOrArrayAccessMULTOPR();
+          var OptInitOrExprListOrArrayAccess = new OptInitOrExprListOrArrayAccessMULTOPR();
           // Epsilon
-          return optinitorexprlistorarrayaccess;
+          return OptInitOrExprListOrArrayAccess;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optInitOrExprListOrArrayAccess' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2342,12 +2342,12 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LBRACKET:
         {
-          var arrayindex = new ArrayIndexLBRACKET();
-          arrayindex.LBRACKET = consume(Terminals.LBRACKET);
-          arrayindex.sliceexpr = parsesliceExpr();
-          arrayindex.RBRACKET = consume(Terminals.RBRACKET);
-          arrayindex.reparrayindex = parserepArrayIndex();
-          return arrayindex;
+          var ArrayIndex = new ArrayIndexLBRACKET();
+          ArrayIndex.LBRACKET = consume(Terminals.LBRACKET);
+          ArrayIndex.SliceExpr = parsesliceExpr();
+          ArrayIndex.RBRACKET = consume(Terminals.RBRACKET);
+          ArrayIndex.RepArrayIndex = parserepArrayIndex();
+          return ArrayIndex;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'arrayIndex' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2359,58 +2359,58 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var sliceexpr = new SliceExprTYPE();
-          sliceexpr.expr = parseexpr();
-          sliceexpr.repsliceexpr = parserepSliceExpr();
-          return sliceexpr;
+          var SliceExpr = new SliceExprTYPE();
+          SliceExpr.Expr = parseexpr();
+          SliceExpr.RepSliceExpr = parserepSliceExpr();
+          return SliceExpr;
         }
         
         case Terminals.LPAREN:
         {
-          var sliceexpr = new SliceExprLPAREN();
-          sliceexpr.expr = parseexpr();
-          sliceexpr.repsliceexpr = parserepSliceExpr();
-          return sliceexpr;
+          var SliceExpr = new SliceExprLPAREN();
+          SliceExpr.Expr = parseexpr();
+          SliceExpr.RepSliceExpr = parserepSliceExpr();
+          return SliceExpr;
         }
         
         case Terminals.ADDOPR:
         {
-          var sliceexpr = new SliceExprADDOPR();
-          sliceexpr.expr = parseexpr();
-          sliceexpr.repsliceexpr = parserepSliceExpr();
-          return sliceexpr;
+          var SliceExpr = new SliceExprADDOPR();
+          SliceExpr.Expr = parseexpr();
+          SliceExpr.RepSliceExpr = parserepSliceExpr();
+          return SliceExpr;
         }
         
         case Terminals.NOT:
         {
-          var sliceexpr = new SliceExprNOT();
-          sliceexpr.expr = parseexpr();
-          sliceexpr.repsliceexpr = parserepSliceExpr();
-          return sliceexpr;
+          var SliceExpr = new SliceExprNOT();
+          SliceExpr.Expr = parseexpr();
+          SliceExpr.RepSliceExpr = parserepSliceExpr();
+          return SliceExpr;
         }
         
         case Terminals.IDENT:
         {
-          var sliceexpr = new SliceExprIDENT();
-          sliceexpr.expr = parseexpr();
-          sliceexpr.repsliceexpr = parserepSliceExpr();
-          return sliceexpr;
+          var SliceExpr = new SliceExprIDENT();
+          SliceExpr.Expr = parseexpr();
+          SliceExpr.RepSliceExpr = parserepSliceExpr();
+          return SliceExpr;
         }
         
         case Terminals.LBRACKET:
         {
-          var sliceexpr = new SliceExprLBRACKET();
-          sliceexpr.expr = parseexpr();
-          sliceexpr.repsliceexpr = parserepSliceExpr();
-          return sliceexpr;
+          var SliceExpr = new SliceExprLBRACKET();
+          SliceExpr.Expr = parseexpr();
+          SliceExpr.RepSliceExpr = parserepSliceExpr();
+          return SliceExpr;
         }
         
         case Terminals.LITERAL:
         {
-          var sliceexpr = new SliceExprLITERAL();
-          sliceexpr.expr = parseexpr();
-          sliceexpr.repsliceexpr = parserepSliceExpr();
-          return sliceexpr;
+          var SliceExpr = new SliceExprLITERAL();
+          SliceExpr.Expr = parseexpr();
+          SliceExpr.RepSliceExpr = parserepSliceExpr();
+          return SliceExpr;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'sliceExpr' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2422,17 +2422,17 @@ namespace Compiler
       switch (terminal) {
         case Terminals.RBRACKET:
         {
-          var repsliceexpr = new RepSliceExprRBRACKET();
+          var RepSliceExpr = new RepSliceExprRBRACKET();
           // Epsilon
-          return repsliceexpr;
+          return RepSliceExpr;
         }
         
         case Terminals.RANGE:
         {
-          var repsliceexpr = new RepSliceExprRANGE();
-          repsliceexpr.RANGE = consume(Terminals.RANGE);
-          repsliceexpr.expr = parseexpr();
-          return repsliceexpr;
+          var RepSliceExpr = new RepSliceExprRANGE();
+          RepSliceExpr.RANGE = consume(Terminals.RANGE);
+          RepSliceExpr.Expr = parseexpr();
+          return RepSliceExpr;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repSliceExpr' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2444,135 +2444,135 @@ namespace Compiler
       switch (terminal) {
         case Terminals.RBRACKET:
         {
-          var reparrayindex = new RepArrayIndexRBRACKET();
+          var RepArrayIndex = new RepArrayIndexRBRACKET();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.RANGE:
         {
-          var reparrayindex = new RepArrayIndexRANGE();
+          var RepArrayIndex = new RepArrayIndexRANGE();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.DO:
         {
-          var reparrayindex = new RepArrayIndexDO();
+          var RepArrayIndex = new RepArrayIndexDO();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.THEN:
         {
-          var reparrayindex = new RepArrayIndexTHEN();
+          var RepArrayIndex = new RepArrayIndexTHEN();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.ENDWHILE:
         {
-          var reparrayindex = new RepArrayIndexENDWHILE();
+          var RepArrayIndex = new RepArrayIndexENDWHILE();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.ENDIF:
         {
-          var reparrayindex = new RepArrayIndexENDIF();
+          var RepArrayIndex = new RepArrayIndexENDIF();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.ELSE:
         {
-          var reparrayindex = new RepArrayIndexELSE();
+          var RepArrayIndex = new RepArrayIndexELSE();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.ENDPROC:
         {
-          var reparrayindex = new RepArrayIndexENDPROC();
+          var RepArrayIndex = new RepArrayIndexENDPROC();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.ENDFUN:
         {
-          var reparrayindex = new RepArrayIndexENDFUN();
+          var RepArrayIndex = new RepArrayIndexENDFUN();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.ENDPROGRAM:
         {
-          var reparrayindex = new RepArrayIndexENDPROGRAM();
+          var RepArrayIndex = new RepArrayIndexENDPROGRAM();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.SEMICOLON:
         {
-          var reparrayindex = new RepArrayIndexSEMICOLON();
+          var RepArrayIndex = new RepArrayIndexSEMICOLON();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.BECOMES:
         {
-          var reparrayindex = new RepArrayIndexBECOMES();
+          var RepArrayIndex = new RepArrayIndexBECOMES();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.RPAREN:
         {
-          var reparrayindex = new RepArrayIndexRPAREN();
+          var RepArrayIndex = new RepArrayIndexRPAREN();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.COMMA:
         {
-          var reparrayindex = new RepArrayIndexCOMMA();
+          var RepArrayIndex = new RepArrayIndexCOMMA();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.BOOLOPR:
         {
-          var reparrayindex = new RepArrayIndexBOOLOPR();
+          var RepArrayIndex = new RepArrayIndexBOOLOPR();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.RELOPR:
         {
-          var reparrayindex = new RepArrayIndexRELOPR();
+          var RepArrayIndex = new RepArrayIndexRELOPR();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.ADDOPR:
         {
-          var reparrayindex = new RepArrayIndexADDOPR();
+          var RepArrayIndex = new RepArrayIndexADDOPR();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.MULTOPR:
         {
-          var reparrayindex = new RepArrayIndexMULTOPR();
+          var RepArrayIndex = new RepArrayIndexMULTOPR();
           // Epsilon
-          return reparrayindex;
+          return RepArrayIndex;
         }
         
         case Terminals.LBRACKET:
         {
-          var reparrayindex = new RepArrayIndexLBRACKET();
-          reparrayindex.arrayindex = parsearrayIndex();
-          return reparrayindex;
+          var RepArrayIndex = new RepArrayIndexLBRACKET();
+          RepArrayIndex.ArrayIndex = parsearrayIndex();
+          return RepArrayIndex;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repArrayIndex' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2584,16 +2584,16 @@ namespace Compiler
       switch (terminal) {
         case Terminals.NOT:
         {
-          var monadicopr = new MonadicOprNOT();
-          monadicopr.NOT = consume(Terminals.NOT);
-          return monadicopr;
+          var MonadicOpr = new MonadicOprNOT();
+          MonadicOpr.NOT = consume(Terminals.NOT);
+          return MonadicOpr;
         }
         
         case Terminals.ADDOPR:
         {
-          var monadicopr = new MonadicOprADDOPR();
-          monadicopr.ADDOPR = consume(Terminals.ADDOPR);
-          return monadicopr;
+          var MonadicOpr = new MonadicOprADDOPR();
+          MonadicOpr.ADDOPR = consume(Terminals.ADDOPR);
+          return MonadicOpr;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'monadicOpr' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2605,11 +2605,11 @@ namespace Compiler
       switch (terminal) {
         case Terminals.LPAREN:
         {
-          var exprlist = new ExprListLPAREN();
-          exprlist.LPAREN = consume(Terminals.LPAREN);
-          exprlist.optexprlist = parseoptExprList();
-          exprlist.RPAREN = consume(Terminals.RPAREN);
-          return exprlist;
+          var ExprList = new ExprListLPAREN();
+          ExprList.LPAREN = consume(Terminals.LPAREN);
+          ExprList.OptExprList = parseoptExprList();
+          ExprList.RPAREN = consume(Terminals.RPAREN);
+          return ExprList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'exprList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2621,65 +2621,65 @@ namespace Compiler
       switch (terminal) {
         case Terminals.TYPE:
         {
-          var optexprlist = new OptExprListTYPE();
-          optexprlist.expr = parseexpr();
-          optexprlist.repexprlist = parserepExprList();
-          return optexprlist;
+          var OptExprList = new OptExprListTYPE();
+          OptExprList.Expr = parseexpr();
+          OptExprList.RepExprList = parserepExprList();
+          return OptExprList;
         }
         
         case Terminals.LPAREN:
         {
-          var optexprlist = new OptExprListLPAREN();
-          optexprlist.expr = parseexpr();
-          optexprlist.repexprlist = parserepExprList();
-          return optexprlist;
+          var OptExprList = new OptExprListLPAREN();
+          OptExprList.Expr = parseexpr();
+          OptExprList.RepExprList = parserepExprList();
+          return OptExprList;
         }
         
         case Terminals.ADDOPR:
         {
-          var optexprlist = new OptExprListADDOPR();
-          optexprlist.expr = parseexpr();
-          optexprlist.repexprlist = parserepExprList();
-          return optexprlist;
+          var OptExprList = new OptExprListADDOPR();
+          OptExprList.Expr = parseexpr();
+          OptExprList.RepExprList = parserepExprList();
+          return OptExprList;
         }
         
         case Terminals.NOT:
         {
-          var optexprlist = new OptExprListNOT();
-          optexprlist.expr = parseexpr();
-          optexprlist.repexprlist = parserepExprList();
-          return optexprlist;
+          var OptExprList = new OptExprListNOT();
+          OptExprList.Expr = parseexpr();
+          OptExprList.RepExprList = parserepExprList();
+          return OptExprList;
         }
         
         case Terminals.IDENT:
         {
-          var optexprlist = new OptExprListIDENT();
-          optexprlist.expr = parseexpr();
-          optexprlist.repexprlist = parserepExprList();
-          return optexprlist;
+          var OptExprList = new OptExprListIDENT();
+          OptExprList.Expr = parseexpr();
+          OptExprList.RepExprList = parserepExprList();
+          return OptExprList;
         }
         
         case Terminals.LBRACKET:
         {
-          var optexprlist = new OptExprListLBRACKET();
-          optexprlist.expr = parseexpr();
-          optexprlist.repexprlist = parserepExprList();
-          return optexprlist;
+          var OptExprList = new OptExprListLBRACKET();
+          OptExprList.Expr = parseexpr();
+          OptExprList.RepExprList = parserepExprList();
+          return OptExprList;
         }
         
         case Terminals.LITERAL:
         {
-          var optexprlist = new OptExprListLITERAL();
-          optexprlist.expr = parseexpr();
-          optexprlist.repexprlist = parserepExprList();
-          return optexprlist;
+          var OptExprList = new OptExprListLITERAL();
+          OptExprList.Expr = parseexpr();
+          OptExprList.RepExprList = parserepExprList();
+          return OptExprList;
         }
         
         case Terminals.RPAREN:
         {
-          var optexprlist = new OptExprListRPAREN();
+          var OptExprList = new OptExprListRPAREN();
           // Epsilon
-          return optexprlist;
+          return OptExprList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'optExprList' unexpectedly.", terminal.ToString()), token.Row, token.Column);
@@ -2691,18 +2691,18 @@ namespace Compiler
       switch (terminal) {
         case Terminals.COMMA:
         {
-          var repexprlist = new RepExprListCOMMA();
-          repexprlist.COMMA = consume(Terminals.COMMA);
-          repexprlist.expr = parseexpr();
-          repexprlist.repexprlist = parserepExprList();
-          return repexprlist;
+          var RepExprList = new RepExprListCOMMA();
+          RepExprList.COMMA = consume(Terminals.COMMA);
+          RepExprList.Expr = parseexpr();
+          RepExprList.RepExprList = parserepExprList();
+          return RepExprList;
         }
         
         case Terminals.RPAREN:
         {
-          var repexprlist = new RepExprListRPAREN();
+          var RepExprList = new RepExprListRPAREN();
           // Epsilon
-          return repexprlist;
+          return RepExprList;
         }
         default:
           throw new GrammarException(String.Format("found Terminal '{0}' in Nonterminal 'repExprList' unexpectedly.", terminal.ToString()), token.Row, token.Column);

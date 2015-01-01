@@ -460,6 +460,7 @@
     <Compile Include="Parser\AST\ASTStoDecl.cs" />
     <Compile Include="Parser\AST\ASTType.cs" />
     <Compile Include="Parser\AST\ASTWhile.cs" />
+    <Compile Include="Parser\AST\ASTTypeOrArray.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

@@ -7,7 +7,7 @@ namespace Compiler
   {
     public Tokennode GLOBAL { get; set; } 
   
-    public IGlobImps globimps { get; set; }
+    public IGlobImps GlobImps { get; set; }
   
     public OptGlobImpsGLOBAL()
     {

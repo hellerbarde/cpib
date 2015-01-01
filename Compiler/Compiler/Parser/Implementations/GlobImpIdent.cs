@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class GlobImpIDENT : IGlobImp
   {
-    public IOptChangemode optchangemode { get; set; }
+    public IOptChangemode OptChangemode { get; set; }
   
     public Tokennode IDENT { get; set; } 
   

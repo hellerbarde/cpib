@@ -5,9 +5,9 @@ namespace Compiler
 {
   public partial class Term3ADDOPR : ITerm3
   {
-    public IFactor factor { get; set; }
+    public IFactor Factor { get; set; }
   
-    public IRepFactor repfactor { get; set; }
+    public IRepFactor RepFactor { get; set; }
   
     public Term3ADDOPR()
     {

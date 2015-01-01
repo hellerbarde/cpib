@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class DeclFUN : IDecl
   {
-    public IFunDecl fundecl { get; set; }
+    public IFunDecl FunDecl { get; set; }
   
     public DeclFUN()
     {
