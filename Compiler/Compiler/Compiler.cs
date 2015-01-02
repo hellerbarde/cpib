@@ -13,13 +13,30 @@ namespace Compiler
         var list = scanner.Scan(new System.IO.StreamReader("test04.iml"));
         Console.WriteLine("[" + String.Join(",\n", list) + "]");
         var parser = new Parser(list);
-        IProgram program = parser.parseprogram();
+        IProgram cst = parser.parseprogram();
         //Console.WriteLine(program);
-        var ast = program.ToAbstractSyntax();
+        var ast = cst.ToAbstractSyntax();
         Console.WriteLine(ast.ToString());
+        if(!(ast is ASTProgram))
+        {
+          throw new IVirtualMachine.InternalError("Generation of Abstract Syntax Tree failed.");
+        }
+        ASTProgram program = (ASTProgram)ast;
+        //Checker
+        CheckerInformation info = new CheckerInformation();
+        ScopeChecker contextChecker = new ScopeChecker();
+        contextChecker.Check(program, info);
+        //Code Generator
+        IVirtualMachine vm = new VirtualMachine(1000, 1000);
+        program.GenerateCode(0, vm, info);
+        Console.WriteLine(vm.ToString());
+        Console.WriteLine();
+        //Executuion
+        vm.Execute();
       } catch (Exception ex) {
         Console.WriteLine("Failed: " + ex.Message);
         Console.WriteLine(ex.StackTrace);
+        throw;
       }
     }
   }
