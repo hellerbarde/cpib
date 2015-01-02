@@ -14,5 +14,16 @@ namespace Compiler
         {
             return Value.ToString();
         }
+
+        public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
+        {
+            vm.IntLoad(loc++, Value);
+            return loc;
+        }
+
+        public override Type GetExpressionType(CheckerInformation info)
+        {
+            return Type.INT32;
+        }
     }
 }

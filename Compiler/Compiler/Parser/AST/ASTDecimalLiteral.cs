@@ -14,5 +14,16 @@ namespace Compiler
         {
             return string.Format("{0}m", this.Value);
         }
+
+        public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
+        {
+            vm.DecimalLoad(loc++, Value);
+            return loc;
+        }
+
+        public override Type GetExpressionType(CheckerInformation info)
+        {
+            return Type.DECIMAL;
+        }
     }
 }
