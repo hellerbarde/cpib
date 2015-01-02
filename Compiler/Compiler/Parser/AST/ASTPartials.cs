@@ -3035,7 +3035,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      //throw new NotImplementedException(); //TODO
+      return new ASTEmpty();
     }
   }
 
@@ -3099,7 +3100,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      //throw new NotImplementedException(); //TODO
+      return new ASTEmpty();
     }
   }
 
