@@ -7,6 +7,7 @@ namespace Compiler
   {
     public ASTArrayAccess()
     {
+      Accessor = new List<ASTSliceExpr>();
     }
     public ASTExpression Array { get; set; }
     public List<ASTSliceExpr> Accessor { get; set; }
