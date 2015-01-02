@@ -16,7 +16,7 @@ namespace Compiler
             else
             {
                 string token = text.ToString();
-                if (scanner.Keywords.ContainsKey(token)) { scanner.AddToken(scanner.Keywords[token]); }
+        if (scanner.Keywords.ContainsKey(token)) { scanner.AddToken(scanner.Keywords[token](0)); }
                 else { scanner.AddToken(new IdentToken(token)); }
                 scanner.CurrentState = new DefaultState();
                 scanner.CurrentState.Handle(scanner, data);

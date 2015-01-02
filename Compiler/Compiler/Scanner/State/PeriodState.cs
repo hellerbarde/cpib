@@ -13,7 +13,7 @@ namespace Compiler
     {
       scanner.CurrentState = new DefaultState();
       if (data == '.') {
-        scanner.AddToken(scanner.Keywords[".."]);
+        scanner.AddToken(scanner.Keywords[".."](0));
         //scanner.CurrentState = new DefaultState();
         //scanner.CurrentState.Handle(scanner, data);
       }

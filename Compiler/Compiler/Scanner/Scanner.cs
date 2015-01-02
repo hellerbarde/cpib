@@ -23,7 +23,7 @@ namespace Compiler
     /// <summary>
     /// Definition of all keywords and corresponding tokens
     /// </summary>
-    public Dictionary<string, Token> Keywords { get; private set; }
+    public Dictionary<string, Func<int, Token>> Keywords { get; private set; }
 
     /// <summary>
     /// Current row the scanner is in (starting by 1)
@@ -38,44 +38,44 @@ namespace Compiler
     public Scanner()
     {
       #region keywords
-      Keywords = new Dictionary<string, Token>();
-      Keywords.Add("div", new OperatorToken(Terminals.MULTOPR, Operators.DIV));
-      Keywords.Add("mod", new OperatorToken(Terminals.MULTOPR, Operators.MOD));
-      Keywords.Add("bool", new TypeToken(Type.BOOL));
-      Keywords.Add("int32", new TypeToken(Type.INT32));
-      Keywords.Add("decimal", new TypeToken(Type.DECIMAL));
-      Keywords.Add("call", new Token(Terminals.CALL));
-      Keywords.Add("const", new ChangeModeToken(ChangeMode.CONST));
-      Keywords.Add("var", new ChangeModeToken(ChangeMode.VAR));
-      Keywords.Add("copy", new MechModeToken(MechMode.COPY));
-      Keywords.Add("ref", new MechModeToken(MechMode.REF));
-      Keywords.Add("debugin", new Token(Terminals.DEBUGIN));
-      Keywords.Add("debugout", new Token(Terminals.DEBUGOUT));
-      Keywords.Add("do", new Token(Terminals.DO));
-      Keywords.Add("else", new Token(Terminals.ELSE));
-      Keywords.Add("endfun", new Token(Terminals.ENDFUN));
-      Keywords.Add("endif", new Token(Terminals.ENDIF));
-      Keywords.Add("endproc", new Token(Terminals.ENDPROC));
-      Keywords.Add("endprogram", new Token(Terminals.ENDPROGRAM));
-      Keywords.Add("endwhile", new Token(Terminals.ENDWHILE));
-      Keywords.Add("fun", new Token(Terminals.FUN)); //so funny
-      Keywords.Add("global", new Token(Terminals.GLOBAL));
-      Keywords.Add("if", new Token(Terminals.IF));
-      Keywords.Add("in", new FlowModeToken(FlowMode.IN));
-      Keywords.Add("inout", new FlowModeToken(FlowMode.INOUT));
-      Keywords.Add("out", new FlowModeToken(FlowMode.OUT));
-      Keywords.Add("init", new Token(Terminals.INIT));
-      Keywords.Add("local", new Token(Terminals.LOCAL));
-      Keywords.Add("not", new Token(Terminals.NOT));
-      Keywords.Add("proc", new Token(Terminals.PROC));
-      Keywords.Add("program", new Token(Terminals.PROGRAM));
-      Keywords.Add("returns", new Token(Terminals.RETURNS));
-      Keywords.Add("skip", new Token(Terminals.SKIP));
-      Keywords.Add("then", new Token(Terminals.THEN));
-      Keywords.Add("while", new Token(Terminals.WHILE));
-      Keywords.Add("..", new Token(Terminals.RANGE));
-      Keywords.Add("array", new Token(Terminals.ARRAY));
-      Keywords.Add("fill", new Token(Terminals.FILL));
+      Keywords = new Dictionary<string, Func<int, Token>>();
+      Keywords.Add("div", x => new OperatorToken(Terminals.MULTOPR, Operators.DIV));
+      Keywords.Add("mod", x => new OperatorToken(Terminals.MULTOPR, Operators.MOD));
+      Keywords.Add("bool", x => new TypeToken(Type.BOOL));
+      Keywords.Add("int32", x => new TypeToken(Type.INT32));
+      Keywords.Add("decimal", x => new TypeToken(Type.DECIMAL));
+      Keywords.Add("call", x => new Token(Terminals.CALL));
+      Keywords.Add("const", x => new ChangeModeToken(ChangeMode.CONST));
+      Keywords.Add("var", x => new ChangeModeToken(ChangeMode.VAR));
+      Keywords.Add("copy", x => new MechModeToken(MechMode.COPY));
+      Keywords.Add("ref", x => new MechModeToken(MechMode.REF));
+      Keywords.Add("debugin", x => new Token(Terminals.DEBUGIN));
+      Keywords.Add("debugout", x => new Token(Terminals.DEBUGOUT));
+      Keywords.Add("do", x => new Token(Terminals.DO));
+      Keywords.Add("else", x => new Token(Terminals.ELSE));
+      Keywords.Add("endfun", x => new Token(Terminals.ENDFUN));
+      Keywords.Add("endif", x => new Token(Terminals.ENDIF));
+      Keywords.Add("endproc", x => new Token(Terminals.ENDPROC));
+      Keywords.Add("endprogram", x => new Token(Terminals.ENDPROGRAM));
+      Keywords.Add("endwhile", x => new Token(Terminals.ENDWHILE));
+      Keywords.Add("fun", x => new Token(Terminals.FUN)); //so funny
+      Keywords.Add("global", x => new Token(Terminals.GLOBAL));
+      Keywords.Add("if", x => new Token(Terminals.IF));
+      Keywords.Add("in", x => new FlowModeToken(FlowMode.IN));
+      Keywords.Add("inout", x => new FlowModeToken(FlowMode.INOUT));
+      Keywords.Add("out", x => new FlowModeToken(FlowMode.OUT));
+      Keywords.Add("init", x => new Token(Terminals.INIT));
+      Keywords.Add("local", x => new Token(Terminals.LOCAL));
+      Keywords.Add("not", x => new Token(Terminals.NOT));
+      Keywords.Add("proc", x => new Token(Terminals.PROC));
+      Keywords.Add("program", x => new Token(Terminals.PROGRAM));
+      Keywords.Add("returns", x => new Token(Terminals.RETURNS));
+      Keywords.Add("skip", x => new Token(Terminals.SKIP));
+      Keywords.Add("then", x => new Token(Terminals.THEN));
+      Keywords.Add("while", x => new Token(Terminals.WHILE));
+      Keywords.Add("..", x => new Token(Terminals.RANGE));
+      Keywords.Add("array", x => new Token(Terminals.ARRAY));
+      Keywords.Add("fill", x => new Token(Terminals.FILL));
       #endregion
     }
 
