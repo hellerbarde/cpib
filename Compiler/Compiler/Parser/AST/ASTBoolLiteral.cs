@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-  public partial class ASTBoolLiteral : IASTNode
+  public partial class ASTBoolLiteral : ASTExpression
     {
         public ASTBoolLiteral(bool value)
         {

@@ -2,13 +2,17 @@
 
 namespace Compiler
 {
-  public partial class ASTSliceExpr
+  public partial class ASTSliceExpr:IASTNode
   {
     public ASTSliceExpr()
     {
+      NextExpression = new ASTEmpty();
     }
-    public ASTExpression start { get; set;}
-    public int end { get; set;}
+
+    public IASTNode NextExpression { get; set; }
+
+    public IASTNode Start { get; set;}
+    public IASTNode End { get; set;}
   }
 }
 

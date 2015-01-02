@@ -9,7 +9,7 @@ namespace Compiler
     {
     }
     public ASTExpression Array { get; set; }
-    public List<ASTSliceExpr> Accessor { public get; set; }
+    public List<ASTSliceExpr> Accessor { get; set; }
 
 
   }

@@ -438,7 +438,6 @@
     <Compile Include="Parser\AST\ASTCmdDebugIn.cs" />
     <Compile Include="Parser\AST\ASTCmdDebugOut.cs" />
     <Compile Include="Parser\AST\ASTCmdSkip.cs" />
-    <Compile Include="Parser\AST\ASTComma.cs" />
     <Compile Include="Parser\AST\ASTCpsCmd.cs" />
     <Compile Include="Parser\AST\ASTCpsDecl.cs" />
     <Compile Include="Parser\AST\ASTDecimalLiteral.cs" />
@@ -449,7 +448,6 @@
     <Compile Include="Parser\AST\ASTIf.cs" />
     <Compile Include="Parser\AST\ASTIntLiteral.cs" />
     <Compile Include="Parser\AST\ASTMultOpr.cs" />
-    <Compile Include="Parser\AST\ASTOptExprList.cs" />
     <Compile Include="Parser\AST\ASTOptInit.cs" />
     <Compile Include="Parser\AST\ASTParam.cs" />
     <Compile Include="Parser\AST\ASTPartials.cs" />

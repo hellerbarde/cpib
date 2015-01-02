@@ -106,8 +106,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         decl.Type = new ASTTypeOrArray(); //TODO
       }
-
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         decl.Type = new ASTTypeOrArray(); //TODO
       }
       decl.Changemode = ((ChangeModeToken)this.CHANGEMODE.Token).Value;
@@ -651,8 +650,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
-
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
@@ -673,8 +671,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
-
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
@@ -695,8 +692,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
-
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
@@ -801,8 +797,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
-
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
 
@@ -831,8 +826,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
-
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
 
@@ -861,8 +855,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
-        
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
 
@@ -891,8 +884,7 @@ namespace Compiler
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
-
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE){
+      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         param.Type = new ASTTypeOrArray(); //TODO
       }
 //            param.Type = ((TypeToken)((TypedIdentIDENT)this.TypedIdent).TYPE.Token).Value;
@@ -2335,6 +2327,8 @@ namespace Compiler
         return new ASTIntLiteral(((IntLiteralToken)this.LITERAL.Token).Value);
       }
 
+
+
       throw new NotImplementedException();
     }
   }
@@ -2409,7 +2403,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException("Type Casting is not a feature in our language");
+      throw new ContextException("Type Casting is not a feature in our language");
     }
   }
 
@@ -2712,10 +2706,31 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      var returnvalue = new ASTArrayLiteral();
+
+      var rep = this.RepArray.ToAbstractSyntax();
+
+      if (rep is ASTEmpty) {
+        // there is only one arrayliteral in this arrayliteral. so meta. wow
+        returnvalue.Value.Add((ASTExpression)this.ArrayLiteral.ToAbstractSyntax());
+        return returnvalue;
+      }
+      else {
+        // there are many arrayliterals
+        returnvalue.Value.Add((ASTExpression)this.ArrayLiteral.ToAbstractSyntax());
+        var foo = this.RepArray.ToAbstractSyntax();
+        while (!(foo is ASTEmpty)) {
+          returnvalue.Value.Add((ASTExpression)foo);
+          foo = ((ASTExpression)foo).NextExpression;
+        }
+        return returnvalue;
+      }
+      /*node.NextExpression = 
       this.ArrayLiteral;
       this.RepArray;
 
-      throw new NotImplementedException();
+      return new ASTArrayLiteral();*/
+
     }
   }
 
@@ -2723,10 +2738,13 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.LITERAL;
-      this.RepLiteral;
+      return new ASTEmpty();
+      // we are inside an array literal with ints or bools
+      //if (this.LITERAL is 
+      //this.LITERAL;
+      //this.RepLiteral;
 
-      throw new NotImplementedException();
+      //throw new NotImplementedException(); //TODO
     }
   }
 
@@ -2734,24 +2752,27 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.LBRACKET;
-      this.RBRACKET;
-      this.RepArrayIndex;
-      this.SliceExpr;
+      var rep = this.RepArrayIndex.ToAbstractSyntax();
 
-      throw new NotImplementedException();
+      if (rep is ASTEmpty) {
+        return this.SliceExpr.ToAbstractSyntax();
+      }
+      else {
+        var sliceexpr = (ASTSliceExpr)this.SliceExpr.ToAbstractSyntax();
+        sliceexpr.NextExpression = rep;
+
+        return sliceexpr;
+      }
     }
   }
+
+
 
   public partial class ArrayLiteralLBRACKET : IArrayLiteral
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.ArrayContent;
-      this.LBRACKET;
-      this.RBRACKET;
-
-      throw new NotImplementedException();
+      return this.ArrayContent.ToAbstractSyntax();
     }
   }
 
@@ -2759,12 +2780,13 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.BECOMES;
-      this.Expr;
-      this.Expr2;
-      this.OptFill;
-
-      throw new NotImplementedException();
+//      this.BECOMES;
+//      this.Expr;
+//      this.Expr2;
+//      this.OptFill;
+//
+      //      throw new NotImplementedException(); //TODO
+      return new ASTEmpty();
     }
   }
 
@@ -2772,10 +2794,11 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.Cmd;
-      this.RepCpsCmd;
-
-      throw new NotImplementedException();
+//      this.Cmd;
+//      this.RepCpsCmd;
+//
+      //      throw new NotImplementedException(); //TODO
+      return new ASTEmpty();
     }
   }
 
@@ -2783,10 +2806,11 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.RepTerm1;
-      this.Term1;
-
-      throw new NotImplementedException();
+//      this.RepTerm1;
+//      this.Term1;
+//
+      //      throw new NotImplementedException();//TODO
+      return new ASTEmpty();
     }
   }
 
@@ -2794,9 +2818,10 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.ArrayLiteral;
-
-      throw new NotImplementedException();
+//      this.ArrayLiteral;
+//
+//      throw new NotImplementedException();//TODO
+      return new ASTEmpty();
     }
   }
 
@@ -2804,10 +2829,11 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.Expr;
-      this.RepExprList;
-
-      throw new NotImplementedException();
+//      this.Expr;
+//      this.RepExprList;
+//
+//      throw new NotImplementedException(); //TODO
+      return new ASTEmpty();
     }
   }
 
@@ -2823,9 +2849,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      this.FILL;
-
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2881,10 +2905,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      ASTExpression arrayaccess = ASTExpression();
-      arrayaccess.sliceexpr = ((ArrayIndexLBRACKET)ArrayIndex).SliceExpr;
-      //throw new NotImplementedException();
-      return arrayaccess;
+      return this.ArrayIndex.ToAbstractSyntax();
+
     }
   }
 
@@ -2908,7 +2930,16 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      var rep = this.RepArray.ToAbstractSyntax();
+
+      if (rep is ASTEmpty) {
+        return this.ArrayLiteral.ToAbstractSyntax();
+      }
+      else {
+        var lit = (ASTExpression)this.ArrayLiteral.ToAbstractSyntax();
+        lit.NextExpression = rep;
+        return lit;
+      }
     }
   }
 
@@ -2916,7 +2947,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2924,7 +2955,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2932,7 +2963,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2940,7 +2971,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2948,7 +2979,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2956,7 +2987,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2964,7 +2995,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2972,7 +3003,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2980,7 +3011,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2988,7 +3019,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2996,7 +3027,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3012,7 +3043,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3020,7 +3051,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3028,7 +3059,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3036,7 +3067,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3044,7 +3075,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3052,7 +3083,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3060,7 +3091,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3076,7 +3107,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3084,7 +3115,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3092,7 +3123,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3100,7 +3131,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3108,7 +3139,16 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      var rep = this.RepLiteral.ToAbstractSyntax();
+
+      if (rep is ASTEmpty) {
+        return new ASTIntLiteral(((IntLiteralToken)LITERAL.Token).Value);
+      }
+      else {
+        var expr = new ASTIntLiteral(((IntLiteralToken)LITERAL.Token).Value);
+        expr.NextExpression = rep;
+        return expr;
+      }
     }
   }
 
@@ -3116,23 +3156,49 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
+
+  /* 
+    var arrayaccess = new ASTArrayAccess();
+      var sliceexpr = ((ArrayIndexLBRACKET)this.ArrayIndex).SliceExpr;
+      ((Slice))
+        //((ArrayIndexLBRACKET)ArrayIndex).SliceExpr;
+        //this.
+      //throw new NotImplementedException();
+      return arrayaccess;
+      var rep = this.RepExprList.ToAbstractSyntax();
+      if (!(rep is ASTEmpty)) {
+        var expr = (ASTExpression)this.Expr.ToAbstractSyntax();
+        expr.NextExpression = rep;
+
+        return expr;
+      }
+
+      return this.Expr.ToAbstractSyntax();
+  */
 
   public partial class RepSliceExprRANGE : IRepSliceExpr
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      var slice = new ASTSliceExpr();
+      slice.End = (ASTExpression)this.Expr.ToAbstractSyntax();
+      return slice;
     }
   }
+
+
 
   public partial class RepSliceExprRBRACKET : IRepSliceExpr
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new ContextException("no empty array access expressions allowed");
+      // this means there is no slice, only an index
+      var index = new ASTSliceExpr();
+      index.End = new ASTEmpty();
+      return index;
     }
   }
 
@@ -3140,7 +3206,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      var slice = (ASTSliceExpr)this.RepSliceExpr.ToAbstractSyntax();
+      slice.Start = this.Expr.ToAbstractSyntax();
+      return slice;
     }
   }
 
@@ -3148,7 +3216,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      var slice = (ASTSliceExpr)this.RepSliceExpr.ToAbstractSyntax();
+      slice.Start = this.Expr.ToAbstractSyntax();
+      return slice;
     }
   }
 
@@ -3164,7 +3234,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      var slice = (ASTSliceExpr)this.RepSliceExpr.ToAbstractSyntax();
+      slice.Start = this.Expr.ToAbstractSyntax();
+      return slice;
     }
   }
 
@@ -3172,7 +3244,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      var slice = (ASTSliceExpr)this.RepSliceExpr.ToAbstractSyntax();
+      slice.Start = this.Expr.ToAbstractSyntax();
+      return slice;
     }
   }
 

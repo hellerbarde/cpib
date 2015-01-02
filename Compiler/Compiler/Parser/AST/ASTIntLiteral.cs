@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-  public partial class ASTIntLiteral : IASTNode
+  public partial class ASTIntLiteral : ASTExpression
     {
         public ASTIntLiteral(int value)
         {

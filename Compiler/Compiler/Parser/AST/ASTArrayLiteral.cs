@@ -3,14 +3,14 @@
 
 namespace Compiler
 {
-  public partial class ASTArrayLiteral : IASTNode
+  public partial class ASTArrayLiteral : ASTExpression
   {
-    public ASTArrayLiteral(List<int> value)
+    public ASTArrayLiteral()
     {
-      this.Value = value;
+      this.Value = new List<ASTExpression>();
     }
 
-    public List<int> Value { public get; set; }
+    public List<ASTExpression> Value { get; set; }
 
     public override string ToString()
     {

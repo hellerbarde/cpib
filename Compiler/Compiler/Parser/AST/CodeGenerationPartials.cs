@@ -2,201 +2,250 @@
 
 namespace Compiler
 {
-  public partial class ASTAddOpr
-  { 
-    String EmitCode(){
+  public partial class ASTAddOpr : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTArrayAccess
-  { 
-    String EmitCode(){
+
+  public partial class ASTArrayAccess : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTArrayLiteral
-  { 
-    String EmitCode(){
+
+  public partial class ASTArrayLiteral : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTBoolLiteral
-  { 
-    String EmitCode(){
+
+  public partial class ASTBoolLiteral : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTBoolOpr
-  { 
-    String EmitCode(){
+
+  public partial class ASTBoolOpr : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTCmdCall
-  { 
-    String EmitCode(){
+
+  public partial class ASTCmdCall : ASTCpsCmd
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTCmdDebugIn
-  { 
-    String EmitCode(){
+
+  public partial class ASTCmdDebugIn  : ASTCpsCmd
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTCmdDebugOut
-  { 
-    String EmitCode(){
+
+  public partial class ASTCmdDebugOut : ASTCpsCmd
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTCmdIdent
-  { 
-    String EmitCode(){
+
+  public partial class ASTCmdIdent : ASTCpsCmd
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTCmdSkip
-  { 
-    String EmitCode(){
+
+  public partial class ASTCmdSkip : ASTCpsCmd
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTComma
-  { 
-    String EmitCode(){
+
+  public partial class ASTComma : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTCpsCmd
-  { 
-    String EmitCode(){
+
+  public partial class ASTCpsCmd : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTCpsDecl
-  { 
-    String EmitCode(){
+
+  public partial class ASTCpsDecl : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTDecimalLiteral
-  { 
-    String EmitCode(){
+
+  public partial class ASTDecimalLiteral : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTEmpty
-  { 
-    String EmitCode(){
+
+  public partial class ASTEmpty : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTExpression
-  { 
-    String EmitCode(){
+
+  public partial class ASTExpression : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTGlobalParam
-  { 
-    String EmitCode(){
+
+  public partial class ASTGlobalParam : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTIdent
-  { 
-    String EmitCode(){
+
+  public partial class ASTIdent  : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTIf
-  { 
-    String EmitCode(){
+
+  public partial class ASTIf : ASTCpsCmd
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTIntLiteral
-  { 
-    String EmitCode(){
+
+  public partial class ASTIntLiteral : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTMultOpr
-  { 
-    String EmitCode(){
+
+  public partial class ASTMultOpr : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTOptExprList
-  { 
-    String EmitCode(){
+
+  public partial class ASTOptInit : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTOptInit
-  { 
-    String EmitCode(){
+
+  public partial class ASTParam : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTParam
-  { 
-    String EmitCode(){
+
+  public partial class ASTProcFuncDecl: ASTCpsDecl
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTPartials
-  { 
-    String EmitCode(){
+
+  public partial class ASTProgram : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTProcFuncDecl
-  { 
-    String EmitCode(){
+
+  public partial class ASTRelOpr : ASTExpression
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTProgram
-  { 
-    String EmitCode(){
+
+  public partial class ASTSliceExpr : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTRelOpr
-  { 
-    String EmitCode(){
+
+  public partial class ASTStoDecl : ASTCpsDecl
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTSliceExpr
-  { 
-    String EmitCode(){
+
+  public partial class ASTType : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTStoDecl
-  { 
-    String EmitCode(){
+
+  public partial class ASTTypeOrArray : IASTNode
+  {
+    public virtual String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
-  public partial class ASTType
-  { 
-    String EmitCode(){
-      throw new NotImplementedException();
-    }
-  }
-  public partial class ASTTypeOrArray
-  { 
-    String EmitCode(){
-      throw new NotImplementedException();
-    }
-  }
-  public partial class ASTWhile
-  { 
-    String EmitCode(){
+
+  public partial class ASTWhile : ASTCpsCmd
+  {
+    public override String EmitCode()
+    {
       throw new NotImplementedException();
     }
   }
