@@ -1,8 +1,0 @@
-<program>
-  PROGRAM <cmds> ENDPROGRAM
-<cmds>
-  IDENT <repCmd>
-<repCmd>
-  SEMICOLON IDENT <repCmd>
-
-val it = () : unit
