@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+<<<<<<< HEAD
     <Compile Include="Scanner\LexicalException.cs" />
     <Compile Include="Scanner\Scanner.cs" />
     <Compile Include="Scanner\State\AndState.cs" />
@@ -464,10 +465,101 @@
     <Compile Include="Parser\AST\ASTArrayAccess.cs" />
     <Compile Include="Parser\AST\ASTSliceExpr.cs" />
     <Compile Include="Parser\AST\CodeGenerationPartials.cs" />
+=======
+    <Compile Include="01Scanner\LexicalException.cs" />
+    <Compile Include="01Scanner\Scanner.cs" />
+    <Compile Include="01Scanner\State\AndState.cs" />
+    <Compile Include="01Scanner\State\ColonState.cs" />
+    <Compile Include="01Scanner\State\DecimalState.cs" />
+    <Compile Include="01Scanner\State\DefaultState.cs" />
+    <Compile Include="01Scanner\State\GTState.cs" />
+    <Compile Include="01Scanner\State\LTState.cs" />
+    <Compile Include="01Scanner\State\NumberState.cs" />
+    <Compile Include="01Scanner\State\OrState.cs" />
+    <Compile Include="01Scanner\State\SkipLineState.cs" />
+    <Compile Include="01Scanner\State\SlashState.cs" />
+    <Compile Include="01Scanner\State\State.cs" />
+    <Compile Include="01Scanner\State\TextState.cs" />
+    <Compile Include="01Scanner\Token\ChangeModeToken.cs" />
+    <Compile Include="01Scanner\Token\DecimalLiteralToken.cs" />
+    <Compile Include="01Scanner\Token\FlowModeToken.cs" />
+    <Compile Include="01Scanner\Token\GenericParamToken.cs" />
+    <Compile Include="01Scanner\Token\ChangeMode.cs" />
+    <Compile Include="01Scanner\Token\FlowMode.cs" />
+    <Compile Include="01Scanner\Token\MechMode.cs" />
+    <Compile Include="01Scanner\Token\IdentToken.cs" />
+    <Compile Include="01Scanner\Token\MechModeToken.cs" />
+    <Compile Include="01Scanner\Token\Operators.cs" />
+    <Compile Include="01Scanner\Token\OperatorToken.cs" />
+    <Compile Include="01Scanner\Token\BoolLiteralToken.cs" />
+    <Compile Include="01Scanner\Token\IntLiteralToken.cs" />
+    <Compile Include="02Parser\AST\ASTAddOpr.cs" />
+    <Compile Include="02Parser\AST\ASTBoolLiteral.cs" />
+    <Compile Include="02Parser\AST\ASTBoolOpr.cs" />
+    <Compile Include="02Parser\AST\ASTCmdCall.cs" />
+    <Compile Include="02Parser\AST\ASTCmdDebugIn.cs" />
+    <Compile Include="02Parser\AST\ASTCmdDebugOut.cs" />
+    <Compile Include="02Parser\AST\ASTCmdIdent.cs" />
+    <Compile Include="02Parser\AST\ASTCmdSkip.cs" />
+    <Compile Include="02Parser\AST\ASTCpsCmd.cs" />
+    <Compile Include="02Parser\AST\ASTCpsDecl.cs" />
+    <Compile Include="02Parser\AST\ASTDecimalLiteral.cs" />
+    <Compile Include="02Parser\AST\IASTDecl.cs" />
+    <Compile Include="02Parser\AST\ASTEmpty.cs" />
+    <Compile Include="02Parser\AST\ASTExpression.cs" />
+    <Compile Include="02Parser\AST\ASTGlobalParam.cs" />
+    <Compile Include="02Parser\AST\ASTIdent.cs" />
+    <Compile Include="02Parser\AST\ASTIf.cs" />
+    <Compile Include="02Parser\AST\ASTIntLiteral.cs" />
+    <Compile Include="02Parser\AST\ASTMultOpr.cs" />
+    <Compile Include="02Parser\AST\ASTOptInit.cs" />
+    <Compile Include="02Parser\AST\ASTParam.cs" />
+    <Compile Include="02Parser\AST\ASTPartials.cs" />
+    <Compile Include="02Parser\AST\ASTProcFuncDecl.cs" />
+    <Compile Include="02Parser\AST\ASTProgram.cs" />
+    <Compile Include="02Parser\AST\ASTRelOpr.cs" />
+    <Compile Include="02Parser\AST\ASTStoDecl.cs" />
+    <Compile Include="02Parser\AST\ASTType.cs" />
+    <Compile Include="02Parser\AST\ASTWhile.cs" />
+    <Compile Include="02Parser\AST\IASTNode.cs" />
+    <Compile Include="02Parser\AST\IASTStoDecl.cs" />
+    <Compile Include="02Parser\GrammarException.cs" />
+    <Compile Include="02Parser\NotTerminals.cs" />
+    <Compile Include="02Parser\Parser.cs" />
+    <Compile Include="02Parser\ParserSymbol.cs" />
+    <Compile Include="02Parser\Symbol.cs" />
+    <Compile Include="02Parser\Productions.cs" />
+    <Compile Include="02Parser\Treenode.cs" />
+    <Compile Include="03Checker\Checker.cs" />
+    <Compile Include="03Checker\CheckerException.cs" />
+    <Compile Include="03Checker\CheckerInformation.cs" />
+    <Compile Include="03Checker\ScopeChecker.cs" />
+    <Compile Include="03Checker\Namespace.cs" />
+    <Compile Include="05VirtualMachine\Data.cs" />
+    <Compile Include="05VirtualMachine\IVirtualMachine.cs" />
+    <Compile Include="05VirtualMachine\TestVirtualMachine.cs" />
+    <Compile Include="05VirtualMachine\VirtualMachine.cs" />
+    <Compile Include="Helpers\CloneObjects.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="01Scanner\Token\Terminals.cs" />
+    <Compile Include="01Scanner\Token\Token.cs" />
+    <Compile Include="01Scanner\Token\Type.cs" />
+    <Compile Include="01Scanner\Token\TypeToken.cs" />
+>>>>>>> 83e2fa2afc7da70bbf14d9d58904258dbdf2389e
   </ItemGroup>
   <ItemGroup>
+    <None Include="test04.iml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="test03.iml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="App.config" />
     <None Include="test01.iml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Include="parsertest01.iml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
     <None Include="test02.iml">
@@ -480,7 +572,9 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="04CodeGenerator\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
