@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-  public class ASTStoDecl : ASTCpsDecl
+  public partial class ASTStoDecl : ASTCpsDecl
   {
     public string Ident { get; set; }
 

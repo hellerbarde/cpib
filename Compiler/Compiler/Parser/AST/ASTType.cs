@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTType : IASTNode
+  public partial class ASTType : IASTNode
     {
         public Type Type { get; set; }
 

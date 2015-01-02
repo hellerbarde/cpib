@@ -2712,6 +2712,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.ArrayLiteral;
+      this.RepArray;
+
       throw new NotImplementedException();
     }
   }
@@ -2720,6 +2723,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.LITERAL;
+      this.RepLiteral;
+
       throw new NotImplementedException();
     }
   }
@@ -2728,6 +2734,11 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.LBRACKET;
+      this.RBRACKET;
+      this.RepArrayIndex;
+      this.SliceExpr;
+
       throw new NotImplementedException();
     }
   }
@@ -2736,6 +2747,10 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.ArrayContent;
+      this.LBRACKET;
+      this.RBRACKET;
+
       throw new NotImplementedException();
     }
   }
@@ -2744,6 +2759,11 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.BECOMES;
+      this.Expr;
+      this.Expr2;
+      this.OptFill;
+
       throw new NotImplementedException();
     }
   }
@@ -2752,6 +2772,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.Cmd;
+      this.RepCpsCmd;
+
       throw new NotImplementedException();
     }
   }
@@ -2760,6 +2783,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.RepTerm1;
+      this.Term1;
+
       throw new NotImplementedException();
     }
   }
@@ -2768,6 +2794,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.ArrayLiteral;
+
       throw new NotImplementedException();
     }
   }
@@ -2776,6 +2804,9 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.Expr;
+      this.RepExprList;
+
       throw new NotImplementedException();
     }
   }
@@ -2784,7 +2815,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2792,6 +2823,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      this.FILL;
+
       throw new NotImplementedException();
     }
   }
@@ -2800,7 +2833,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2808,7 +2841,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2816,7 +2849,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2824,7 +2857,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2832,7 +2865,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2840,7 +2873,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2848,7 +2881,10 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      ASTExpression arrayaccess = ASTExpression();
+      arrayaccess.sliceexpr = ((ArrayIndexLBRACKET)ArrayIndex).SliceExpr;
+      //throw new NotImplementedException();
+      return arrayaccess;
     }
   }
 
@@ -2856,7 +2892,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -2864,7 +2900,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3096,7 +3132,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      throw new ContextException("no empty array access expressions allowed");
     }
   }
 
@@ -3120,7 +3156,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      throw new ContextException("No nested arrayliterals allowed in a slice expression");
     }
   }
 
@@ -3144,7 +3180,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      throw new ContextException("No Bools allowed in a slice expression");
     }
   }
 
@@ -3152,7 +3188,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      throw new ContextException("No TYPE allowed in a slice expression");
     }
   }
 
@@ -3160,8 +3196,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3169,7 +3204,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3177,7 +3212,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3185,7 +3220,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3193,7 +3228,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3201,7 +3236,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3209,7 +3244,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3217,7 +3252,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      return new ASTEmpty();
     }
   }
 
@@ -3225,7 +3260,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      // this can only be an array literal, so we can skip repterm2
+      return this.Term2.ToAbstractSyntax();
     }
   }
 
@@ -3233,7 +3269,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      // this can only be an array literal, so we can skip repterm3
+      return this.Term3.ToAbstractSyntax();
     }
   }
 
@@ -3241,7 +3278,8 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new NotImplementedException();
+      // this can only be an array literal, so we can skip repfactor
+      return this.Factor.ToAbstractSyntax();
     }
   }
 

@@ -1,6 +1,6 @@
 namespace Compiler
 {
-    public class ASTCmdSkip : ASTCpsCmd
+  public partial class ASTCmdSkip : ASTCpsCmd
     {
     }
 }

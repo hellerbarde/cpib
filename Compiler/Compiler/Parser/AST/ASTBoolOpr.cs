@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTBoolOpr : ASTExpression
+  public partial class ASTBoolOpr : ASTExpression
     {
         public IASTNode Term { get; set; }
         public IASTNode RepTerm { get; set; }

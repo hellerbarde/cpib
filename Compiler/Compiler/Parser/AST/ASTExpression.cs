@@ -1,6 +1,6 @@
 ﻿namespace Compiler
 {
-    public class ASTExpression : IASTNode
+  public partial class ASTExpression : IASTNode
     {
         public ASTExpression()
         {

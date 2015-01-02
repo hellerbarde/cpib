@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTOptExprList : IASTNode
+  public partial class ASTOptExprList : IASTNode
     {
         public IASTNode Expr { get; set; }
 

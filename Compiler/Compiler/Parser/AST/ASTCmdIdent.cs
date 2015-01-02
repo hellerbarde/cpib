@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTCmdIdent : ASTCpsCmd
+  public partial class ASTCmdIdent : ASTCpsCmd
     {
         public IASTNode LValue { get; set; }
 

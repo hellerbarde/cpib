@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTIdent : ASTExpression
+  public partial class ASTIdent : ASTExpression
     {
         public string Ident { get; set; }
 

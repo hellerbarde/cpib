@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTComma : IASTNode
+  public partial class ASTComma : IASTNode
     {
         public IASTNode Expr { get; set; }
 

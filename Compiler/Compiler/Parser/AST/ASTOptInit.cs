@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTOptInit : IASTNode
+  public partial class ASTOptInit : IASTNode
     {
         public string Ident { get; set; }
 

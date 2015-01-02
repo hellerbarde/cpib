@@ -4,6 +4,6 @@ namespace Compiler
 {
   public interface IASTNode
   {
-
+    String EmitCode();
   }
 }

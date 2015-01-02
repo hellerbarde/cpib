@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Compiler
 {
-    public class ASTWhile : ASTCpsCmd
+  public partial class ASTWhile : ASTCpsCmd
     {
         public IASTNode Condition { get; set; }
 

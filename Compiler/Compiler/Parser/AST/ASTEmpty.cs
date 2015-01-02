@@ -1,6 +1,6 @@
 ﻿namespace Compiler
 {
-    public class ASTEmpty:IASTNode
+  public partial class ASTEmpty:IASTNode
     {
          
     }

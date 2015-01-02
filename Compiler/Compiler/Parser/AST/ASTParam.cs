@@ -2,7 +2,7 @@ using System;
 
 namespace Compiler
 {
-  public class ASTParam : IASTNode
+  public partial class ASTParam : IASTNode
   {
     public ASTParam()
     {

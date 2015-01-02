@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTMultOpr : ASTExpression
+  public partial class ASTMultOpr : ASTExpression
     {
         public ASTMultOpr()
         {

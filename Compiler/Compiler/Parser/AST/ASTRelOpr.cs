@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTRelOpr : ASTExpression
+  public partial class ASTRelOpr : ASTExpression
     {
         public ASTRelOpr()
         {

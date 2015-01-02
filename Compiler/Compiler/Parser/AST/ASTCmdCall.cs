@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Compiler
 {
-    public class ASTCmdCall : ASTCpsCmd
+  public partial class ASTCmdCall : ASTCpsCmd
     {
         public string Ident { get; set; }
 

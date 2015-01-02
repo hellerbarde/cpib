@@ -2,7 +2,7 @@
 
 namespace Compiler
 {
-  public class ASTProgram : IASTNode
+  public partial class ASTProgram : IASTNode
   {
     public string Ident { get; set; }
 

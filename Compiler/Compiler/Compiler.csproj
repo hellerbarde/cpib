@@ -437,7 +437,6 @@
     <Compile Include="Parser\AST\ASTCmdCall.cs" />
     <Compile Include="Parser\AST\ASTCmdDebugIn.cs" />
     <Compile Include="Parser\AST\ASTCmdDebugOut.cs" />
-    <Compile Include="Parser\AST\ASTCmdIDENT.cs" />
     <Compile Include="Parser\AST\ASTCmdSkip.cs" />
     <Compile Include="Parser\AST\ASTComma.cs" />
     <Compile Include="Parser\AST\ASTCpsCmd.cs" />
@@ -461,6 +460,12 @@
     <Compile Include="Parser\AST\ASTType.cs" />
     <Compile Include="Parser\AST\ASTWhile.cs" />
     <Compile Include="Parser\AST\ASTTypeOrArray.cs" />
+    <Compile Include="Parser\ContextException.cs" />
+    <Compile Include="Parser\AST\ASTArrayLiteral.cs" />
+    <Compile Include="Parser\AST\ASTCmdIdent.cs" />
+    <Compile Include="Parser\AST\ASTArrayAccess.cs" />
+    <Compile Include="Parser\AST\ASTSliceExpr.cs" />
+    <Compile Include="Parser\AST\CodeGenerationPartials.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

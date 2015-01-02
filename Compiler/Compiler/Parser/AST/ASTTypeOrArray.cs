@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Compiler
 {
-  public class ASTTypeOrArray : IASTNode
+  public partial class ASTTypeOrArray : IASTNode
   {
     public ASTTypeOrArray()
     {

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Compiler
 {
-    public class ASTProcFuncDecl:ASTCpsDecl
+  public partial class ASTProcFuncDecl:ASTCpsDecl
     {
         public string Ident { get; set; }
 

@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-    public class ASTGlobalParam : IASTNode
+  public partial class ASTGlobalParam : IASTNode
     {
         public ASTGlobalParam()
         {
