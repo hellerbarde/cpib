@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-  public partial class ASTCpsCmd : IASTNode
+  public abstract class ASTCpsCmd : IASTNode
     {
         public ASTCpsCmd()
         {

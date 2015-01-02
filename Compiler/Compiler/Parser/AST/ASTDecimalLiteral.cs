@@ -1,7 +1,7 @@
 
 namespace Compiler
 {
-  public partial class ASTDecimalLiteral : IASTNode
+  public partial class ASTDecimalLiteral : ASTExpression
     {
         public ASTDecimalLiteral(decimal value)
         {

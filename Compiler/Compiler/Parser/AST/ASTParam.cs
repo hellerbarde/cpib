@@ -2,7 +2,7 @@ using System;
 
 namespace Compiler
 {
-  public partial class ASTParam : IASTNode
+  public partial class ASTParam : IASTNode, IASTStoDecl
   {
     public ASTParam()
     {
@@ -11,7 +11,9 @@ namespace Compiler
 
     public IASTNode NextParam { get; set; }
 
-    public ASTTypeOrArray Type { get; set; }
+    public ASTTypeOrArray TypeOrArray { get; set; }
+
+    public Type Type { get; set; }
 
     public string Ident { get; set; }
 
@@ -23,7 +25,7 @@ namespace Compiler
 
     public override string ToString()
     {
-      return String.Format("{0} {1} {2} {3}", this.OptChangemode, this.FlowMode, this.Type, this.Ident);
+      return String.Format("{0} {1} {2} {3}", this.OptChangemode, this.FlowMode, this.TypeOrArray, this.Ident);
     }
 
     public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)

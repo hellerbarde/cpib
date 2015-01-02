@@ -105,11 +105,11 @@ namespace Compiler
       decl.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
         // this is an array
-        decl.Type = new ASTTypeOrArray(); //TODO
+        decl.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
         // this is a basic type
-        decl.Type = new ASTTypeOrArray(); //TODO
+        decl.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       decl.Changemode = ((ChangeModeToken)this.CHANGEMODE.Token).Value;
 
@@ -129,7 +129,7 @@ namespace Compiler
       var rootParam = new ASTParam();
       rootParam.OptChangemode = returnParam.Changemode;
       rootParam.Ident = returnParam.Ident;
-      rootParam.Type = returnParam.Type;
+      rootParam.TypeOrArray = returnParam.TypeOrArray;
       rootParam.FlowMode = FlowMode.OUT;
 
       rootParam.NextParam = this.ParamList.ToAbstractSyntax();
@@ -650,10 +650,10 @@ namespace Compiler
     {
       var param = new ASTParam();
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
       if (this.OptChangemode is OptChangemodeCHANGEMODE) {
@@ -671,10 +671,10 @@ namespace Compiler
     {
       var param = new ASTParam();
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
       if (this.OptChangemode is OptChangemodeCHANGEMODE) {
@@ -692,10 +692,10 @@ namespace Compiler
     {
       var param = new ASTParam();
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
       param.FlowMode = ((FlowModeToken)this.FLOWMODE.Token).Value;
@@ -797,10 +797,10 @@ namespace Compiler
     {
       var param = new ASTParam();
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
 
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
@@ -826,10 +826,10 @@ namespace Compiler
       var param = new ASTParam();
 
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
 
       //param.Type = ((TypeToken)((TypedIdentIDENT)this.TypedIdent).TYPE.Token).Value;
@@ -855,10 +855,10 @@ namespace Compiler
     {
       var param = new ASTParam();
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
 
       //param.Type = new ASTTypeOrArray();((TypedIdentIDENT)TypedIdent).TypeOrArray; //TODO
@@ -884,10 +884,10 @@ namespace Compiler
     {
       var param = new ASTParam();
       if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
       else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.Type = new ASTTypeOrArray(); //TODO
+        param.TypeOrArray = new ASTTypeOrArray(); //TODO
       }
 //            param.Type = ((TypeToken)((TypedIdentIDENT)this.TypedIdent).TYPE.Token).Value;
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;

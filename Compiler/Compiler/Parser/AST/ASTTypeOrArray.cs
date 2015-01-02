@@ -23,6 +23,11 @@ namespace Compiler
       return "";
       //return string.Format("{0}({1})", Type, Expr);
     }
+
+    public virtual int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
+    {
+      throw new System.NotImplementedException();
+    }
   }
 }
 

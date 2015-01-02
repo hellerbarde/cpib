@@ -11,8 +11,6 @@
     <AssemblyName>Compiler</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <ProductVersion>12.0.0</ProductVersion>
-    <SchemaVersion>2.0</SchemaVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -464,7 +462,6 @@
     <Compile Include="Parser\AST\ASTCmdIdent.cs" />
     <Compile Include="Parser\AST\ASTArrayAccess.cs" />
     <Compile Include="Parser\AST\ASTSliceExpr.cs" />
-    <Compile Include="Parser\AST\CodeGenerationPartials.cs" />
     <Compile Include="Parser\AST\IASTNode.cs" />
     <Compile Include="Checker\Checker.cs" />
     <Compile Include="Checker\CheckerException.cs" />
@@ -473,6 +470,10 @@
     <Compile Include="Checker\ScopeChecker.cs" />
     <Compile Include="Parser\AST\IASTDecl.cs" />
     <Compile Include="Parser\AST\IASTStoDecl.cs" />
+    <Compile Include="VirtualMachine\Data.cs" />
+    <Compile Include="VirtualMachine\IVirtualMachine.cs" />
+    <Compile Include="VirtualMachine\TestVirtualMachine.cs" />
+    <Compile Include="VirtualMachine\VirtualMachine.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -504,6 +505,7 @@
     <Folder Include="Parser\Implementations\" />
     <Folder Include="Parser\AST\" />
     <Folder Include="Checker\" />
+    <Folder Include="VirtualMachine\" />
   </ItemGroup>
   <ProjectExtensions>
     <MonoDevelop>

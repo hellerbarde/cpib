@@ -1,15 +1,14 @@
 
 namespace Compiler
 {
-  public partial class ASTCpsDecl : IASTNode
+  public abstract class ASTCpsDecl : IASTNode, IASTDecl
     {
-        public string Ident { get; set; }
-
         public ASTCpsDecl()
         {
             NextDecl = new ASTEmpty();
         }
-
+      
+        public string Ident { get; set; }
         public IASTNode NextDecl { get; set; }
 
         public abstract int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info);

@@ -34,7 +34,7 @@ namespace Compiler
                     //Load address where to save the input
                     vm.IntLoad(loc++, address);
                     //Switch between types:
-                    switch (param.Type)
+            switch (param.TypeOrArray.Type)
                     {
                         case Type.INT32:
                             vm.IntInput(loc++, ident);

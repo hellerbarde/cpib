@@ -5,7 +5,7 @@ namespace Compiler
 {
   public partial class ASTProcFuncDecl:ASTCpsDecl
     {
-        public string Ident { get; set; }
+    //public string Ident { get; set; }
 
         public List<ASTCpsDecl> Declarations { get; set; }
 
