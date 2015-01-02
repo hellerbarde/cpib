@@ -25,5 +25,10 @@ namespace Compiler
     {
       return String.Format("{0} {1} {2} {3}", this.OptChangemode, this.FlowMode, this.Type, this.Ident);
     }
+
+    public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
+    {
+      return loc;
+    }
   }
 }

@@ -8,5 +8,7 @@ namespace Compiler
             NextCmd = new ASTEmpty();
         }
         public IASTNode NextCmd { get; set; }
+
+        public abstract int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info);
     }
 }

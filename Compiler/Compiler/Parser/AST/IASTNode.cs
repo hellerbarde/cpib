@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace Compiler
+﻿namespace Compiler
 {
-  public interface IASTNode
-  {
-  }
+    public interface IASTNode
+    {
+        int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info);
+    }
 }
-
