@@ -37,7 +37,7 @@ namespace Compiler
         program.GenerateCode(0, vm, info);
         Console.WriteLine(vm.ToString());
         Console.WriteLine();
-        //Executuion
+        //Execution
         vm.Execute();
       } catch (Exception ex) {
         Console.WriteLine("Failed: " + ex.Message);
