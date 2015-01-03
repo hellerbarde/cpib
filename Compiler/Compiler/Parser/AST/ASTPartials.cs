@@ -2794,7 +2794,6 @@ namespace Compiler
           throw new ContextException("Types other than int32 and bool are not supported");
         }
         returnvalue.Value.Add(lit);
-        var foo = rep;
         while (!(rep is ASTEmpty)) {
           returnvalue.Value.Add((ASTExpression)rep);
           rep = ((ASTExpression)rep).NextExpression;
