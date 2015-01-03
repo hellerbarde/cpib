@@ -16,12 +16,16 @@ namespace Compiler
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
-      ASTSliceExpr access = Accessor.First();      
-      loc = access.End.GenerateCode(loc, vm, info);
+      ASTSliceExpr access = Accessor.First();
+      if (access.End is ASTEmpty){
+        vm.IntLoad(loc++, 0);
+      } else {
+        loc = access.End.GenerateCode(loc, vm, info);
+      }
       loc = access.Start.GenerateCode(loc, vm, info);
       if (info.CurrentNamespace != null &&
-        info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-        info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
+          info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+          info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
         IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][Ident];        
         vm.IntLoad(loc++, storage.Address);
         vm.ArrayAccess(loc++);

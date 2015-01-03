@@ -1,7 +1,14 @@
 ﻿program arraytest (out var b:int32)
 global
-    var a:array(5) int32
+    var a:array(5) int32;
+    var c:int32
 do
-    a init := [5,4,3,2,1];
-    b init := a[0]
+    a init := [5,4,9,2,1];
+    b init := a[0];
+    c init := 0;
+    while (b > 0) do
+        b := b-1;
+        c := a[b];
+        debugout c
+    endwhile
 endprogram
