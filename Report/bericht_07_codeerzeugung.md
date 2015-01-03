@@ -1,5 +1,4 @@
-## Bytecode
-Warum nennen wir es bytecode?
+## Codeerzeugung
 
 ### Allgemeine Codeerzeugung
 Die Codeerzeugung geschieht bei uns über den Abstract Syntax Tree, indem der Wurzel, dem ASTProgram, der Befehl zur Codeerzeugung erteilt wird.
