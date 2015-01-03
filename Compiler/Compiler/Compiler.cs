@@ -11,7 +11,7 @@ namespace Compiler
       try {
         Console.WriteLine("args: " + args);
         var scanner = new Scanner();
-        var list = scanner.Scan(new System.IO.StreamReader("test04.iml"));
+        var list = scanner.Scan(new System.IO.StreamReader("test05.iml"));
         Console.WriteLine("[" + String.Join(",\n", list) + "]");
         var parser = new Parser(list);
         IProgram cst = parser.parseprogram();
@@ -27,7 +27,7 @@ namespace Compiler
         var stringbuilder = new StringBuilder();
         program.printAST(0, stringbuilder);
         Console.Write(stringbuilder.ToString());
-        return;
+        //return;
         //Checker
         CheckerInformation info = new CheckerInformation();
         ScopeChecker contextChecker = new ScopeChecker();
