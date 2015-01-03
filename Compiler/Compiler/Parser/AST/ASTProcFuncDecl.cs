@@ -61,7 +61,11 @@ namespace Compiler
           copies += param.Size();
         }
       }
-      vm.Enter(loc++, copies + Declarations.Count, 0);
+      int decl_mem = 0;
+      foreach (ASTCpsDecl decl in Declarations){
+          decl_mem += decl.Size();
+      }
+      vm.Enter(loc++, copies + decl_mem, 0);
       //CopyIn of inout copy parameters
       foreach (ASTParam param in Params)
       {

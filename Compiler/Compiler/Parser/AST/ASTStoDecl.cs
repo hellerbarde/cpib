@@ -32,8 +32,7 @@ namespace Compiler
     public override int Size()
     {
       if (this.TypeOrArray.isArray) {
-
-        int memoryRequired = this.TypeOrArray.dimensions.Aggregate<int>((u, v) => u*v);
+        int memoryRequired = this.TypeOrArray.dimensions.Aggregate<int>((aggregate, next) => aggregate * next);
         return memoryRequired;  
       }
       else {

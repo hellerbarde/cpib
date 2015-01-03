@@ -37,7 +37,6 @@ namespace Compiler
     public virtual int Size()
     {
       if (this.TypeOrArray.isArray) {
-
         int memoryRequired = this.TypeOrArray.dimensions.Aggregate<int>((u, v) => u*v);
         return memoryRequired;  
       }
