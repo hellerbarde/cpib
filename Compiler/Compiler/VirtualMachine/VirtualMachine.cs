@@ -923,7 +923,7 @@ namespace Compiler
       }
       sp = sp - 3;
       while (start < end) {
-        store[sp] = store[address + start];
+        store[sp] = Data.intNew(((Data.IntData)store[address + start]).getData());
         ++sp;
         ++start;
       }
