@@ -150,6 +150,7 @@ namespace Compiler
     {
       pc = 0;
       while (pc > -1) {
+        //Console.WriteLine(pc.ToString() + ": " + code[pc].Value);
         code[pc].Key();
       }
     }

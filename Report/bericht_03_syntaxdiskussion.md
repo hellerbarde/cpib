@@ -59,8 +59,8 @@ e init := [[true, true], [true, false], [false, true], [false, false]];
 Beim Initialisieren der Arrays haben wir uns sofort dafür entschieden, dass ein Array immer vollständig initialisiert werden muss, d.h. nicht teilweise unbestimmte Werte haben darf. Wir haben uns aber überlegt, dass es nützlich sein könnte, Arrays leicht mit dem Wert 0 zu initialisieren. Dazu haben wir die folgende Syntax entworfen und das Keyword 'fill' eingeführt. Hier haben wir die eckigen Klammern dann doch eingeführt, da uns die Syntax mit ihnen genug deutlich besser lesbar vorkam.
 
 ```
-var a: array 7 int32;
-var b: array 3 int32;
+var a: array (7) int32;
+var b: array (3) int32;
 a init := [0, 1, 2, 3, 4, 5, 6];
 b init := fill 0;
 ```
@@ -68,7 +68,7 @@ b init := fill 0;
 Bei erneuter Betrachtung haben wir keinen Grund gefunden, warum unsere Array nur "nullbar" sein sollten, und erlauben nun, ein Array komplett mit einem beliebigen Wert aufzufüllen, welcher auch durch eine Expression repräsentiert sein könnte.
 
 ```
-var c: array 6 int32;
+var c: array (6) int32;
 c init := fill 5*3+1;
 ```
 
@@ -88,8 +88,8 @@ Bevor wir nun zu den Array Slices kommen, sollte noch erwähnt werden, dass wir 
 Ein Array Slice ist ein erweiterter Zugriff, und soll auf möglichst simple Art erlauben, mehrere Elemente gleichzeitig zu adressieren. Daher übernahmen wir grundsätzlich die Syntax eines Array-Zugriffs, und erweiterten sie um ein Trennsymbol, '..', und einen zweiten Index. Wir beschreiben Slices also über einen Start- und einen End-Index. In unserem Fall sind beide *inklusive* zu verstehen.
 
 ```
-var a: array 20 int32;
-var b: array 4 int32;
+var a: array (20) int32;
+var b: array (4) int32;
 > snip
 b := a[0..3]; 
 ```
@@ -98,8 +98,8 @@ In diesem Beispiel nehmen wir daher die ersten vier Elemente eines 20-Element Ar
 Zudem sollten Slice zu Slice Zuweisungen möglich sein, also z.B:
 
 ```
-var c: array 20 int32;
-var d: array 10 int32;
+var c: array (20) int32;
+var d: array (10) int32;
 > snip
 d[5..8] := c[16..20]; 
 ```
