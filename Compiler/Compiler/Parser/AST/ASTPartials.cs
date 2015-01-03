@@ -102,19 +102,15 @@ namespace Compiler
     {
       var decl = new ASTStoDecl();
       decl.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        // this is an array
-        decl.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        // this is a basic type
-        decl.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
+      decl.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
+      // DONE!
+        
       decl.Changemode = ((ChangeModeToken)this.CHANGEMODE.Token).Value;
 
       return decl;
     }
   }
+
 
   public partial class FunDeclFUN : IFunDecl
   {
@@ -649,13 +645,9 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var param = new ASTParam();
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
+      param.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
+      // DONE!
       if (this.OptChangemode is OptChangemodeCHANGEMODE) {
         param.OptChangemode =
                     ((ChangeModeToken)((OptChangemodeCHANGEMODE)this.OptChangemode).CHANGEMODE.Token).Value;
@@ -670,13 +662,9 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var param = new ASTParam();
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
+      param.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
+
       if (this.OptChangemode is OptChangemodeCHANGEMODE) {
         param.OptChangemode =
                     ((ChangeModeToken)((OptChangemodeCHANGEMODE)this.OptChangemode).CHANGEMODE.Token).Value;
@@ -691,13 +679,9 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var param = new ASTParam();
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
+      param.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
+
       param.FlowMode = ((FlowModeToken)this.FLOWMODE.Token).Value;
       if (this.OptChangemode is OptChangemodeCHANGEMODE) {
         param.OptChangemode =
@@ -796,14 +780,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var param = new ASTParam();
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
+      param.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
 
       if (this.OptMechmode is OptMechmodeMECHMODE) {
         param.OptMechmode =
@@ -824,16 +802,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var param = new ASTParam();
-
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-
-      //param.Type = ((TypeToken)((TypedIdentIDENT)this.TypedIdent).TYPE.Token).Value;
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
+      param.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
 
       if (this.OptMechmode is OptMechmodeMECHMODE) {
         param.OptMechmode =
@@ -854,15 +824,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var param = new ASTParam();
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-
-      //param.Type = new ASTTypeOrArray();((TypedIdentIDENT)TypedIdent).TypeOrArray; //TODO
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
+      param.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
 
       if (this.OptMechmode is OptMechmodeMECHMODE) {
         param.OptMechmode =
@@ -883,14 +846,9 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var param = new ASTParam();
-      if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayARRAY) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-      else if (((TypedIdentIDENT)TypedIdent).TypeOrArray is TypeOrArrayTYPE) {
-        param.TypeOrArray = new ASTTypeOrArray(); //TODO
-      }
-//            param.Type = ((TypeToken)((TypedIdentIDENT)this.TypedIdent).TYPE.Token).Value;
       param.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
+      param.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
+
       param.FlowMode = ((FlowModeToken)this.FLOWMODE.Token).Value;
 
       if (this.OptMechmode is OptMechmodeMECHMODE) {
@@ -914,7 +872,7 @@ namespace Compiler
       var ast = new ASTStoDecl();
       ast.Ident = ((IdentToken)IDENT.Token).Value;
       ast.TypeOrArray = (ASTTypeOrArray)this.TypeOrArray.ToAbstractSyntax();
-      ast.Changemode = ChangeMode.VAR; //TODO: Is this correct?
+      //ast.Changemode = ChangeMode.VAR; //TO DO: Is this correct?
       return ast;
     }
   }
@@ -2343,23 +2301,22 @@ namespace Compiler
     {
       var ident = new ASTIdent();
       ident.Ident = ((IdentToken)this.IDENT.Token).Value;
+
       if (this.OptInitOrExprListOrArrayAccess is OptInitOrExprListOrArrayAccessINIT) {
         ident.IsArrayAccess = false;
         ident.IsInit = true;
         ident.OptInitOrExprListOrArrayAccess = new ASTEmpty();
       }
       if (this.OptInitOrExprListOrArrayAccess is OptInitOrExprListOrArrayAccessLBRACKET) {
-//        ident.IsArrayAccess = true;
-//        ident.IsInit = false;
-//        ident.OptInitOrExprListOrArrayAccess = this.OptInitOrExprListOrArrayAccess.ToAbstractSyntax();
         var returnvalue = new ASTArrayAccess();
-        returnvalue.Array = new ASTIdent();
-        ((ASTIdent)returnvalue.Array).Ident = ((IdentToken)this.IDENT.Token).Value;
-        var foo = this.OptInitOrExprListOrArrayAccess.ToAbstractSyntax();
-        while (!(foo is ASTEmpty)) {
-          returnvalue.Accessor.Add((ASTSliceExpr)foo);
-          foo = ((ASTSliceExpr)foo).NextExpression;
+        returnvalue.Ident = ident.Ident;
+              
+        var arrayaccessor = this.OptInitOrExprListOrArrayAccess.ToAbstractSyntax();
+        while (!(arrayaccessor is ASTEmpty)) {
+          returnvalue.Accessor.Add((ASTSliceExpr)arrayaccessor);
+          arrayaccessor = ((ASTSliceExpr)arrayaccessor).NextExpression;
         }
+
         return returnvalue;
       }
       if (this.OptInitOrExprListOrArrayAccess is OptInitOrExprListOrArrayAccessLPAREN) {
@@ -2423,7 +2380,10 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      throw new ContextException("Type Casting is not a feature in our language");
+      var ident = new ASTType();
+      ident.Type = ((TypeToken)this.TYPE.Token).Value;
+      ident.Expr = (ASTExpression)this.Expr.ToAbstractSyntax();
+      return ident;
     }
   }
 
@@ -3133,12 +3093,12 @@ namespace Compiler
       var rep = this.RepArrayLength.ToAbstractSyntax();
 
       if (rep is ASTEmpty) {
-        return this.Expr.ToAbstractSyntax();
+        return (ASTIntLiteral)this.Expr.ToAbstractSyntax();
       }
       else {
-        var expr = (ASTExpression)this.Expr.ToAbstractSyntax();
+        var expr = (ASTIntLiteral)this.Expr.ToAbstractSyntax();
         expr.NextExpression = rep;
-        return expr;
+        return (ASTIntLiteral)expr;
       }
     }
   }
@@ -3204,6 +3164,7 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      // this means there is a slice
       var slice = new ASTSliceExpr();
       slice.End = (ASTExpression)this.Expr.ToAbstractSyntax();
       return slice;
@@ -3289,7 +3250,18 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      return new ASTEmpty();
+      var type = new ASTTypeOrArray();
+      type.isArray = true;
+      type.Type = ((TypeToken)TYPE.Token).Value;
+
+      type.dimensions.Add(((ASTIntLiteral)((ExprLITERAL)Expr).ToAbstractSyntax()).Value);
+      var rep = this.RepArrayLength.ToAbstractSyntax();
+      while (!(rep is ASTEmpty)) {
+        type.dimensions.Add(((ASTIntLiteral)rep).Value);
+        rep = (ASTIntLiteral)((ASTIntLiteral)rep).NextExpression;
+      }
+
+      return type;
     }
   }
 
@@ -3297,7 +3269,10 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      return new ASTEmpty();
+      var type = new ASTTypeOrArray();
+      type.isArray = false;
+      type.Type = ((TypeToken)TYPE.Token).Value;
+      return type;
     }
   }
 

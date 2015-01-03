@@ -5,14 +5,14 @@ using System.Linq;
 
 namespace Compiler
 {
-  public class ASTArrayAccess : ASTExpression
+  public class ASTArrayAccess : ASTIdent
   {
     public ASTArrayAccess()
     {
       Accessor = new List<ASTSliceExpr>();
     }
 
-    public ASTExpression Array { get; set; }
+    //public string Ident { get; set; }
 
     public List<ASTSliceExpr> Accessor { get; set; }
 
@@ -27,12 +27,9 @@ namespace Compiler
     {
       string ind = String.Concat(Enumerable.Repeat(" ", level));
 
-      sb.AppendLine(string.Format("{0}ASTArrayAccess()", ind));
-      sb.AppendLine(string.Format("{0}[Array]:", ind));
-      Array.printAST(level + 1, sb);
+      sb.AppendLine(string.Format("{0}ASTArrayAccess(Ident: {1})", ind, Ident));
       sb.AppendLine(string.Format("{0}[Accessor]:", ind));
       foreach (var a in Accessor) {
-        //sb.Append(ind + " ");
         a.printAST(level + 1, sb);
       }
     }
