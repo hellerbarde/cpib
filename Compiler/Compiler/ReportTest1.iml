@@ -1,0 +1,26 @@
+program T1
+  global
+    var a : array (2,3) int32;
+    var i : int32;
+    var j : int32;
+    var t : int32
+  do
+    j := 0;
+    while j < 3 do
+      i := 0;
+      while i < 2 do
+        a[i][j] := i + j;
+        i := i +1
+      endwhile;
+      j := j +1
+    endwhile;
+    while j < 3 do
+      while i < 2 do
+        t := a[i][j];
+        debugout t;
+        i := i + 1
+      endwhile
+      i := 0;
+      j := j + 1
+    endwhile
+endprogram
