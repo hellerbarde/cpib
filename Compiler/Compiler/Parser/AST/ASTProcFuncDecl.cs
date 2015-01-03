@@ -58,7 +58,7 @@ namespace Compiler
       {
         if (param.OptMechmode == MechMode.COPY && (param.FlowMode == FlowMode.INOUT || param.FlowMode == FlowMode.OUT))
         {
-          ++copies;
+          copies += param.Size();
         }
       }
       vm.Enter(loc++, copies + Declarations.Count, 0);
@@ -86,6 +86,18 @@ namespace Compiler
       //Return
       vm.Return(loc++, Params.Count);
       return loc;
+    }
+
+    public override int Size()
+    {
+      int result = 0;
+      foreach (ASTCpsDecl decl in Declarations){
+        result += decl.Size();
+      }
+      foreach (ASTParam para in Params){
+        result += para.Size();
+      }
+      return result;
     }
   }
 }

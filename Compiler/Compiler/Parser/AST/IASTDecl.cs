@@ -6,5 +6,6 @@ namespace Compiler
     {
         string Ident { get; set; }
         int Address { get; set; }
+        int Size();
     }
 }
