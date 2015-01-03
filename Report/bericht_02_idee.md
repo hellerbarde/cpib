@@ -1,4 +1,4 @@
-## Idee
+## Abstract
 
 IML hat ursprünglich keine Datenstrukturen wie Tupel, Listen und Arrays. Wir wollten uns dem Thema Arrays annehmen. Uns war es vorallem wichtig, einige Gedanken zu konsistentem, intuitivem und lesbarem Syntax festzuhalten. Zu finden ist dies im nächsten Kapitel "Gedanken zum Syntax". 
 

@@ -1,1 +1,5 @@
-# Compilerbau 2014 - Gruppe 10 - Arrays und Array-Slicing
+# Arrays und Array-Slicing in IML
+
+Compilerbau, HS2014 (Gruppe 10)
+
+Autoren: Stark, Philip und Zeman, Mark 

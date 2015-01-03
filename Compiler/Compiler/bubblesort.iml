@@ -1,0 +1,31 @@
+program bubble()
+
+global
+  var 
+
+proc bubbleSort(inout copy A : array (10) int32)
+local n : int32; 
+      i : int32; 
+      tmp : int32;
+      swapped : bool
+do 
+
+  n init := 10;
+  i init := 1;
+  tmp init := 0;
+  swapped init := false; 
+  while not swapped do
+    while i < n do
+
+      if A[i-1] > A[i] then
+        swap(A[i-1], A[i])
+        tmp := A[i];
+        A[i] := A[i-1];
+        A[i-1] := tmp;
+        swapped = true
+      endif
+      i := i + 1
+    endwhile;
+    n := n - 1
+  endwhile
+end procedure
