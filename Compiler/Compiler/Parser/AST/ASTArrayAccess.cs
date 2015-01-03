@@ -11,16 +11,30 @@ namespace Compiler
     {
       Accessor = new List<ASTSliceExpr>();
     }
-
     //public string Ident { get; set; }
-
     public List<ASTSliceExpr> Accessor { get; set; }
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
-      throw new NotImplementedException();
-      //vm.IntLoad(loc++, Value); // TODO TODO TODO
-      //return loc;
+      ASTSliceExpr access = Accessor.First();     
+      loc = access.Start.GenerateCode(loc, vm, info);
+      loc = access.End.GenerateCode(loc, vm, info);
+      if (info.CurrentNamespace != null &&
+        info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+        info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
+        IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][Ident];        
+        vm.IntLoad(loc++, storage.Address);
+        vm.ArrayAccess(loc++);
+      }
+      else if (info.Globals.ContainsIdent(Ident)) {
+        IASTStoDecl storage = info.Globals[Ident];
+        vm.IntLoad(loc++, storage.Address);
+        vm.ArrayAccess(loc++);
+      }
+      else {
+        throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + Ident);
+      }
+      return loc;
     }
 
     public override void printAST(int level, StringBuilder sb)
@@ -36,10 +50,8 @@ namespace Compiler
 
     public override Type GetExpressionType(CheckerInformation info)
     {
-      throw new NotImplementedException(); // TODO TODO
-      //return Type.INT32;
+      return Type.INT32;
     }
-
   }
 }
 

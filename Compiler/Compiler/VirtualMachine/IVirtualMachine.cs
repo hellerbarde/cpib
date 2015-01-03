@@ -120,6 +120,9 @@ namespace Compiler
         public abstract void DecimalToInt(int loc);
         public abstract void IntToDecimal(int loc);
 
+        // array operations
+        public abstract void ArrayAccess(int loc);
+
         public override abstract String ToString();
     }
 }
