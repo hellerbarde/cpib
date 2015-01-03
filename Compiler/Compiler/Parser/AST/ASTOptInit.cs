@@ -1,15 +1,25 @@
+using System.Text;
+using System;
+using System.Linq;
 
 namespace Compiler
 {
   public partial class ASTOptInit : IASTNode
+  {
+    public string Ident { get; set; }
+
+    public IASTNode NextInit { get; set; }
+
+    public void printAST(int level, StringBuilder sb)
     {
-        public string Ident { get; set; }
+      string ind = String.Concat(Enumerable.Repeat(" ", level));
 
-        public IASTNode NextInit { get; set; }
-
-        public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
-        {
-            throw new System.NotImplementedException();
-        }
+      sb.AppendLine(string.Format("{0}ASTOptInit(Ident: {1})", ind, Ident));
     }
+
+    public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
+    {
+      throw new System.NotImplementedException();
+    }
+  }
 }

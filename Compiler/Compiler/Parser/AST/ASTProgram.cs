@@ -1,4 +1,7 @@
 ﻿using System.Collections.Generic;
+using System.Text;
+using System.Linq;
+using System;
 
 namespace Compiler
 {
@@ -15,6 +18,26 @@ namespace Compiler
     public override string ToString()
     {
       return string.Format("Program {0}", Ident);
+    }
+
+    public void printAST(int level, StringBuilder sb)
+    {
+      string ind = String.Concat(Enumerable.Repeat(" ", level));
+
+      sb.AppendLine(string.Format("{0}ASTProgram({1})", ind, Ident));
+
+      sb.AppendLine(string.Format("{0}[Params]:", ind));
+      foreach (var a in Params) {
+        a.printAST(level + 1, sb);
+      }
+      sb.AppendLine(string.Format("{0}[Declarations]:", ind));
+      foreach (var a in Declarations) {
+        a.printAST(level + 1, sb);
+      }
+      sb.AppendLine(string.Format("{0}[Commands]:", ind));
+      foreach (var a in Commands) {
+        a.printAST(level + 1, sb);
+      }
     }
 
     public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)

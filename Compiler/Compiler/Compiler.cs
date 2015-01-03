@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 
 namespace Compiler
 {
@@ -22,6 +23,11 @@ namespace Compiler
           throw new IVirtualMachine.InternalError("Generation of Abstract Syntax Tree failed.");
         }
         ASTProgram program = (ASTProgram)ast;
+
+        var stringbuilder = new StringBuilder();
+        program.printAST(0, stringbuilder);
+        Console.Write(stringbuilder.ToString());
+        return;
         //Checker
         CheckerInformation info = new CheckerInformation();
         ScopeChecker contextChecker = new ScopeChecker();

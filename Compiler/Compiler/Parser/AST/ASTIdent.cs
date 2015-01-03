@@ -1,5 +1,6 @@
 using System;
-
+using System.Text;
+using System.Linq;
 
 namespace Compiler
 {
@@ -19,6 +20,13 @@ namespace Compiler
     public override string ToString()
     {
       return string.Format("{0}{1}", IsInit ? "init " : "", Ident);
+    }
+
+    public override void printAST(int level, StringBuilder sb)
+    {
+      string ind = String.Concat(Enumerable.Repeat(" ", level));
+
+      sb.AppendLine(string.Format("{0}ASTIdent(Ident: {1} )[some missing things here, like array access and function params]", ind, Ident)); //TODO some missing stuff here
     }
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)

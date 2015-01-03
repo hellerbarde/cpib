@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
+using System.Linq;
 
 namespace Compiler
 {
@@ -20,8 +22,18 @@ namespace Compiler
 
     public override string ToString()
     {
-      return "";
-      //return string.Format("{0}({1})", Type, Expr);
+      //return "";
+      if (isArray) {
+        return string.Format("array ({0}) {1}", string.Join(", ", dimensions), Type);
+      }
+      else {
+        return Type.ToString();
+      }
+    }
+
+    public void printAST(int level, StringBuilder sb)
+    {
+      throw new NotImplementedException();
     }
 
     public virtual int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
