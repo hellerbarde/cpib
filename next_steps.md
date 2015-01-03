@@ -1,14 +1,23 @@
 # Scanner
 
-Needs to be extended to parse our new Tokens (array etc.) DONE
+DONE
 
 # Parser
 
-Parse token list into Concrete Syntax tree
-From CST generate AST
+Tentative DONE
 
 # Syntax Checker
 
+UNKNOWN
+
 # Context Checker
 
+UNKNOWN
+
 # Code Generation
+
+Requires extension / array implementation
+
+# Report
+Needs updating to include Code gen and checking
+Parser needs description and the scanner needs to be cleaned up, possibly
