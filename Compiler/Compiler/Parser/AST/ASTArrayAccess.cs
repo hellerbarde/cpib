@@ -16,9 +16,9 @@ namespace Compiler
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
-      ASTSliceExpr access = Accessor.First();     
-      loc = access.Start.GenerateCode(loc, vm, info);
+      ASTSliceExpr access = Accessor.First();      
       loc = access.End.GenerateCode(loc, vm, info);
+      loc = access.Start.GenerateCode(loc, vm, info);
       if (info.CurrentNamespace != null &&
         info.Namespaces.ContainsKey(info.CurrentNamespace) &&
         info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
