@@ -2686,19 +2686,21 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
+      // starting with an lbracket, means we have another array literal.
+
       var returnvalue = new ASTArrayLiteral();
 
       var rep = this.RepArray.ToAbstractSyntax();
 
       if (rep is ASTEmpty) {
-        // there is only one arrayliteral in this arrayliteral. so meta. wow
+        // there is only one array literal in this array literal. so meta. wow
         returnvalue.Value.Add((ASTExpression)this.ArrayLiteral.ToAbstractSyntax());
         return returnvalue;
       }
       else {
-        // there are many arrayliterals
+        // there are many array literals
         returnvalue.Value.Add((ASTExpression)this.ArrayLiteral.ToAbstractSyntax());
-        var foo = this.RepArray.ToAbstractSyntax();
+        var foo = rep;
         while (!(foo is ASTEmpty)) {
           returnvalue.Value.Add((ASTExpression)foo);
           foo = ((ASTExpression)foo).NextExpression;
@@ -2718,27 +2720,44 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-
       // we are inside an array literal with ints or bools
-      ASTExpression expr;
 
-      if (this.LITERAL.Token is BoolLiteralToken) {
-        expr = new ASTBoolLiteral(((BoolLiteralToken)this.LITERAL.Token).Value);
-      }
-      else if (this.LITERAL.Token is IntLiteralToken) {
-        expr = new ASTIntLiteral(((IntLiteralToken)this.LITERAL.Token).Value);
-      }
-      else {
-        throw new ContextException("Types other than int32 and bool are not supported");
-      }
+      var returnvalue = new ASTArrayLiteral();
 
       var rep = this.RepLiteral.ToAbstractSyntax();
+      ASTExpression lit;
       if (rep is ASTEmpty) {
-        return expr;
+        // there is only one literal in this array literal.
+        if (this.LITERAL.Token is BoolLiteralToken) {
+          lit = new ASTBoolLiteral(((BoolLiteralToken)this.LITERAL.Token).Value);
+        }
+        else if (this.LITERAL.Token is IntLiteralToken) {
+          lit = new ASTIntLiteral(((IntLiteralToken)this.LITERAL.Token).Value);
+        }
+        else {
+          throw new ContextException("Types other than int32 and bool are not supported");
+        }
+        returnvalue.Value.Add(lit);
+        return returnvalue;
       }
       else {
-        expr.NextExpression = rep;
-        return expr;
+        // there are many literals in the array (the usual case)
+        if (this.LITERAL.Token is BoolLiteralToken) {
+          lit = new ASTBoolLiteral(((BoolLiteralToken)this.LITERAL.Token).Value);
+        }
+        else if (this.LITERAL.Token is IntLiteralToken) {
+          lit = new ASTIntLiteral(((IntLiteralToken)this.LITERAL.Token).Value);
+        }
+        else {
+          throw new ContextException("Types other than int32 and bool are not supported");
+        }
+        returnvalue.Value.Add(lit);
+        var foo = rep;
+        while (!(rep is ASTEmpty)) {
+          returnvalue.Value.Add((ASTExpression)rep);
+          rep = ((ASTExpression)rep).NextExpression;
+        }
+        return returnvalue;
       }
     }
   }
@@ -3142,10 +3161,27 @@ namespace Compiler
       var rep = this.RepLiteral.ToAbstractSyntax();
 
       if (rep is ASTEmpty) {
-        return new ASTIntLiteral(((IntLiteralToken)LITERAL.Token).Value);
+        if (this.LITERAL.Token is BoolLiteralToken) {
+          return new ASTBoolLiteral(((BoolLiteralToken)this.LITERAL.Token).Value);
+        }
+        else if (this.LITERAL.Token is IntLiteralToken) {
+          return new ASTIntLiteral(((IntLiteralToken)this.LITERAL.Token).Value);
+        }
+        else {
+          throw new ContextException("Types other than int32 and bool are not supported");
+        }
       }
       else {
-        var expr = new ASTIntLiteral(((IntLiteralToken)LITERAL.Token).Value);
+        ASTExpression expr;// = new ASTIntLiteral(((IntLiteralToken)LITERAL.Token).Value);
+        if (this.LITERAL.Token is BoolLiteralToken) {
+          expr = new ASTBoolLiteral(((BoolLiteralToken)this.LITERAL.Token).Value);
+        }
+        else if (this.LITERAL.Token is IntLiteralToken) {
+          expr = new ASTIntLiteral(((IntLiteralToken)this.LITERAL.Token).Value);
+        }
+        else {
+          throw new ContextException("Types other than int32 and bool are not supported");
+        }
         expr.NextExpression = rep;
         return expr;
       }
@@ -3258,7 +3294,7 @@ namespace Compiler
       var rep = this.RepArrayLength.ToAbstractSyntax();
       while (!(rep is ASTEmpty)) {
         type.dimensions.Add(((ASTIntLiteral)rep).Value);
-        rep = (ASTIntLiteral)((ASTIntLiteral)rep).NextExpression;
+        rep = ((ASTIntLiteral)rep).NextExpression;
       }
 
       return type;
