@@ -949,7 +949,7 @@ namespace Compiler
         end = start + 1;
       }
       while (start < end) {
-        store[sp] = Data.intNew(((Data.IntData)store[address + start]).getData());
+        store[sp] = store[address + start];
         ++sp;
         ++start;
       }
