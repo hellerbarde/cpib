@@ -13,7 +13,7 @@ namespace Compiler
     {
       string ind = String.Concat(Enumerable.Repeat(" ", level));
 
-      sb.AppendLine(string.Format("{0}ASTCmdDebugIn()", ind));
+      sb.AppendLine(string.Format("{0}ASTCmdDebugOut()", ind));
       sb.AppendLine(string.Format("{0}[Expr]:", ind));
       Expr.printAST(level + 1, sb);
     }
