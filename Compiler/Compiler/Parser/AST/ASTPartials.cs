@@ -2334,14 +2334,35 @@ namespace Compiler
     {
       var lit = this.Factor.ToAbstractSyntax();
 
-      if (lit is ASTIntLiteral) {
-        ((ASTIntLiteral)lit).Value *= -1;
+      if (MonadicOpr is MonadicOprADDOPR) {
+        var opr = ((OperatorToken)((MonadicOprADDOPR)MonadicOpr).ADDOPR.Token).Value;
+
+        if (opr == Operators.MINUS) {
+          if (lit is ASTIntLiteral) {
+            ((ASTIntLiteral)lit).Value *= -1;
+          }
+          else if (lit is ASTDecimalLiteral) {
+            ((ASTDecimalLiteral)lit).Value *= -1;
+          }
+          else {
+            var not = new ASTNot();
+            not.Expr = (ASTExpression)lit;
+
+            lit = not;
+          }
+        }
       }
-      else if (lit is ASTDecimalLiteral) {
-        ((ASTDecimalLiteral)lit).Value *= -1;
+      else if (MonadicOpr is MonadicOprNOT) {
+        var not = new ASTNot();
+        not.Expr = (ASTExpression)lit;
+
+        lit = not;
       }
       else {
-        throw new GrammarException("Monadic - can only be applied to int or decimal");
+        throw new GrammarException(
+          string.Format("Row: {0}, Col: {1}: Can't find relevant MonadicOperator",
+            ((MonadicOprADDOPR)MonadicOpr).ADDOPR.Token.Row,
+            ((MonadicOprADDOPR)MonadicOpr).ADDOPR.Token.Column));
       }
 
       return lit;
@@ -2354,14 +2375,35 @@ namespace Compiler
     {
       var lit = this.Factor.ToAbstractSyntax();
 
-      if (lit is ASTIntLiteral) {
-        ((ASTIntLiteral)lit).Value *= -1;
+      if (MonadicOpr is MonadicOprADDOPR) {
+        var opr = ((OperatorToken)((MonadicOprADDOPR)MonadicOpr).ADDOPR.Token).Value;
+
+        if (opr == Operators.MINUS) {
+          if (lit is ASTIntLiteral) {
+            ((ASTIntLiteral)lit).Value *= -1;
+          }
+          else if (lit is ASTDecimalLiteral) {
+            ((ASTDecimalLiteral)lit).Value *= -1;
+          }
+          else {
+            var not = new ASTNot();
+            not.Expr = (ASTExpression)lit;
+
+            lit = not;
+          }
+        }
       }
-      else if (lit is ASTDecimalLiteral) {
-        ((ASTDecimalLiteral)lit).Value *= -1;
+      else if (MonadicOpr is MonadicOprNOT) {
+        var not = new ASTNot();
+        not.Expr = (ASTExpression)lit;
+
+        lit = not;
       }
       else {
-        throw new GrammarException("Monadic - can only be applied to int or decimal");
+        throw new GrammarException(
+          string.Format("Row: {0}, Col: {1}: Can't find relevant MonadicOperator",
+            ((MonadicOprADDOPR)MonadicOpr).ADDOPR.Token.Row,
+            ((MonadicOprADDOPR)MonadicOpr).ADDOPR.Token.Column));
       }
 
       return lit;

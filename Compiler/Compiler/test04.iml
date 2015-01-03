@@ -13,11 +13,11 @@ global
         var locTest: int32
 	do
 		t42 init := 1;
-        t42 := 5;
+        t42 := -5;
 		a init := [  [[1,2],[3,4],[5,6]],  [[734223,8236],[281,11123],[674,878]]  ];
         c init := [1,2,3,4,5,6,7,8,9,0];
-
-        b init := fill 4;
+        t31 init := not true;
+        b init := fill -4;
         b := a[0][1];
         d := c[1..4];
         if ( t1 = t2 && t2 < t3 && t3 > t4 || t11 /= t41 div t31 div t21 div t11 &? t31 <= t41 * t11 |? t1 - t2 >=t4 + t3 ) then

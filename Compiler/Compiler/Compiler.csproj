@@ -474,6 +474,7 @@
     <Compile Include="VirtualMachine\IVirtualMachine.cs" />
     <Compile Include="VirtualMachine\TestVirtualMachine.cs" />
     <Compile Include="VirtualMachine\VirtualMachine.cs" />
+    <Compile Include="Parser\AST\ASTNot.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

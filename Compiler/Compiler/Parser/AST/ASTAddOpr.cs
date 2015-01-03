@@ -39,10 +39,10 @@ namespace Compiler
     {
       string ind = String.Concat(Enumerable.Repeat(" ", level));
 
-      sb.Append(string.Format("{0}ASTAddOpr(Operator: {1})", ind, Operator));
-      sb.Append(string.Format("{0}[Term]:", ind));
+      sb.AppendLine(string.Format("{0}ASTAddOpr(Operator: {1})", ind, Operator));
+      sb.AppendLine(string.Format("{0}[Term]:", ind));
       Term.printAST(level + 1, sb);
-      sb.Append(string.Format("{0}[RepTerm]:", ind));
+      sb.AppendLine(string.Format("{0}[RepTerm]:", ind));
       RepTerm.printAST(level + 1, sb);
     }
 
