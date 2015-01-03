@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTSliceExpr : IASTNode
+  public class ASTSliceExpr : IASTNode
   {
     public ASTSliceExpr()
     {

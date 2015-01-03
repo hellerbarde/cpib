@@ -5,7 +5,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text.RegularExpressions;
 
-
 namespace Compiler
 {
   public partial class Tokennode : Treenode
@@ -127,6 +126,7 @@ namespace Compiler
       var returnParam = (ASTStoDecl)this.StoDecl.ToAbstractSyntax();
 
       var rootParam = new ASTParam();
+
       rootParam.OptChangemode = returnParam.Changemode;
       rootParam.Ident = returnParam.Ident;
       rootParam.TypeOrArray = returnParam.TypeOrArray;
@@ -911,7 +911,11 @@ namespace Compiler
   {
     public virtual IASTNode ToAbstractSyntax()
     {
-      return new ASTEmpty();
+      var ast = new ASTStoDecl();
+      ast.Ident = ((IdentToken)IDENT.Token).Value;
+      ast.TypeOrArray = (ASTTypeOrArray)this.TypeOrArray.ToAbstractSyntax();
+      ast.Changemode = ChangeMode.VAR; //TODO: Is this correct?
+      return ast;
     }
   }
 
@@ -928,8 +932,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdIdent();
-      ident.LValue = this.Expr.ToAbstractSyntax();
-      ident.RValue = this.Expr2.ToAbstractSyntax();
+      ident.LValue = (ASTExpression)this.Expr.ToAbstractSyntax();
+      ident.RValue = (ASTExpression)this.Expr2.ToAbstractSyntax();
       return ident;
     }
   }
@@ -939,8 +943,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdIdent();
-      ident.LValue = this.Expr.ToAbstractSyntax();
-      ident.RValue = this.Expr2.ToAbstractSyntax();
+      ident.LValue = (ASTExpression)this.Expr.ToAbstractSyntax();
+      ident.RValue = (ASTExpression)this.Expr2.ToAbstractSyntax();
       return ident;
     }
   }
@@ -950,8 +954,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdIdent();
-      ident.LValue = this.Expr.ToAbstractSyntax();
-      ident.RValue = this.Expr2.ToAbstractSyntax();
+      ident.LValue = (ASTExpression)this.Expr.ToAbstractSyntax();
+      ident.RValue = (ASTExpression)this.Expr2.ToAbstractSyntax();
       return ident;
     }
   }
@@ -961,8 +965,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdIdent();
-      ident.LValue = this.Expr.ToAbstractSyntax();
-      ident.RValue = this.Expr2.ToAbstractSyntax();
+      ident.LValue = (ASTExpression)this.Expr.ToAbstractSyntax();
+      ident.RValue = (ASTExpression)this.Expr2.ToAbstractSyntax();
       return ident;
     }
   }
@@ -972,8 +976,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdIdent();
-      ident.LValue = this.Expr.ToAbstractSyntax();
-      ident.RValue = this.Expr2.ToAbstractSyntax();
+      ident.LValue = (ASTExpression)this.Expr.ToAbstractSyntax();
+      ident.RValue = (ASTExpression)this.Expr2.ToAbstractSyntax();
       return ident;
     }
   }
@@ -983,8 +987,8 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdIdent();
-      ident.LValue = this.Expr.ToAbstractSyntax();
-      ident.RValue = this.Expr2.ToAbstractSyntax();
+      ident.LValue = (ASTExpression)this.Expr.ToAbstractSyntax();
+      ident.RValue = (ASTExpression)this.Expr2.ToAbstractSyntax();
       return ident;
     }
   }
@@ -1068,7 +1072,7 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdDebugIn();
-      ident.Expr = this.Expr.ToAbstractSyntax();
+      ident.Expr = (ASTExpression)this.Expr.ToAbstractSyntax();
       return ident;
     }
   }
@@ -1078,7 +1082,7 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdDebugOut();
-      ident.Expr = this.Expr.ToAbstractSyntax();
+      ident.Expr = (ASTExpression)this.Expr.ToAbstractSyntax();
       return ident;
     }
   }
@@ -2329,8 +2333,6 @@ namespace Compiler
         return new ASTIntLiteral(((IntLiteralToken)this.LITERAL.Token).Value);
       }
 
-
-
       throw new NotImplementedException();
     }
   }
@@ -3207,7 +3209,7 @@ namespace Compiler
       return slice;
     }
   }
-    
+
   public partial class RepSliceExprRBRACKET : IRepSliceExpr
   {
     public virtual IASTNode ToAbstractSyntax()

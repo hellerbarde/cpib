@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTAddOpr : ASTExpression
+  public class ASTAddOpr : ASTExpression
   {
     public ASTAddOpr()
     {

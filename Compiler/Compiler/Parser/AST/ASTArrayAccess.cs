@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTArrayAccess : ASTExpression
+  public class ASTArrayAccess : ASTExpression
   {
     public ASTArrayAccess()
     {

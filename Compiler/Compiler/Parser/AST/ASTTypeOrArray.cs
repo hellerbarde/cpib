@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTTypeOrArray : IASTNode
+  public class ASTTypeOrArray : IASTNode
   {
     public ASTTypeOrArray()
     {

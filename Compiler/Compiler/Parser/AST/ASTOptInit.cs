@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTOptInit : IASTNode
-  {
-    public string Ident { get; set; }
+    public class ASTOptInit : IASTNode
+    {
+        public string Ident { get; set; }
 
-    public IASTNode NextInit { get; set; }
+        public IASTNode NextInit { get; set; }
 
     public void printAST(int level, StringBuilder sb)
     {
@@ -17,9 +17,9 @@ namespace Compiler
       sb.AppendLine(string.Format("{0}ASTOptInit(Ident: {1})", ind, Ident));
     }
 
-    public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
-    {
-      throw new System.NotImplementedException();
+        public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
+        {
+            throw new IVirtualMachine.InternalError("ASTOptInit.GenerateCode was called. This should never happen!");
+        }
     }
-  }
 }

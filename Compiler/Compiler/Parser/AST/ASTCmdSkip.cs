@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTCmdSkip : ASTCpsCmd
+  public class ASTCmdSkip : ASTCpsCmd
   {
 
     public override void printAST(int level, StringBuilder sb)

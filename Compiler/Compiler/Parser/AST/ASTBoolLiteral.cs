@@ -5,19 +5,19 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTBoolLiteral : ASTExpression
-  {
-    public ASTBoolLiteral(bool value)
+    public class ASTBoolLiteral : ASTExpression
     {
-      this.Value = value;
-    }
+        public ASTBoolLiteral(bool value)
+        {
+            this.Value = value;
+        }
 
-    public bool Value { get; set; }
+        public bool Value { get; set; }
 
-    public override string ToString()
-    {
-      return Value.ToString();
-    }
+        public override string ToString()
+        {
+            return Value.ToString();
+        }
 
     public override void printAST(int level, StringBuilder sb)
     {
@@ -26,15 +26,15 @@ namespace Compiler
       sb.AppendLine(string.Format("{0}ASTBoolLiteral(Value: {1})", ind, Value));
     }
 
-    public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
-    {
-      vm.IntLoad(loc++, Value ? 1 : 0);
-      return loc;
-    }
+        public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
+        {
+            vm.IntLoad(loc++, Value ? 1 : 0);
+            return loc;
+        }
 
-    public override Type GetExpressionType(CheckerInformation info)
-    {
-      return Type.BOOL;
+        public override Type GetExpressionType(CheckerInformation info)
+        {
+            return Type.BOOL;
+        }
     }
-  }
 }

@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTArrayLiteral : ASTExpression
+  public class ASTArrayLiteral : ASTExpression
   {
     public ASTArrayLiteral()
     {

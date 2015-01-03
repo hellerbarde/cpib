@@ -4,8 +4,8 @@ using System.Linq;
 
 namespace Compiler
 {
-  public partial class ASTEmpty:IASTNode
-  {
+    public class ASTEmpty : IASTNode
+    {
     public int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
       return loc;
@@ -17,5 +17,5 @@ namespace Compiler
 
       sb.AppendLine(string.Format("{0}ASTEmpty()", ind));
     }
-  }
+    }
 }
