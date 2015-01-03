@@ -923,10 +923,11 @@ namespace Compiler
       }
       sp = sp - 3;
       while (start < end) {
-        store[sp] = Data.intNew(((Data.IntData)store[address + start]).getData());
+        store[sp] = store[address + start];
         ++sp;
         ++start;
       }
+      ++pc;
     }
 
     public override void ArrayAccess(int loc)

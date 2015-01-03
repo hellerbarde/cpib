@@ -3,5 +3,5 @@ global
     var a:array(5) int32
 do
     a init := [5,4,3,2,1];
-    b init := a[0..1]
+    b init := a[0]
 endprogram
