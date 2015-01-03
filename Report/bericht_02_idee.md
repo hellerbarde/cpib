@@ -11,4 +11,4 @@ b := a[1..4]
 
 In diesem Beispiel wird zuerst der Variable `a` ein Arrayliteral zugewiesen. Danach wird der Variable `b` eine Teilkopie von a zugewiesen. Spezifisch wäre es hier `[1,4,1,5]`. Diese syntaktische Abkürzung ermöglicht es einem, seinen Quellcode sehr konzis und intuitiv zu gestalten. 
 
-Wir haben noch ein paar weitere syntaktische Abkürzungen einbezogen, die es einem vereinfachen mit Arrays zu arbeiten. Zum Beispiel das auffüllen von Arrays mit einem spezifizierten Wert. Die lexikalische und syntaktische Spezifikation sind in den respektiven Kapiteln zu finden. 
+Wir haben noch ein paar weitere syntaktische Abkürzungen einbezogen, die es einem vereinfachen mit Arrays zu arbeiten. Zum Beispiel das Auffüllen von Arrays mit einem spezifizierten Wert. Die lexikalische und syntaktische Spezifikation sind in den respektiven Kapiteln zu finden. 

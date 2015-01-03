@@ -45,7 +45,7 @@ global
   var datapoint : array (3) int;
   var i : int
 do
-  datapoint init    := fill 0;
+  datapoint init := fill 0;
   i init := 0
   result init := 0;
 
@@ -59,3 +59,10 @@ do
   endwhile
 endprogram
 ```
+
+## Appendix: Ehrlichkeitserklärung
+
+Wir, Philip Stark und Mark Zeman, haben diesen Bericht eigenhändig für den Kurs Compilerbau verfasst. Der Code für den Compiler entstand in Zusammenarbeit mit Janis Peyer und Ralf Grubenmann, wobei der Code für Arrays gänzlich von uns stammt und der Code für Decimal gänzlich von ihnen. 
+Weitere Ideen stammen aus dem Austausch mit anderen Gruppen, speziell Manuel Jenny und Yannick Augstburger.
+
+Philip Stark                                    Mark Zeman

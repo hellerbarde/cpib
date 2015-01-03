@@ -11,7 +11,7 @@ cmd     ::= SKIP
           | DEBUGIN expr
           | DEBUGOUT expr
 
-typedIdent  ::= IDENT COLON (ATOMTYPE | ARRAY LPAREN expr {COMMA expr} RPAREN TYPE)
+typedIdent  ::= IDENT COLON (ATOMTYPE | ARRAY LPAREN expr {COMMA expr} RPAREN ATOMTYPE)
 
 factor      ::= LITERAL
               | arrayLiteral
@@ -19,7 +19,7 @@ factor      ::= LITERAL
               | monadicOpr factor
               | LPAREN expr RPAREN
 
-arrayIndex  ::= LBRACKET expr [DOTDOT expr] RBRACKET {arrayIndex}
+arrayIndex  ::= LBRACKET expr [RANGE expr] RBRACKET {arrayIndex}
 
 arrayLiteral ::= LBRACKET arrayContent RBRACKET
 

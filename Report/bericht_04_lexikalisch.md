@@ -8,5 +8,5 @@ Pattern          | Token
 `[`              | LBRACKET
 `]`              | RBRACKET
 `fill`           | FILL
-`arr (int) type` | (ARRAY,Length,Type)
-`..`             | DOTDOT
+`array`          | ARRAY
+`..`             | RANGE
