@@ -150,6 +150,7 @@ namespace Compiler
     {
       pc = 0;
       while (pc > -1) {
+        Console.WriteLine(pc.ToString() + ": " + code[pc].Value);
         code[pc].Key();
       }
     }
@@ -850,6 +851,28 @@ namespace Compiler
         throw new IVirtualMachine.CodeTooSmallError();
       }
       code[loc] = new KeyValuePair<Action, string>(() => IntOutput(indicator), "IntOutput(\"" + indicator + "\")");
+    }
+
+    private void ArrayOutput(String indicator, int length)
+    {
+      //sp = sp - 1;
+      //int output = Data.intGet(store[sp]);
+      Console.Write("!" + indicator + " : array = [");
+      for (int i = length; i > 1; i--) {
+        Console.Write(Data.intGet(store[sp-i]) + ", ");
+      }
+      Console.WriteLine(Data.intGet(store[sp-1]) + "]");
+      sp -= length;
+      Console.Write(string.Join(", ", new List<int>()));
+      pc = pc + 1;
+    }
+
+    public override void ArrayOutput(int loc, String indicator, int length)
+    {
+      if (loc >= code.Length) {
+        throw new IVirtualMachine.CodeTooSmallError();
+      }
+      code[loc] = new KeyValuePair<Action, string>(() => ArrayOutput(indicator, length), "ArrayOutput(\"" + indicator + "\")");
     }
 
     private void DecimalOutput(String indicator)

@@ -113,6 +113,7 @@ namespace Compiler
         public abstract void IntInput(int loc, String indicator);
         public abstract void BoolOutput(int loc, String indicator);
         public abstract void IntOutput(int loc, String indicator);
+        public abstract void ArrayOutput(int loc, String indicator, int length);
 
         public abstract void DecimalInput(int loc, String indicator);
         public abstract void DecimalOutput(int loc, String indicator);

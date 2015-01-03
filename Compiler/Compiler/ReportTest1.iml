@@ -7,7 +7,7 @@ program T1 ()
   do
     j init := 0;
     i init := 0;
-    debugout 1;
+    debugout [1,2,3,4,5,6,7,6,5,4,3,2,1];
     while j < 3 do
       i := 0;
       while i < 2 do

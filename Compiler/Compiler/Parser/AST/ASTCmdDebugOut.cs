@@ -21,6 +21,12 @@ namespace Compiler
         public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
         {
             loc = Expr.GenerateCode(loc, vm, info);
+
+      if (Expr is ASTArrayLiteral) {
+        vm.ArrayOutput(loc++, "DEBUGOUT", ((ASTArrayLiteral)Expr).Value.Count);
+        return loc;
+      }
+
             switch (Expr.GetExpressionType(info))
             {
                 case Type.INT32:
