@@ -944,12 +944,12 @@ namespace Compiler
       if (start > end && end != 0){
         throw new IVirtualMachine.ExecutionError("Array Slice end before start");
       }
-      sp = sp - 2;
+      sp = sp - 3;
       if (end == 0){
         end = start + 1;
       }
       while (start < end) {
-        store[sp] = store[address + start];
+        store[sp] = Data.intNew(((Data.IntData)store[address + start]).getData());
         ++sp;
         ++start;
       }
