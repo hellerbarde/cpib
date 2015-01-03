@@ -48,6 +48,7 @@ namespace Compiler
       {
         a.printAST(level + 1, sb);
       }
+      sb.AppendLine(string.Format("{0}[END] ASTProcFuncDecl(Ident: {1})", ind, Ident));
     }
 
     //TODO: Add additional code for function result

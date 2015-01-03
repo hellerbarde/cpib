@@ -21,9 +21,9 @@ namespace Compiler
     {
       string ind = String.Concat(Enumerable.Repeat(" ", level));
 
-      if (End is ASTEmpty) {
-        sb.Append(string.Format("[{0}]", Start));
-      }
+//      if (End is ASTEmpty) {
+//        sb.Append(string.Format("[{0}]", Start));
+//      }
       sb.AppendLine(string.Format("{0}ASTSliceExpr()", ind));
 
       sb.AppendLine(string.Format("{0}[Start]:", ind));
