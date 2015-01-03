@@ -28,9 +28,32 @@ namespace Compiler
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
-      loc = RValue.GenerateCode(loc, vm, info);
-      loc = LValue.GenerateLValue(loc, vm, info);
-      vm.Store(loc++);
+      if (RValue is ASTArrayLiteral) {
+        int? startAdress = null;
+        if (info.CurrentNamespace != null &&
+          info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+          info.Namespaces[info.CurrentNamespace].ContainsIdent(((ASTIdent)LValue).Ident)) {
+          IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][((ASTIdent)LValue).Ident];
+          startAdress = storage.Address;
+        }
+        else if (info.Globals.ContainsIdent(((ASTIdent)LValue).Ident)) {
+          IASTStoDecl storage = info.Globals[((ASTIdent)LValue).Ident];
+          startAdress = storage.Address;
+        }
+        else {
+          throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ((ASTIdent)LValue).Ident);
+        }
+        foreach (ASTExpression expr in ((ASTArrayLiteral)RValue).Value) {
+          loc = expr.GenerateCode(loc, vm, info);
+          vm.LoadRel(loc++, startAdress++.Value);
+          vm.Store(loc++);
+        }
+      }
+      else {
+        loc = RValue.GenerateCode(loc, vm, info);
+        loc = LValue.GenerateLValue(loc, vm, info);
+        vm.Store(loc++);
+      }
       return loc;
     }
   }

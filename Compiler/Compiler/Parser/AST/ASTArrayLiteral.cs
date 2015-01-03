@@ -22,7 +22,10 @@ namespace Compiler
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
-      throw new NotImplementedException();
+      foreach (ASTExpression expr in Value){
+        expr.GenerateCode(loc, vm, info);
+      }
+      return loc;
       //vm.IntLoad(loc++, Value); // TODO TODO TODO
       //return loc;
     }
@@ -40,8 +43,7 @@ namespace Compiler
 
     public override Type GetExpressionType(CheckerInformation info)
     {
-      throw new NotImplementedException(); // TODO TODO
-      //return Type.INT32;
+      return Value.First().GetExpressionType(info);
     }
 
   }

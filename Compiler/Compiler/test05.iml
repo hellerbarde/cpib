@@ -1,7 +1,7 @@
-﻿program fibonacci(in const pos:int32, out var fib:int32)
+﻿program fibonacci(in const pos:int32, out var fib:int32, out var c : array (5,2) int32)
 global
 	proc fibProc(in copy pos:int32, out copy fib:int32)
-		local a : int32; b : int32; c : array (5) int32
+		local a : int32; b : int32 
 	do
         if(pos = 0) then
 		    fib init := 0

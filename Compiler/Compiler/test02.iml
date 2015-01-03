@@ -1,2 +1,11 @@
-﻿a:array [ 5 ] bool;
-a init := fill 5;
+﻿program arraytest ()
+global
+    var a:array(5) int32;
+    var b:int32
+do
+    a init := [5,4,3,2,1];
+    b init := 4
+    //while (b >= 0) do
+    //    debugout a[b]
+    //endwhile
+endprogram
