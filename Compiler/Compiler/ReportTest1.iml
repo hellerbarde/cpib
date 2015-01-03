@@ -5,7 +5,9 @@ program T1 ()
     var j : int32;
     var t : int32
   do
-    j := 0;
+    j init := 0;
+    i init := 0;
+    debugout 1;
     while j < 3 do
       i := 0;
       while i < 2 do
@@ -14,6 +16,9 @@ program T1 ()
       endwhile;
       j := j +1
     endwhile;
+
+    j := 0;
+    i := 0;
     while j < 3 do
       while i < 2 do
         t := a[i][j];
