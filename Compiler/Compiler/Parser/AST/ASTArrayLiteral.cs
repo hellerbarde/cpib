@@ -23,7 +23,7 @@ namespace Compiler
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
       foreach (ASTExpression expr in Value){
-        expr.GenerateCode(loc, vm, info);
+        loc = expr.GenerateCode(loc, vm, info);
       }
       return loc;
       //vm.IntLoad(loc++, Value); // TODO TODO TODO

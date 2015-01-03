@@ -918,16 +918,19 @@ namespace Compiler
       int address = ((Data.IntData)store[sp - 1]).getData();
       int start = ((Data.IntData)store[sp - 2]).getData();
       int end = ((Data.IntData)store[sp - 3]).getData();
-      if (start > end){
+      if (start > end && end != 0){
         throw new IVirtualMachine.ExecutionError("Array Slice end before start");
       }
-      sp = sp - 3;
+      sp = sp - 2;
+      if (end == 0){
+        end = start + 1;
+      }
       while (start < end) {
         store[sp] = store[address + start];
         ++sp;
         ++start;
       }
-      ++pc;
+      pc = pc + 1;
     }
 
     public override void ArrayAccess(int loc)

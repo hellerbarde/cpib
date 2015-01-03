@@ -1,4 +1,4 @@
-program T1
+program T1 ()
   global
     var a : array (2,3) int32;
     var i : int32;
@@ -19,7 +19,7 @@ program T1
         t := a[i][j];
         debugout t;
         i := i + 1
-      endwhile
+      endwhile;
       i := 0;
       j := j + 1
     endwhile
