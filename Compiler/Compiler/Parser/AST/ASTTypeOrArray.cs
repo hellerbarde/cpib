@@ -9,6 +9,7 @@ namespace Compiler
   {
     public ASTTypeOrArray()
     {
+      dimensions = new List<int>();
     }
 
     public Boolean isArray { get; set; }
