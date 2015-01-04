@@ -894,7 +894,6 @@ namespace Compiler
     private void IntOutput(String indicator)
     {
       sp = sp - 1;
-      PrintStack();
       int output = Data.intGet(store[sp]);
       Console.WriteLine("!" + indicator + " : int = " + output);
       pc = pc + 1;
@@ -1001,9 +1000,6 @@ namespace Compiler
 
     private void ArrayAccess()
     {
-      foreach (var foo in this.store.Where(x => x!=null)) {
-        Console.WriteLine(((Data.IntData)foo).getData());
-      }
       if (sp > hp) {
         throw new IVirtualMachine.ExecutionError(SP_GT_HP);
       }
