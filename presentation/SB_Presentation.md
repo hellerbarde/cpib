@@ -53,19 +53,53 @@ arrayContent ::= LITERAL {',' LITERAL}
                | arrayLiteral {',' arrayLiteral}
 ```
 
-# Umgesetztes und Demo
+# Erreichtes und Demo
+
+## Erreichte Ziele
+
+* Generell IML
+    * Variablen, global und lokal
+    * Prozeduren und Funktionen
+    * Kontrollstrukturen
+* Arrays
+    * Literale
+    * Slices
 
 ## Bubble Sort
+
+Demo - Bla
 
 # Implementation
 
 ## Abstract Syntax Tree und Code Generation
 
+AST - Phil?
+
 ## VM Erweiterungen
+
+* ArrayInput und -Output
+    * Länge als Argument
+* ArrayAccess
+Nimmt 3 Werte vom Stack
+    * Adresse des Arrays
+    * Start-Index
+    * End-Index
+Lädt so bestimmten Teil des Arrays auf den Stack
 
 # Abschliessendes
 
 ## Rückblick
+
+* Viel gelernt
+    * Genug um einiges anders machen zu wollen
+* Keine dynamischen Array Slices
+    * Passt nicht zu IML
+* Arrays auf Heap ablegen
+    * Viel zu spät realisiert
+    * Hat ein paar Sachen erleichtert
+    * Hat vieles verkompliziert
+* AST anders aufbauen
+    * Hätte Code Generation erleichtert
 
 ## Fragen
 
