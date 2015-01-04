@@ -53,16 +53,16 @@ namespace Compiler
 
         }
       }
-
+      String indicator = (Expr is ASTIdent)?((ASTIdent)Expr).Ident:"DEBUGOUT";
       switch (Expr.GetExpressionType(info).Type) {
         case Type.INT32:
-          vm.IntOutput(loc++, "DEBUGOUT");
+          vm.IntOutput(loc++, indicator);
           break;
         case Type.BOOL:
-          vm.DecimalOutput(loc++, "DEBUGOUT");
+          vm.DecimalOutput(loc++, indicator);
           break;
         case Type.DECIMAL:
-          vm.BoolOutput(loc++, "DEBUGOUT");
+          vm.BoolOutput(loc++, indicator);
           break;
       }
       return loc;

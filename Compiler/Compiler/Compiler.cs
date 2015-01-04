@@ -26,7 +26,7 @@ namespace Compiler
 
         var stringbuilder = new StringBuilder();
         program.printAST(0, stringbuilder);
-        //Console.Write(stringbuilder.ToString());
+        Console.Write(stringbuilder.ToString());
         //return;
         //Checker
         CheckerInformation info = new CheckerInformation();
