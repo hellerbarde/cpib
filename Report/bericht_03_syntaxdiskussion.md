@@ -26,7 +26,7 @@ var b:array (array (array (array int32 8) 5) 3) 10;
 var b:array int32 3;
 ```
 
-Während dies für ein eindimensionales Array uns sehr intuitiv erscheint, wird es für mehrdimensionale Arrays eher verwirrend, da die Längenangaben dann in der "verkehrten" Reihenfolge dastehen. 
+Während uns dies für ein eindimensionales Array sehr intuitiv erscheint, wird es für mehrdimensionale Arrays eher verwirrend, da die Längenangaben dann in der "verkehrten" Reihenfolge dastehen. 
 Daher modifizierten wir diese Schreibweise und verlegten die Länge nach vorne:
 
 ```
