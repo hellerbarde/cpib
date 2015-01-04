@@ -55,7 +55,8 @@ namespace Compiler
     public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
     {
       var type = new ASTTypeOrArray();
-      type.Type = Type.INT32;
+      type.Type = info.Namespaces[info.CurrentNamespace][Ident].TypeOrArray.Type;
+      type.isArray = true;
       return type;
     }
   }

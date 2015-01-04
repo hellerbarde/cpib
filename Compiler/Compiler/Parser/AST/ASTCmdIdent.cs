@@ -28,7 +28,7 @@ namespace Compiler
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
-      if (RValue is ASTArrayLiteral) {
+      if (RValue.GetExpressionType(info).isArray) {
         int? startAdress = null;
         if (info.CurrentNamespace != null &&
           info.Namespaces.ContainsKey(info.CurrentNamespace) &&

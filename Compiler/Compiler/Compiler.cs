@@ -35,8 +35,8 @@ namespace Compiler
         //Code Generator
         IVirtualMachine vm = new VirtualMachine(1000, 1000);
         program.GenerateCode(0, vm, info);
-        //Console.WriteLine(vm.ToString());
-        //Console.WriteLine();
+        Console.WriteLine(vm.ToString());
+        Console.WriteLine();
         //Execution
         vm.Execute();
       } catch (Exception ex) {

@@ -43,7 +43,9 @@ namespace Compiler
 
     public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
     {
-      return Value.First().GetExpressionType(info);
+      ASTTypeOrArray type = Value.First().GetExpressionType(info);
+      type.isArray = true;
+      return type;
     }
 
   }

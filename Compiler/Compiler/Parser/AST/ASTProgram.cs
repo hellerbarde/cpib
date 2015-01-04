@@ -74,10 +74,19 @@ namespace Compiler
       //Add output code
       foreach (ASTParam param in Params) {
         if (param.FlowMode == FlowMode.OUT || param.FlowMode == FlowMode.INOUT) {
-          //Load output value
+
+          //Switch between types, with arrays being a special case:
+          if (param.TypeOrArray.isArray){
+            vm.IntLoad(loc++, 0);
+            vm.IntLoad(loc++, (param.Size() - 1));
+            vm.IntLoad(loc++, param.Address);
+            vm.ArrayAccess(loc++);
+            vm.ArrayOutput(loc++, param.Ident, param.Size());
+            break;
+          }
+          //Load output value for non-arrays
           vm.IntLoad(loc++, param.Address);
           vm.Deref(loc++);
-          //Switch between types:
           switch (param.TypeOrArray.Type) {
             case Type.INT32:
               vm.IntOutput(loc++, param.Ident);

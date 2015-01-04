@@ -35,7 +35,10 @@ namespace Compiler
       else {
         return 1;
       }
+    }
 
+    public virtual ASTTypeOrArray GetExpressionType(CheckerInformation info){
+      return this.TypeOrArray;
     }
 
   }
