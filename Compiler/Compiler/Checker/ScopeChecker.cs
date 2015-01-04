@@ -13,16 +13,16 @@ namespace Compiler
       int globalAddress = 0;
       //Add global parameters
       foreach (ASTParam param in root.Params) {
-        param.Address = globalAddress++;
-        info.Globals.addDeclaration(param);
+        param.Address = globalAddress;
         globalAddress += param.Size();
+        info.Globals.addDeclaration(param);
       }
       //Add Global Variables, Functions and Procedures
       //And add local variables and parameters of the Function and Procedures
       foreach (ASTCpsDecl declaration in root.Declarations) {
         if (declaration is ASTStoDecl) {
           //Add global storage identifier
-          declaration.Address = globalAddress++;
+          declaration.Address = globalAddress;
           globalAddress += declaration.Size();
           info.Globals.addDeclaration((ASTStoDecl)declaration);
         }
@@ -40,13 +40,13 @@ namespace Compiler
           //Add local params of this function/procedure
           foreach (ASTParam localParam in procFunc.Params) {
             if (localParam.OptMechmode == MechMode.COPY && (localParam.FlowMode == FlowMode.OUT || localParam.FlowMode == FlowMode.INOUT)) {
-              localParam.Address = localAddress++;
-              localParam.AddressLocation = paramAddress++;
+              localParam.Address = localAddress;
+              localParam.AddressLocation = paramAddress;
               localAddress += localParam.Size();
               paramAddress += localParam.Size();
             }
             else {
-              localParam.Address = paramAddress++;
+              localParam.Address = paramAddress;
               paramAddress += localParam.Size();
             }
             ns.addDeclaration(localParam);
@@ -54,7 +54,7 @@ namespace Compiler
           //Add local storage identifier of this function/procedure
           foreach (ASTCpsDecl localDeclaration in ((ASTProcFuncDecl)declaration).Declarations) {
             if (localDeclaration is ASTStoDecl) {
-              localDeclaration.Address = localAddress++;
+              localDeclaration.Address = localAddress;
               localAddress += localDeclaration.Size();
               ns.addDeclaration((ASTStoDecl)localDeclaration);
             }
