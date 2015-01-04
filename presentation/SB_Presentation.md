@@ -57,11 +57,15 @@ arrayContent ::= LITERAL {',' LITERAL}
 
 ## Bubble Sort
 
-# Abstract Syntax Tree und Code Generation
+# Implementation
 
-# VM Erweiterungen
+## Abstract Syntax Tree und Code Generation
 
-# Lessons Learned oder Was würden wir anders machen beim nächsten Mal?
+## VM Erweiterungen
+
+# Abschliessendes
+
+## Rückblick
 
 ## Fragen
 
