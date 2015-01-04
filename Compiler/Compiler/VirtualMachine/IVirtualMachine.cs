@@ -111,6 +111,7 @@ namespace Compiler
         // input (input -> stack) and output (stack -> output) operations
         public abstract void BoolInput(int loc, String indicator);
         public abstract void IntInput(int loc, String indicator);
+        public abstract void ArrayInput(int loc, String indicator, int length, Type type);
         public abstract void BoolOutput(int loc, String indicator);
         public abstract void IntOutput(int loc, String indicator);
         public abstract void ArrayOutput(int loc, String indicator, int length);
@@ -125,5 +126,8 @@ namespace Compiler
         public abstract void ArrayAccess(int loc);
 
         public override abstract String ToString();
+
+    // debug methods
+    public abstract void PrintStack(bool allofit=false);
     }
 }

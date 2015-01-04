@@ -821,6 +821,60 @@ namespace Compiler
       code[loc] = new KeyValuePair<Action, string>(() => IntInput(indicator), "IntInput(\"" + indicator + "\")");
     }
 
+    private void ArrayInput(String indicator, int length, Type type)
+    {
+      string typestr = (type == Type.BOOL) ? "bool" : (type == Type.INT32) ? "int32" : "decimal";
+      //int i;
+
+      //Console.Write("?" + indicator + " : array("+length+")"+typestr+"["+i+"] = ");
+//      int input = ReadInt();
+      //ReadBool;
+      int address = Data.intGet(store[sp - 1]);
+
+      sp = sp - 1;
+      for (int i = 0; i < length; i++) {
+        Console.Write("?" + indicator + " : array("+length+")"+typestr+"["+i+"] = ");
+        switch (type) {
+          case Type.BOOL:
+            var inputb = ReadBool();
+            store[address + i] = Data.boolNew(inputb);
+            break;
+          case Type.INT32:
+            var inputi = ReadInt();
+            store[address + i] = Data.intNew(inputi);
+            break;
+          case Type.DECIMAL:
+            var inputd = ReadInt();
+            store[address + i] = Data.decimalNew(inputd);
+            break;
+        }
+        int input = ReadInt();
+        store[address + i] = Data.intNew(input);
+      }
+
+      pc = pc + 1;
+
+      //sp = sp - 1;
+      //int output = Data.intGet(store[sp]);
+      //Console.Write("!" + indicator + " : array = [");
+
+      //Console.WriteLine(Data.intGet(store[sp-1]) + "]");
+      //sp -= length;
+      //Console.Write(string.Join(", ", new List<int>()));
+      //pc = pc + 1;
+
+
+    }
+
+    public override void ArrayInput(int loc, String indicator, int length, Type type)
+    {
+      if (loc >= code.Length) {
+        throw new IVirtualMachine.CodeTooSmallError();
+      }
+      code[loc] = new KeyValuePair<Action, string>(() => ArrayInput(indicator, length, type), "ArrayInput(\"" + indicator + "\")");
+    }
+
+
     private void BoolOutput(String indicator)
     {
       sp = sp - 1;
@@ -840,11 +894,23 @@ namespace Compiler
     private void IntOutput(String indicator)
     {
       sp = sp - 1;
+      PrintStack();
       int output = Data.intGet(store[sp]);
       Console.WriteLine("!" + indicator + " : int = " + output);
       pc = pc + 1;
     }
 
+    public override void PrintStack(bool allofit=false){
+        Console.WriteLine(string.Format("Stack(sp={0}):", sp));
+        var i = 0;
+        foreach (var value in this.store) {
+          if(value != null) Console.WriteLine(string.Format("{0,-3}: {1}", i, ((Data.IntData)value).getData()) );
+          i += 1;
+          if (!allofit && i >= sp){
+            return;
+          }
+        }
+    }
     public override void IntOutput(int loc, String indicator)
     {
       if (loc >= code.Length) {
