@@ -3,7 +3,7 @@ global
     var a:array(5) int32;
     var c:int32
 do
-    a init := [5,4,9,2,1];
+    a init := [5,4,3,2,1];
     b init := a[0];
     c init := 99;
     while (b > 0) do

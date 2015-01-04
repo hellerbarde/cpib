@@ -935,6 +935,9 @@ namespace Compiler
 
     private void ArrayAccess()
     {
+      foreach (var foo in this.store.Where(x => x!=null)) {
+        Console.WriteLine(((Data.IntData)foo).getData());
+      }
       if (sp > hp) {
         throw new IVirtualMachine.ExecutionError(SP_GT_HP);
       }

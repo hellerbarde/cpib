@@ -50,6 +50,32 @@ namespace Compiler
             vm.Store(loc++);
           }
         }
+        else if (RValue is ASTArrayAccess) {
+          String ident = ((ASTArrayAccess)RValue).Ident;
+          if (info.CurrentNamespace != null &&
+              info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+              info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
+            IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];   
+            ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
+            int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
+            for (int i = accessSize - 1; i >= 0; i--) {
+              vm.LoadRel(loc++, startAdress.Value + i);
+              vm.Store(loc++);
+            }
+          }
+          else if (info.Globals.ContainsIdent(ident)) {
+            IASTStoDecl storage = info.Globals[ident];   
+            ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
+            int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
+            for (int i = accessSize - 1; i >= 0; i--) {
+              vm.LoadRel(loc++, startAdress.Value + i);
+              vm.Store(loc++);
+            }
+          }
+          else {
+            throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ident);
+          }
+        }
         else if (RValue is ASTIdent) {
           String ident = ((ASTIdent)RValue).Ident;
           if (info.CurrentNamespace != null &&
@@ -61,7 +87,7 @@ namespace Compiler
             vm.IntLoad(loc++, 0);     
             vm.IntLoad(loc++, Adress);
             vm.ArrayAccess(loc++);
-            for (int i = storage.Size() -1; i >= 0; i--) {
+            for (int i = storage.Size() - 1; i >= 0; i--) {
               vm.LoadRel(loc++, startAdress.Value + i);
               vm.Store(loc++);
             }

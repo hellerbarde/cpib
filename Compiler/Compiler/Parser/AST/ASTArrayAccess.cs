@@ -60,6 +60,9 @@ namespace Compiler
       } else {
         type.Type = info.Globals[Ident].TypeOrArray.Type;
       }
+      if (Accessor.First().End is ASTEmpty){
+        type.dimensions.Add(1);
+      }
       type.isArray = true;
       return type;
     }
