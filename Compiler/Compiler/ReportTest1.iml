@@ -1,6 +1,6 @@
 program T1 ()
   global
-    var a : array (2,3) int32;
+    var a : array (2) int32;
     var i : int32;
     var j : int32;
     var t : int32
@@ -11,7 +11,7 @@ program T1 ()
     while j < 3 do
       i := 0;
       while i < 2 do
-        a[i][j] := i + j;
+        a[i] := i + j;
         i := i +1
       endwhile;
       j := j +1
@@ -21,7 +21,7 @@ program T1 ()
     i := 0;
     while j < 3 do
       while i < 2 do
-        t := a[i][j];
+        t := a[i];
         debugout t;
         i := i + 1
       endwhile;
