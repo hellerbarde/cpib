@@ -1,20 +1,21 @@
-﻿program fibonacci(in const pos:int32, out var fib:int32, out var c : array (5,2) int32)
+﻿program fibonacci(in const pos:int32, out var fib:int32, out var c : array (2,5) int32)
 global
-	proc fibProc(in copy pos:int32, out copy fib:int32)
-		local a : int32; b : int32 
-	do
+    proc fibProc(in copy pos:int32, out copy fib:int32)
+        local a : int32; b : int32 
+    do
         if(pos = 0) then
-		    fib init := 0
-	    else
-		    if(pos = 1) then
-			    fib init := 1
-			else
-			    call fibProc(pos - 2, a init);
-				call fibProc(pos - 1, b init);
-				fib init := a + b
-			endif
-		endif
-	endproc
+            fib init := 0
+        else
+            if(pos = 1) then
+                fib init := 1
+            else
+                call fibProc(pos - 2, a init);
+                call fibProc(pos - 1, b init);
+                fib init := a + b
+            endif
+        endif
+    endproc
 do
-	call fibProc(pos, fib init)
+    call fibProc(pos, fib init);
+    c init := [[1,0,0,0,8],[2,0,0,0,9]]
 endprogram
