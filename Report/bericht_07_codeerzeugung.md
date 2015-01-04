@@ -1,5 +1,11 @@
 ## Codeerzeugung
 
+### AST
+
+Bei der Struktur des AST haben wir alle degenerierten Bäume, die durch die Repetitions-NTS entstehen in Listen aufgelöst und haben dadurch einen Baum, der sinnvoll traversiert werden kann. 
+
+Wir haben jedem Knoten des CST beigebracht wie er zu einem Knoten des AST wird und dadurch konnten wir bei vielen Knoten des CST das generierte Objekt seines Kindes nach oben reichen. Dies hat zu einer relativ übersichtlichen und logischen Struktur des AST geführt, was uns die Codeerzeugung erleichtert hat.
+
 ### Allgemeine Codeerzeugung
 Die Codeerzeugung geschieht bei uns über den Abstract Syntax Tree, indem der Wurzel, dem ASTProgram, der Befehl zur Codeerzeugung erteilt wird.
 Danach generieren die Knoten des AST mit Hilfe der Kontextinformation des Checkers ihren jeweiligen Code, welcher zusammen mit einer String-Repräsentation abgespeichert wird. Die Kontextinformationen werden dazu genutzt, beispielsweise Adressen von Variablen abzuspeichern oder Jumps zu berechnen.
