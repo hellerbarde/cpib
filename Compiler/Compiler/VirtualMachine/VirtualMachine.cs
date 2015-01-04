@@ -858,7 +858,7 @@ namespace Compiler
       //sp = sp - 1;
       //int output = Data.intGet(store[sp]);
       Console.Write("!" + indicator + " : array = [");
-      for (int i = length; i > 1; i--) {
+      for (int i = length; i > 1; --i) {
         Console.Write(Data.intGet(store[sp-i]) + ", ");
       }
       Console.WriteLine(Data.intGet(store[sp-1]) + "]");
@@ -948,7 +948,7 @@ namespace Compiler
       if (end == 0){
         end = start + 1;
       }
-      while (start < end) {
+      while (start <= end) {
         store[sp] = store[address + start];
         ++sp;
         ++start;

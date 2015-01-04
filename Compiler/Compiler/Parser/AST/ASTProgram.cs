@@ -77,8 +77,8 @@ namespace Compiler
 
           //Switch between types, with arrays being a special case:
           if (param.TypeOrArray.isArray){
-            vm.IntLoad(loc++, 0);
             vm.IntLoad(loc++, (param.Size() - 1));
+            vm.IntLoad(loc++, 0);
             vm.IntLoad(loc++, param.Address);
             vm.ArrayAccess(loc++);
             vm.ArrayOutput(loc++, param.Ident, param.Size());

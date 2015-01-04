@@ -29,9 +29,9 @@ namespace Compiler
               info.Namespaces.ContainsKey(info.CurrentNamespace) &&
               info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
             IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];
-            Adress = storage.Address;
-            vm.IntLoad(loc++, 0);            
-            vm.IntLoad(loc++, storage.Size()-1);
+            Adress = storage.Address;       
+            vm.IntLoad(loc++, storage.Size()-1);            
+            vm.IntLoad(loc++, 0);     
             vm.IntLoad(loc++, Adress);
             vm.ArrayAccess(loc++);
             vm.ArrayOutput(loc++, ident, storage.Size());
@@ -39,9 +39,9 @@ namespace Compiler
           }
           else if (info.Globals.ContainsIdent(ident)) {
             IASTStoDecl storage = info.Globals[ident];
-            Adress = storage.Address;
-            vm.IntLoad(loc++, 0);            
+            Adress = storage.Address;          
             vm.IntLoad(loc++, storage.Size()-1);
+            vm.IntLoad(loc++, 0);  
             vm.IntLoad(loc++, Adress);
             vm.ArrayAccess(loc++);
             vm.ArrayOutput(loc++, ident, storage.Size());
