@@ -43,10 +43,44 @@ namespace Compiler
         else {
           throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ((ASTIdent)LValue).Ident);
         }
-        foreach (ASTExpression expr in ((ASTArrayLiteral)RValue).Value) {
-          loc = expr.GenerateCode(loc, vm, info);
-          vm.LoadRel(loc++, startAdress++.Value);
-          vm.Store(loc++);
+        if (RValue is ASTArrayLiteral) {
+          foreach (ASTExpression expr in ((ASTArrayLiteral)RValue).Value) {
+            loc = expr.GenerateCode(loc, vm, info);
+            vm.LoadRel(loc++, startAdress++.Value);
+            vm.Store(loc++);
+          }
+        }
+        else if (RValue is ASTIdent) {
+          String ident = ((ASTIdent)RValue).Ident;
+          if (info.CurrentNamespace != null &&
+            info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+            info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
+            IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];
+            int Adress = storage.Address;       
+            vm.IntLoad(loc++, storage.Size() - 1);            
+            vm.IntLoad(loc++, 0);     
+            vm.IntLoad(loc++, Adress);
+            vm.ArrayAccess(loc++);
+            for (int i = storage.Size() -1; i >= 0; i--) {
+              vm.LoadRel(loc++, startAdress.Value + i);
+              vm.Store(loc++);
+            }
+          }
+          else if (info.Globals.ContainsIdent(ident)) {
+            IASTStoDecl storage = info.Globals[ident];
+            int Adress = storage.Address;          
+            vm.IntLoad(loc++, storage.Size() - 1);
+            vm.IntLoad(loc++, 0);  
+            vm.IntLoad(loc++, Adress);
+            vm.ArrayAccess(loc++);
+            for (int i = storage.Size() -1; i >= 0; i--) {
+              vm.LoadRel(loc++, startAdress.Value + i);
+              vm.Store(loc++);
+            }
+          }
+          else {
+            throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ident);
+          }
         }
       }
       else {
