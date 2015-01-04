@@ -70,17 +70,18 @@ namespace Compiler
       return loc;
     }
 
-    public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
     {
       //TODO: Could also be a function call!
       if (info.CurrentNamespace != null &&
         info.Namespaces.ContainsKey(info.CurrentNamespace) &&
         info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
-        return info.Namespaces[info.CurrentNamespace].GetIdent(Ident).Type;
+        return info.Namespaces[info.CurrentNamespace].GetIdent(Ident).TypeOrArray;
       }
 
       if (info.Globals.ContainsIdent(Ident)) {
-        return info.Globals.GetIdent(Ident).Type;
+
+        return info.Globals.GetIdent(Ident).TypeOrArray;
       }
 
       throw new NotImplementedException();

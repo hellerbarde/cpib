@@ -32,9 +32,11 @@ namespace Compiler
             return loc;
         }
 
-        public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
         {
-            return Type.BOOL;
+            var type = new ASTTypeOrArray();
+            type.Type = Type.BOOL;
+            return type;
         }
     }
 }

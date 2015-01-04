@@ -54,7 +54,7 @@ namespace Compiler
           //Load address where to save the input
           vm.IntLoad(loc++, param.Address);
           //Switch between types:
-          switch (param.Type) {
+          switch (param.TypeOrArray.Type) {
             case Type.INT32:
               vm.IntInput(loc++, param.Ident);
               break;
@@ -78,7 +78,7 @@ namespace Compiler
           vm.IntLoad(loc++, param.Address);
           vm.Deref(loc++);
           //Switch between types:
-          switch (param.Type) {
+          switch (param.TypeOrArray.Type) {
             case Type.INT32:
               vm.IntOutput(loc++, param.Ident);
               break;

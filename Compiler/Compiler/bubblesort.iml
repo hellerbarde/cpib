@@ -1,7 +1,7 @@
 program bubble()
 
 global
-  var tosort : array (10) int32;
+var tosort : array (10) int32;
 
 proc bubbleSort(inout copy A : array (10) int32)
 local var n : int32; 
@@ -26,11 +26,13 @@ do
       i := i + 1
     endwhile;
     n := n - 1
-  endwhile
+  endwhile;
+  debugout A
 endproc
 
 do 
   tosort init := [4,6,5,2,8,7,3,1,9,0];
-  call bubblesort(tosort);
-  debugout tosort
+  debugout tosort;
+  call bubbleSort(tosort)
+
 endprogram

@@ -18,7 +18,7 @@ namespace Compiler
 
     public ASTTypeOrArray TypeOrArray { get; set; }
 
-    public Type Type { get; set; }
+    //public Type Type { get; set; }
 
     public int Address { get; set; }
 

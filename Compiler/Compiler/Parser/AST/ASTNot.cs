@@ -25,10 +25,10 @@ namespace Compiler
 
       var type = GetExpressionType(info);
 
-      if (type == Type.BOOL || type == Type.INT32) {
+      if (type.Type == Type.BOOL || type.Type == Type.INT32) {
         vm.IntInv(loc++);
       }
-      else if (type == Type.DECIMAL) {
+      else if (type.Type == Type.DECIMAL) {
         vm.DecimalInv(loc++);
       }
       else {
@@ -39,7 +39,7 @@ namespace Compiler
       return loc;
     }
 
-    public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
     {
       return Expr.GetExpressionType(info);
     }

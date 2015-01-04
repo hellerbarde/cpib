@@ -6,10 +6,7 @@ namespace Compiler
 {
   public class ASTStoDecl : ASTCpsDecl, IASTStoDecl
   {
-    //public string Ident { get; set; }
     public ASTTypeOrArray TypeOrArray { get; set; }
-
-    public Type Type { get; set; }
 
     public ChangeMode Changemode { get; set; }
 

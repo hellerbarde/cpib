@@ -49,7 +49,7 @@ namespace Compiler
 
             var type = GetExpressionType(info);
 
-      if (type == Type.BOOL) {
+      if (type.Type == Type.BOOL) {
         switch (Operator) {
                     case Operators.AND:
                         //Can only work with int operations:
@@ -103,13 +103,14 @@ namespace Compiler
             return loc;
         }
 
-        public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
         {
             var termType = ((ASTExpression)Term).GetExpressionType(info);
             var repTermType = ((ASTExpression)RepTerm).GetExpressionType(info);
 
-      if (termType == Type.BOOL && repTermType == Type.BOOL) {
-                return Type.BOOL;
+      if (termType.Type == Type.BOOL && repTermType.Type == Type.BOOL) {
+        return new ASTTypeOrArray(Type.BOOL);
+
             }
 
             throw new GrammarException(string.Format("Types {0}, {1} are not a valid combination for Bool Operation {2}", termType, repTermType, this.ToString()));

@@ -76,6 +76,8 @@ namespace Compiler
       Keywords.Add("..", () => new Token(Terminals.RANGE));
       Keywords.Add("array", () => new Token(Terminals.ARRAY));
       Keywords.Add("fill", () => new Token(Terminals.FILL));
+      Keywords.Add("true", () => new BoolLiteralToken(true));
+      Keywords.Add("false", () => new BoolLiteralToken(false));
       #endregion
     }
 

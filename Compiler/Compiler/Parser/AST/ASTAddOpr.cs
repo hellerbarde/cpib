@@ -53,7 +53,7 @@ namespace Compiler
 
       var type = GetExpressionType(info);
 
-      if (type == Type.INT32) {
+      if (type.Type == Type.INT32) {
         switch (Operator) {
           case Operators.PLUS:
             vm.IntAdd(loc++);
@@ -66,7 +66,7 @@ namespace Compiler
               "There's an invalid operator in ASTAddOpr. Operator: " + Operator.ToString());
         }
       }
-      else if (type == Type.DECIMAL) {
+      else if (type.Type == Type.DECIMAL) {
         switch (Operator) {
           case Operators.PLUS:
             vm.DecimalAdd(loc++);
@@ -86,19 +86,20 @@ namespace Compiler
       return loc;
     }
 
-    public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
     {
       var termType = ((ASTExpression)Term).GetExpressionType(info);
       var repTermType = ((ASTExpression)RepTerm).GetExpressionType(info);
 
-      if (termType == Type.INT32 && repTermType == Type.INT32) {
-        return Type.INT32;
+      if (termType.Type == Type.INT32 && repTermType.Type == Type.INT32) {
+
+        return new ASTTypeOrArray(Type.INT32);
       }
 
-      if ((termType == Type.INT32 && repTermType == Type.DECIMAL)
-                || (termType == Type.DECIMAL && repTermType == Type.INT32)
-                || (termType == Type.DECIMAL && repTermType == Type.DECIMAL)) {
-        return Type.DECIMAL;
+      if ((termType.Type == Type.INT32 && repTermType.Type == Type.DECIMAL)
+        || (termType.Type == Type.DECIMAL && repTermType.Type == Type.INT32)
+        || (termType.Type == Type.DECIMAL && repTermType.Type == Type.DECIMAL)) {
+        return new ASTTypeOrArray(Type.DECIMAL);
       }
 
       throw new GrammarException(string.Format("Types {0}, {1} are not a valid combination for AddOperation {2}", termType, repTermType, this.ToString()));

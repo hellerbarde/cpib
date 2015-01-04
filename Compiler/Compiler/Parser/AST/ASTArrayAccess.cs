@@ -52,9 +52,11 @@ namespace Compiler
       }
     }
 
-    public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
     {
-      return Type.INT32;
+      var type = new ASTTypeOrArray();
+      type.Type = Type.INT32;
+      return type;
     }
   }
 }

@@ -4,6 +4,6 @@ namespace Compiler
 {
   public interface IASTStoDecl : IASTDecl
   {
-    Type Type { get; set; }
+    ASTTypeOrArray TypeOrArray { get; set; }
   }
 }

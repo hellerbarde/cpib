@@ -41,7 +41,7 @@ namespace Compiler
             var termType = ((ASTExpression)Term).GetExpressionType(info);
             var repTermType = ((ASTExpression)RepTerm).GetExpressionType(info);
 
-            if (termType == Type.INT32 && repTermType == Type.INT32)
+      if (termType.Type == Type.INT32 && repTermType.Type == Type.INT32)
             {
                 switch (Operator)
                 {
@@ -67,9 +67,9 @@ namespace Compiler
                         throw new IVirtualMachine.InternalError("There's an invalid operator in ASTRelOpr. Operator: " + Operator.ToString());
                 }
             }
-            else if ((termType == Type.INT32 && repTermType == Type.DECIMAL)
-                      || (termType == Type.DECIMAL && repTermType == Type.INT32)
-                     || (termType == Type.DECIMAL && repTermType == Type.DECIMAL)) {
+      else if ((termType.Type == Type.INT32 && repTermType.Type == Type.DECIMAL)
+        || (termType.Type == Type.DECIMAL && repTermType.Type == Type.INT32)
+        || (termType.Type == Type.DECIMAL && repTermType.Type == Type.DECIMAL)) {
         switch (Operator) {
                     case Operators.EQ:
                         vm.DecimalEQ(loc++);
@@ -101,9 +101,11 @@ namespace Compiler
             return loc;
         }
 
-        public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
         {
-            return Type.BOOL;
+      var type = new ASTTypeOrArray();
+      type.Type = Type.BOOL;
+      return type;
         }
     }
 }

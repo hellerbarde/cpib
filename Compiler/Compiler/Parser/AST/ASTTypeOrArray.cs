@@ -12,6 +12,12 @@ namespace Compiler
       dimensions = new List<int>();
     }
 
+    public ASTTypeOrArray(Type type)
+    {
+      this.Type = type;
+      dimensions = new List<int>();
+    }
+
     public Boolean isArray { get; set; }
 
     public Type Type { get; set; }

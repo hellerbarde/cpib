@@ -22,6 +22,6 @@ namespace Compiler
 
     public abstract int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info);
 
-    public abstract Type GetExpressionType(CheckerInformation info);
+    public abstract ASTTypeOrArray GetExpressionType(CheckerInformation info);
   }
 }

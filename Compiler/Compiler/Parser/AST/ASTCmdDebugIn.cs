@@ -21,7 +21,7 @@ namespace Compiler
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
       loc = Expr.GenerateLValue(loc, vm, info);
-            switch (Expr.GetExpressionType(info))
+      switch (Expr.GetExpressionType(info).Type)
             {
                 case Type.INT32:
                     vm.IntInput(loc++, "DEBUGIN");

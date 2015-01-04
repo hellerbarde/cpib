@@ -23,16 +23,16 @@ namespace Compiler
             public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
         {
             if(Type != Type.DECIMAL && Type != Type.INT32){ throw new IVirtualMachine.InternalError("Use of invalid (not existing) casting type " + Type.ToString()); }
-            Type exprType = Expr.GetExpressionType(info);
-            if(exprType != Type.DECIMAL && exprType != Type.INT32){ throw new IVirtualMachine.InternalError("Cannot cast from type " + exprType.ToString()); }
+            var exprType = Expr.GetExpressionType(info);
+      if(exprType.Type != Type.DECIMAL && exprType.Type != Type.INT32){ throw new IVirtualMachine.InternalError("Cannot cast from type " + exprType.ToString()); }
             loc = Expr.GenerateCode(loc, vm, info);
-            if (Type != exprType)
+      if (Type != exprType.Type)
             {
-                if (Type == Type.DECIMAL && exprType == Type.INT32)
+        if (Type == Type.DECIMAL && exprType.Type == Type.INT32)
                 {
                     vm.IntToDecimal(loc++);
                 }
-                else if (Type == Type.INT32 && exprType == Type.DECIMAL)
+        else if (Type == Type.INT32 && exprType.Type == Type.DECIMAL)
                 {
                     vm.DecimalToInt(loc++);
                 }
@@ -44,9 +44,9 @@ namespace Compiler
             return loc;
         }
 
-        public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
         {
-            return this.Type;
+      return new ASTTypeOrArray(this.Type);
         }
     }
 }

@@ -31,9 +31,12 @@ namespace Compiler
             return loc;
         }
 
-        public override Type GetExpressionType(CheckerInformation info)
+    public override ASTTypeOrArray GetExpressionType(CheckerInformation info)
         {
-            return Type.DECIMAL;
+      var type = new ASTTypeOrArray();
+      type.Type = Type.DECIMAL;
+      return type;
+      //return Type.DECIMAL;
         }
     }
 }

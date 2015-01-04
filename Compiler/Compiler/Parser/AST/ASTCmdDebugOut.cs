@@ -27,7 +27,7 @@ namespace Compiler
         return loc;
       }
 
-            switch (Expr.GetExpressionType(info))
+      switch (Expr.GetExpressionType(info).Type)
             {
                 case Type.INT32:
                     vm.IntOutput(loc++, "DEBUGOUT");
