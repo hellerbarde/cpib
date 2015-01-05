@@ -39,19 +39,24 @@ namespace Compiler
         if (storage is ASTStoDecl || (storage is ASTParam && ((ASTParam)storage).OptMechmode == MechMode.COPY)) {
           //Local Identifier or parameter with mechmode COPY
 
-          if (this.IsArrayAccess) {
-            ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
-            vm.IntLoad(loc++, storage.Address);
-            vm.IntAdd(loc++);
+          if (this.GetExpressionType(info).isArray) {
+            if (this is ASTArrayAccess) {
+              ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
+              vm.IntLoad(loc++, storage.Address);
+              vm.IntAdd(loc++);
+            }
+            else {
+              vm.IntLoad(loc++, storage.Address);
+            }
           }
-          else{
+          else {
             vm.LoadRel(loc++, storage.Address);
           }
         }
         else if (storage is ASTParam) {
           //TODO: What should happen if OptMechmode == null?
           //Load parameter with mechmode REF
-          if (this.IsArrayAccess) {
+          if (this.GetExpressionType(info).isArray) {
             ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
             vm.IntLoad(loc++, storage.Address);
             vm.IntAdd(loc++);
@@ -70,7 +75,20 @@ namespace Compiler
       }
       else if (info.Globals.ContainsIdent(Ident)) {
         IASTStoDecl storage = info.Globals[Ident];
-        vm.IntLoad(loc++, storage.Address);
+        if (this.GetExpressionType(info).isArray) {
+          if (this is ASTArrayAccess) {
+            ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
+            vm.IntLoad(loc++, storage.Address);
+            vm.IntAdd(loc++);
+          }
+          else {
+            vm.IntLoad(loc++, storage.Address);
+          }
+        }
+        else {
+          vm.IntLoad(loc++, storage.Address);
+        }
+
       }
       else {
         throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + Ident);
