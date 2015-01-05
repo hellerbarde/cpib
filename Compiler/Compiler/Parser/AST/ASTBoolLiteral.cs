@@ -36,6 +36,7 @@ namespace Compiler
         {
             var type = new ASTTypeOrArray();
             type.Type = Type.BOOL;
+            type.isArray = false;
             return type;
         }
     }

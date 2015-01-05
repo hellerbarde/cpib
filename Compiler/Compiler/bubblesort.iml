@@ -20,14 +20,14 @@ do
   debugout A;  
   debugout swapped;
   while not swapped do
-    debugout 10;
     while i < n do
+      debugout A[i-1];
       if A[i-1] > A[i] then
         tmp := A[i];
         A[i] := A[i-1];
         A[i-1] := tmp;
-        debugout tmp;
-        swapped := true
+        swapped := true;
+        debugout tmp
       else
         skip
       endif;

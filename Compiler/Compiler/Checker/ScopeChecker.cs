@@ -8,7 +8,7 @@ namespace Compiler
 {
   public class ScopeChecker : Checker
   {
-    private void OptainNamespaceInformation(ASTProgram root, CheckerInformation info)
+    private void ObtainNamespaceInformation(ASTProgram root, CheckerInformation info)
     {
       int globalAddress = 0;
       //Add global parameters
@@ -34,6 +34,11 @@ namespace Compiler
           Namespace<IASTStoDecl> ns = new Namespace<IASTStoDecl>();
           info.Namespaces.Add(declaration.Ident, ns);
           //Relative address: The framepointer is one above the last parameter. Meaning the last parameter has the relative address -1 and the first -Params.Count
+          //Not true anymore with arrays, since count no longer represents total mem_required nor does the last param have length 1 necessarily
+//          int paramAddress = 0;
+//          foreach (ASTParam param in procFunc.Params){
+//            paramAddress = paramAddress - param.Size();
+//          }
           int paramAddress = -procFunc.Params.Count;
           //Relative address: out copy, inout copy and local identifiers. Starting 3 addresses behind the frame pointer.
           int localAddress = 3;
@@ -72,7 +77,7 @@ namespace Compiler
     {
       //Fill namespaces with declaration identifiers
       //Throws an exception if an identifier is declared more then once in a namespace
-      OptainNamespaceInformation(root, info);
+      ObtainNamespaceInformation(root, info);
       //is any applied identifier declared?
       CheckForUndeclaredIdent(root, info);
     }

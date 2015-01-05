@@ -50,7 +50,7 @@ namespace Compiler
             }
           }
           else {
-            vm.LoadRel(loc++, storage.Address);
+            vm.IntLoad(loc++, storage.Address);
           }
         }
         else if (storage is ASTParam) {

@@ -877,6 +877,7 @@ namespace Compiler
 
     private void BoolOutput(String indicator)
     {
+      PrintStack(true);
       sp = sp - 1;
       bool output = Data.boolGet(store[sp]);
       Console.WriteLine("!" + indicator + " : bool = " + output);
@@ -904,6 +905,7 @@ namespace Compiler
         var i = 0;
         foreach (var value in this.store) {
           if(value != null) Console.WriteLine(string.Format("{0,-3}: {1}", i, ((Data.IntData)value).getData()) );
+          if(value == null && i < 50) Console.WriteLine(string.Format("{0,-3}: {1}", i, "Null"));
           i += 1;
           if (!allofit && i >= sp){
             return;
@@ -928,7 +930,7 @@ namespace Compiler
         Console.Write(Data.intGet(store[sp-i]) + ", ");
       }
       Console.WriteLine(Data.intGet(store[sp-1]) + "]");
-      sp -= length;
+      sp -= length + 1;
       Console.Write(string.Join(", ", new List<int>()));
       pc = pc + 1;
     }
