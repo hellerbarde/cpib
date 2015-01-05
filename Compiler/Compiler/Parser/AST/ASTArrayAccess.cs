@@ -74,6 +74,14 @@ namespace Compiler
         throw new NotImplementedException("Adressing arrays through anything but literals is not supported yet.");
       }
     }
+
+    public int EndIndex(CheckerInformation info){
+      if (Accessor.First().End is ASTIntLiteral){
+        return ((ASTIntLiteral)Accessor.First().End).Value;
+      } else {
+        throw new NotImplementedException("Adressing arrays through anything but literals is not supported yet.");
+      }
+    }
   }
 }
 

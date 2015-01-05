@@ -69,15 +69,12 @@ namespace Compiler
           else if (info.Globals.ContainsIdent(ident)) {
             IASTStoDecl storage = info.Globals[ident];   
             ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
-            Console.WriteLine("Global array " + ident);
-            Console.WriteLine(((ASTArrayAccess)RValue).GetExpressionType(info).ToString());
-            Console.WriteLine(LValue.ToString());
             int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
-            for (int i = 1; i <= accessSize; ++i) {
-              vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info));
-              Console.WriteLine("Start index of the array access: "+ ((ASTArrayAccess)RValue).StartIndex(info));
+            for (int i = 0; i < accessSize; i++) {
+              Console.WriteLine(((ASTArrayAccess)RValue).StartIndex(info));
+              vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info) + i);
               vm.Deref(loc++);
-              vm.LoadRel(loc++, startAdress.Value + accessSize - i);
+              vm.LoadRel(loc++, startAdress.Value + accessSize - i - 1);
               vm.Store(loc++);
             }
             loc = LValue.GenerateLValue(loc, vm, info);
