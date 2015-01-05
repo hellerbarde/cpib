@@ -123,7 +123,7 @@ namespace Compiler
         public abstract void IntToDecimal(int loc);
 
         // array operations
-        public abstract void ArrayAccess(int loc);
+        public abstract void ArrayAccess(int loc, bool loadrel=true);
 
         public override abstract String ToString();
 

@@ -900,7 +900,7 @@ namespace Compiler
     }
 
     public override void PrintStack(bool allofit=false){
-        Console.WriteLine(string.Format("Stack(sp={0}):", sp));
+      Console.WriteLine(string.Format("Stack(sp={0}, fp={1}):", sp, fp));
         var i = 0;
         foreach (var value in this.store) {
           if(value != null) Console.WriteLine(string.Format("{0,-3}: {1}", i, ((Data.IntData)value).getData()) );
@@ -922,6 +922,7 @@ namespace Compiler
     {
       //sp = sp - 1;
       //int output = Data.intGet(store[sp]);
+      //PrintStack();
       Console.Write("!" + indicator + " : array = [");
       for (int i = length; i > 1; --i) {
         Console.Write(Data.intGet(store[sp-i]) + ", ");
@@ -998,22 +999,30 @@ namespace Compiler
       code[loc] = new KeyValuePair<Action, string>(() => IntToDecimal(), "IntToDecimal");
     }
 
-    private void ArrayAccess()
+    private void ArrayAccess(bool loadrel=true)
     {
       if (sp > hp) {
         throw new IVirtualMachine.ExecutionError(SP_GT_HP);
       }
-      int address = ((Data.IntData)store[sp - 1]).getData();
-      int start = ((Data.IntData)store[sp - 2]).getData();
+      //PrintStack();
       int end = ((Data.IntData)store[sp - 3]).getData();
+      int start = ((Data.IntData)store[sp - 2]).getData();
+      int address = ((Data.IntData)store[sp - 1]).getData();
+      address += loadrel ? fp : 0;
       if (start > end && end != 0){
         throw new IVirtualMachine.ExecutionError("Array Slice end before start");
       }
       sp = sp - 3;
       if (end == 0){
+        // This is when we only need one value
         end = start + 1;
       }
       while (start <= end) {
+        string foo = "idk...";
+        if (store[address + start] != null) {
+          foo = ((Data.IntData)store[address + start]).getData().ToString();
+        }
+        //Console.WriteLine("from " + (address + start) + ", storing " + foo + " at " + sp);
         store[sp] = store[address + start];
         ++sp;
         ++start;
@@ -1021,7 +1030,7 @@ namespace Compiler
       pc = pc + 1;
     }
 
-    public override void ArrayAccess(int loc)
+    public override void ArrayAccess(int loc, bool loadrel=true)
     {
       if (loc >= code.Length) {
         throw new IVirtualMachine.CodeTooSmallError();
