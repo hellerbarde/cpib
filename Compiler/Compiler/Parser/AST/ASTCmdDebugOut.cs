@@ -29,9 +29,9 @@ namespace Compiler
               info.Namespaces.ContainsKey(info.CurrentNamespace) &&
               info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
             IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];
-            Adress = storage.Address;       
-            vm.IntLoad(loc++, storage.Size()-1);            
-            vm.IntLoad(loc++, 0);     
+            Adress = storage.Address;
+            vm.IntLoad(loc++, storage.Size()-1);
+            vm.IntLoad(loc++, 0);
             vm.IntLoad(loc++, Adress);
             vm.ArrayAccess(loc++);
             vm.ArrayOutput(loc++, ident, storage.Size());
@@ -59,10 +59,10 @@ namespace Compiler
           vm.IntOutput(loc++, indicator);
           break;
         case Type.BOOL:
-          vm.DecimalOutput(loc++, indicator);
+          vm.BoolOutput(loc++, indicator);
           break;
         case Type.DECIMAL:
-          vm.BoolOutput(loc++, indicator);
+          vm.DecimalOutput(loc++, indicator);
           break;
       }
       return loc;
