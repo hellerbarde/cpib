@@ -17,7 +17,7 @@ do
   A init := [4,6,5,2,8,7,3,1,9,0];
   A[0] := 0;
   A[9] := 4;
-  debugout A;
+  debugout A;  
   debugout swapped;
   while not swapped do
     debugout 10;
