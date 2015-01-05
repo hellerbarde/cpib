@@ -3,12 +3,13 @@ global
     var a:array(5) int32
 do
     a init := [5,4,3,2,1];
-    b init := a[0];
+    b init := a[4];
     c init := 99;
+    debugout b;
     while (b > 0) do
         b := b-1;
-        c := a[b];
-        debugout b
+        c := a[3];
+        debugout c
     endwhile;
     debugout a
 endprogram

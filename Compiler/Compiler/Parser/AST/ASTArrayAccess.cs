@@ -66,6 +66,14 @@ namespace Compiler
       type.isArray = true;
       return type;
     }
+
+    public int StartIndex(CheckerInformation info){
+      if (Accessor.First().Start is ASTIntLiteral){
+        return ((ASTIntLiteral)Accessor.First().Start).Value;
+      } else {
+        throw new NotImplementedException("Adressing arrays through anything but literals is not supported yet.");
+      }
+    }
   }
 }
 

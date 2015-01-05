@@ -53,8 +53,8 @@ namespace Compiler
         else if (RValue is ASTArrayAccess) {
           String ident = ((ASTArrayAccess)RValue).Ident;
           if (info.CurrentNamespace != null &&
-              info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-              info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
+            info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+            info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
             IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];   
             ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
             int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
@@ -69,15 +69,15 @@ namespace Compiler
           else if (info.Globals.ContainsIdent(ident)) {
             IASTStoDecl storage = info.Globals[ident];   
             ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
-            int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
             Console.WriteLine("Global array " + ident);
-            Console.WriteLine(accessSize);
             Console.WriteLine(((ASTArrayAccess)RValue).GetExpressionType(info).ToString());
             Console.WriteLine(LValue.ToString());
-            for (int i = accessSize - 1; i >= 0; i--) {
-              vm.IntLoad(loc++, storage.Address + i);
+            int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
+            for (int i = 1; i <= accessSize; ++i) {
+              vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info));
+              Console.WriteLine("Start index of the array access: "+ ((ASTArrayAccess)RValue).StartIndex(info));
               vm.Deref(loc++);
-              vm.LoadRel(loc++, startAdress.Value + i);
+              vm.LoadRel(loc++, startAdress.Value + accessSize - i);
               vm.Store(loc++);
             }
             loc = LValue.GenerateLValue(loc, vm, info);
@@ -98,6 +98,8 @@ namespace Compiler
             vm.IntLoad(loc++, Adress);
             vm.ArrayAccess(loc++);
             for (int i = storage.Size() - 1; i >= 0; i--) {
+              vm.IntLoad(loc++, storage.Address + i);
+              vm.Deref(loc++);
               vm.LoadRel(loc++, startAdress.Value + i);
               vm.Store(loc++);
             }
