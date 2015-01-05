@@ -2310,7 +2310,8 @@ namespace Compiler
       if (this.OptInitOrExprListOrArrayAccess is OptInitOrExprListOrArrayAccessLBRACKET) {
         var returnvalue = new ASTArrayAccess();
         returnvalue.Ident = ident.Ident;
-              
+        returnvalue.IsArrayAccess = true;
+
         var arrayaccessor = this.OptInitOrExprListOrArrayAccess.ToAbstractSyntax();
         while (!(arrayaccessor is ASTEmpty)) {
           returnvalue.Accessor.Add((ASTSliceExpr)arrayaccessor);
