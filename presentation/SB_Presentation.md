@@ -62,25 +62,33 @@ arrayContent ::= LITERAL {',' LITERAL}
     * Prozeduren und Funktionen
     * Kontrollstrukturen
 * Arrays
-    * Literale
-    * Slices
+	* Input und Output
+	* Zugriff auf Elemente
+	* 
+	* Literale
+    * Fixed-Length Slices
+
 
 ## Bubble Sort
 
-Demo - Bla
+Demonstration
 
 # Implementation
 
 ## Abstract Syntax Tree und Code Generation
 
-AST - Phil?
+### AST 
+
+* There is an AST and a 
+
+### Code Generation
 
 ## VM Erweiterungen
 
 * ArrayInput und -Output
     * Länge als Argument
-* ArrayAccess
-Nimmt 3 Werte vom Stack
+* ArrayAccess:
+  Nimmt 3 Werte vom Stack
     * Adresse des Arrays
     * Start-Index
     * End-Index
@@ -92,15 +100,23 @@ Lädt so bestimmten Teil des Arrays auf den Stack
 
 * Viel gelernt
     * Genug um einiges anders machen zu wollen
+* Selbst mit Warnung vom Professor Aufwand unterschätzt
+
 * Keine dynamischen Array Slices
-    * Passt nicht zu IML
+    * Passt konzeptuell nicht zu IML
 * Arrays auf Heap ablegen
     * Viel zu spät realisiert
     * Hat ein paar Sachen erleichtert
     * Hat vieles verkompliziert
-* AST anders aufbauen
-    * Hätte Code Generation erleichtert
+
+
+## Ausblick
+
+* AST neu planen
+    * Würde Code Generation erleichtern
 
 ## Fragen
 
 Vielen Dank! 
+
+![Foo](latenights.png)
