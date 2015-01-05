@@ -25,11 +25,11 @@ namespace Compiler
 
       var type = GetExpressionType(info);
 
-      if (type.Type == Type.BOOL || type.Type == Type.INT32) {
-        vm.IntInv(loc++);
-      }
-      else if (type.Type == Type.DECIMAL) {
-        vm.DecimalInv(loc++);
+      if (type.Type == Type.BOOL) {
+        //1 NE 1 == 0
+        //0 NE 1 == 1
+        vm.IntLoad(loc++, 1);
+        vm.IntNE(loc++);
       }
       else {
         throw new IVirtualMachine.InternalError(
