@@ -58,25 +58,37 @@ namespace Compiler
             IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];   
             ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
             int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
-            for (int i = 0; i < accessSize; i++) {
-              vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info) + i);
-              vm.Deref(loc++);
-              vm.LoadRel(loc++, startAdress.Value + i);
-              vm.Store(loc++);
+            if (((ASTArrayAccess)RValue).Accessor.First().Start is ASTIntLiteral && accessSize > 1) {
+              for (int i = 0; i < accessSize; i++) {
+                vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info) + i);
+                vm.Deref(loc++);
+                vm.LoadRel(loc++, startAdress.Value + i);
+                vm.Store(loc++);
+              }
             }
-            loc = LValue.GenerateLValue(loc, vm, info);
+            else {
+              loc = LValue.GenerateLValue(loc, vm, info);
+              vm.Store(loc++);
+              return loc;
+            }
           }
           else if (info.Globals.ContainsIdent(ident)) {
             IASTStoDecl storage = info.Globals[ident];   
             ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
             int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
-            for (int i = 0; i < accessSize; i++) {
-              vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info) + i);
-              vm.Deref(loc++);
-              vm.LoadRel(loc++, startAdress.Value + i);
+            if (((ASTArrayAccess)RValue).Accessor.First().Start is ASTIntLiteral && accessSize > 1) {
+              for (int i = 0; i < accessSize; i++) {
+                vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info) + i);
+                vm.Deref(loc++);
+                vm.LoadRel(loc++, startAdress.Value + i);
+                vm.Store(loc++);
+                return loc;
+              }
+            } else {
+              loc = LValue.GenerateLValue(loc, vm, info);
               vm.Store(loc++);
+              return loc;
             }
-            loc = LValue.GenerateLValue(loc, vm, info);
           }
           else {
             throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ident);
@@ -118,11 +130,11 @@ namespace Compiler
             throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ident);
           }
         }
-      }
-      else {
-        loc = RValue.GenerateCode(loc, vm, info);
-        loc = LValue.GenerateLValue(loc, vm, info);
-        vm.Store(loc++);
+        else {
+          loc = RValue.GenerateCode(loc, vm, info);
+          loc = LValue.GenerateLValue(loc, vm, info);
+          vm.Store(loc++);
+        }
       }
       return loc;
     }
