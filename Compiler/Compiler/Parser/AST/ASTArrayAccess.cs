@@ -62,6 +62,8 @@ namespace Compiler
       }
       if (Accessor.First().End is ASTEmpty){
         type.dimensions.Add(1);
+      } else if (Accessor.First().Start is ASTIntLiteral && Accessor.First().End is ASTIntLiteral){
+        type.dimensions.Add(((ASTIntLiteral)Accessor.First().End).Value - ((ASTIntLiteral)Accessor.First().Start).Value + 1);
       }
       type.isArray = true;
       return type;
