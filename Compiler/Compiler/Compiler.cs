@@ -11,7 +11,7 @@ namespace Compiler
       try {
         Console.WriteLine("args: (" + String.Join(",",args)+")");
         var scanner = new Scanner();
-        var list = scanner.Scan(new System.IO.StreamReader("test02.iml"));
+        var list = scanner.Scan(new System.IO.StreamReader("test04.iml"));
         //Console.WriteLine("[" + String.Join(",\n", list) + "]");
         var parser = new Parser(list);
         IProgram cst = parser.parseprogram();

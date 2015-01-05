@@ -93,8 +93,8 @@ namespace Compiler
             vm.IntLoad(loc++, 0);     
             vm.IntLoad(loc++, Adress);
             vm.ArrayAccess(loc++);
-            for (int i = 0; i < storage.Size(); i++) {
-              vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info) + i);
+            for (int i = storage.Size() - 1; i >= 0; i--) {
+              vm.IntLoad(loc++, storage.Address + i);
               vm.Deref(loc++);
               vm.LoadRel(loc++, startAdress.Value + i);
               vm.Store(loc++);
@@ -108,9 +108,7 @@ namespace Compiler
             vm.IntLoad(loc++, 0);  
             vm.IntLoad(loc++, Adress);
             vm.ArrayAccess(loc++);
-            for (int i = 0; i < storage.Size(); i++) {
-              vm.IntLoad(loc++, storage.Address + ((ASTArrayAccess)RValue).StartIndex(info) + i);
-              vm.Deref(loc++);
+            for (int i = storage.Size() -1; i >= 0; i--) {
               vm.LoadRel(loc++, startAdress.Value + i);
               vm.Store(loc++);
             }

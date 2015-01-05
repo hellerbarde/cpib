@@ -112,13 +112,33 @@ namespace Compiler
         info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
         return info.Namespaces[info.CurrentNamespace].GetIdent(Ident).TypeOrArray;
       }
-
-      if (info.Globals.ContainsIdent(Ident)) {
-
+      else if (info.Globals.ContainsIdent(Ident)) {
         return info.Globals.GetIdent(Ident).TypeOrArray;
       }
 
       throw new NotImplementedException();
+    }
+
+    public int Value(CheckerInformation info)
+    {
+      ASTTypeOrArray type = null;
+      IASTStoDecl storage;
+      if (info.CurrentNamespace != null &&
+        info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+        info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
+        type = info.Namespaces[info.CurrentNamespace].GetIdent(Ident).TypeOrArray;
+        storage = info.Namespaces[info.CurrentNamespace].GetIdent(Ident);
+      }
+      else if (info.Globals.ContainsIdent(Ident)) {
+        type = info.Globals.GetIdent(Ident).TypeOrArray;
+        storage = info.Namespaces[info.CurrentNamespace].GetIdent(Ident);
+      }
+      if (type.Type != Type.INT32 || type.isArray){
+        throw new CheckerException("Tried to get the value of a non-int32 ident");
+      }
+      //TODO: Return the value, if possible at compile-time i.e. not dependent on user input
+      return storage.Size();
+
     }
   }
 }

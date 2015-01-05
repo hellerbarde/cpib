@@ -11,7 +11,7 @@ program T1 ()
     while j < 3 do
       i := 0;
       while i < 2 do
-        a[i] := i + j;
+        a[i][j] := i + j;
         i := i +1
       endwhile;
       j := j +1
@@ -21,7 +21,7 @@ program T1 ()
     i := 0;
     while j < 3 do
       while i < 2 do
-        t := a[i];
+        t := a[i][j];
         debugout t;
         i := i + 1
       endwhile;
