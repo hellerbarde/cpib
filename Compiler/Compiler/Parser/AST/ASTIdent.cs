@@ -31,19 +31,35 @@ namespace Compiler
 
     public override int GenerateLValue(int loc, IVirtualMachine vm, CheckerInformation info)
     {
-      //TODO: Could also be a function call!
+      //TODO: Could also be a function call! (Phil: not really... This is the LValue.)
       if (info.CurrentNamespace != null &&
         info.Namespaces.ContainsKey(info.CurrentNamespace) &&
         info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
         IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][Ident];
         if (storage is ASTStoDecl || (storage is ASTParam && ((ASTParam)storage).OptMechmode == MechMode.COPY)) {
           //Local Identifier or parameter with mechmode COPY
-          vm.LoadRel(loc++, storage.Address);
+
+          if (this.IsArrayAccess) {
+            ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
+            vm.IntLoad(loc++, storage.Address);
+            vm.IntAdd(loc++);
+          }
+          else{
+            vm.LoadRel(loc++, storage.Address);
+          }
         }
         else if (storage is ASTParam) {
           //TODO: What should happen if OptMechmode == null?
           //Load parameter with mechmode REF
-          vm.LoadRel(loc++, storage.Address); //Relative Address to fp
+          if (this.IsArrayAccess) {
+            ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
+            vm.IntLoad(loc++, storage.Address);
+            vm.IntAdd(loc++);
+            //vm.LoadRel(loc++, storage.Address); //Relative Address to fp
+          }
+          else {
+            vm.LoadRel(loc++, storage.Address); //Relative Address to fp
+          }
           vm.Deref(loc++); //Deref to get global Address
           //With another Deref the value is loaded
         }

@@ -3,22 +3,30 @@ program bubble()
 global
 var tosort : array (10) int32;
 
-proc bubbleSort(inout copy A : array (10) int32)
+proc bubbleSort(inout copy foo : array (10) int32)
 local var n : int32; 
       var i : int32; 
       var tmp : int32;
-      var swapped : bool
+      var swapped : bool;
+      var A : array (10) int32
 do 
   n init := 10;
   i init := 1;
   tmp init := 0;
   swapped init := false; 
+  A init := [4,6,5,2,8,7,3,1,9,0];
+  A[0] := 0;
+  A[9] := 4;
+  debugout A;
+  debugout swapped;
   while not swapped do
+    debugout 10;
     while i < n do
       if A[i-1] > A[i] then
         tmp := A[i];
         A[i] := A[i-1];
         A[i-1] := tmp;
+        debugout tmp;
         swapped := true
       else
         skip
@@ -27,12 +35,15 @@ do
     endwhile;
     n := n - 1
   endwhile;
+  //A := [1,2,3,4,5,6,7,8,9,0];
+  //A[6] := 999;
   debugout A
 endproc
 
 do 
   tosort init := [4,6,5,2,8,7,3,1,9,0];
   debugout tosort;
-  call bubbleSort(tosort)
+  call bubbleSort(tosort);
+  debugout tosort
 
 endprogram
