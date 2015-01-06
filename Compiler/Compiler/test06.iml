@@ -1,0 +1,14 @@
+﻿program arraytests()
+global
+    proc test()
+        local b : array (7) int32 
+    do
+        b init := [11,22,33,44,55,66,77];
+        debugout b;
+        b[0] := 1;
+        b[1] := 2;
+        debugout b
+    endproc
+do
+    call test()
+endprogram

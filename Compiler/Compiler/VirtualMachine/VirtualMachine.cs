@@ -848,8 +848,8 @@ namespace Compiler
             store[address + i] = Data.decimalNew(inputd);
             break;
         }
-        int input = ReadInt();
-        store[address + i] = Data.intNew(input);
+        //int input = ReadInt();
+        //store[address + i] = Data.intNew(input);
       }
 
       pc = pc + 1;
@@ -920,14 +920,11 @@ namespace Compiler
 
     private void ArrayOutput(String indicator, int length)
     {
-      //sp = sp - 1;
-      //int output = Data.intGet(store[sp]);
-      //PrintStack();
       Console.Write("!" + indicator + " : array = [");
       for (int i = length; i > 1; --i) {
-        Console.Write(Data.intGet(store[sp-i]) + ", ");
+        Console.Write(((store[sp-i] == null) ? "null" : Data.intGet(store[sp-i]).ToString()) + ", ");
       }
-      Console.WriteLine(Data.intGet(store[sp-1]) + "]");
+      Console.WriteLine(((store[sp-1] == null) ? "null" :Data.intGet(store[sp-1]).ToString()) + "]");
       sp -= length;
       Console.Write(string.Join(", ", new List<int>()));
       pc = pc + 1;
@@ -1004,24 +1001,23 @@ namespace Compiler
       if (sp > hp) {
         throw new IVirtualMachine.ExecutionError(SP_GT_HP);
       }
-      //PrintStack();
       int end = ((Data.IntData)store[sp - 3]).getData();
       int start = ((Data.IntData)store[sp - 2]).getData();
       int address = ((Data.IntData)store[sp - 1]).getData();
       address += loadrel ? fp : 0;
       if (start > end && end != 0){
-        throw new IVirtualMachine.ExecutionError("Array Slice end before start");
+        throw new IVirtualMachine.ExecutionError(string.Format("Array Slice end before start (start: {0}. end: {1})", start, end));
       }
       sp = sp - 3;
       if (end == 0){
         // This is when we only need one value
-        end = start + 1;
+        end = start;
       }
       while (start <= end) {
-        string foo = "idk...";
-        if (store[address + start] != null) {
-          foo = ((Data.IntData)store[address + start]).getData().ToString();
-        }
+        //string foo = "idk...";
+        //if (store[address + start] != null) {
+          //foo = ((Data.IntData)store[address + start]).getData().ToString();
+        //}
         //Console.WriteLine("from " + (address + start) + ", storing " + foo + " at " + sp);
         store[sp] = store[address + start];
         ++sp;

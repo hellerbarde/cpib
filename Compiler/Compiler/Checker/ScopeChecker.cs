@@ -34,7 +34,7 @@ namespace Compiler
           Namespace<IASTStoDecl> ns = new Namespace<IASTStoDecl>();
           info.Namespaces.Add(declaration.Ident, ns);
           //Relative address: The framepointer is one above the last parameter. Meaning the last parameter has the relative address -1 and the first -Params.Count
-          int paramAddress = -procFunc.Params.Count;
+          int paramAddress = -procFunc.Params.Sum(x => x.Size());
           //Relative address: out copy, inout copy and local identifiers. Starting 3 addresses behind the frame pointer.
           int localAddress = 3;
           //Add local params of this function/procedure

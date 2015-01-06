@@ -16,24 +16,32 @@ namespace Compiler
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
+      //TODO: Could also be a function call!
+      loc = GenerateLValue(loc, vm, info);
+      vm.ArrayAccess(loc++);
+      return loc;
+    }
+
+    public override int GenerateLValue(int loc, IVirtualMachine vm, CheckerInformation info){
       ASTSliceExpr access = Accessor.First();
       if (access.End is ASTEmpty){
         vm.IntLoad(loc++, 0);
-      } else {
+      } 
+      else {
         loc = access.End.GenerateCode(loc, vm, info);
       }
       loc = access.Start.GenerateCode(loc, vm, info);
       if (info.CurrentNamespace != null &&
-          info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-          info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
+        info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+        info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
         IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][Ident];        
         vm.IntLoad(loc++, storage.Address);
-        vm.ArrayAccess(loc++);
+        //vm.IntAdd(loc++);
       }
       else if (info.Globals.ContainsIdent(Ident)) {
         IASTStoDecl storage = info.Globals[Ident];
         vm.IntLoad(loc++, storage.Address);
-        vm.ArrayAccess(loc++);
+        //vm.IntAdd(loc++);
       }
       else {
         throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + Ident);
