@@ -89,6 +89,16 @@ arrayContent ::= LITERAL {',' LITERAL}
 	* Interface ist Top of the Stack
 
 
+## Kontextchecker
+
+* Über den Prozess verteilt
+	* Wo möglich
+	* Nicht 
+* AST
+	* Valide Expressiontypes
+* Code Generation
+	* Initialisierung von Variablen
+
 ## VM Erweiterungen
 
 * ArrayInput und -Output
@@ -122,6 +132,7 @@ Lädt so bestimmten Teil des Arrays auf den Stack
 * AST neu planen
     * Würde Code Generation erleichtern
 
-## Fragen
+## Vielen Dank!
 
-Vielen Dank! 
+### Fragen?
+
