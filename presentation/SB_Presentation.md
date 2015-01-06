@@ -64,14 +64,13 @@ arrayContent ::= LITERAL {',' LITERAL}
 * Arrays
 	* Input und Output
 	* Zugriff auf Elemente
-	* 
 	* Literale
     * Fixed-Length Slices
 
 
-## Bubble Sort
+## Demonstration
+### Bubble Sort
 
-Demonstration
 
 # Implementation
 
@@ -79,9 +78,16 @@ Demonstration
 
 ### AST 
 
-* There is an AST and a 
+* Noch zu generell
+* Namen der Knoten nicht intuitiv
+	* Spät realisiert
 
 ### Code Generation
+
+* In AST Knoten `generateCode`
+	* Rekursive Code Generation
+	* Interface ist Top of the Stack
+
 
 ## VM Erweiterungen
 
@@ -101,7 +107,8 @@ Lädt so bestimmten Teil des Arrays auf den Stack
 * Viel gelernt
     * Genug um einiges anders machen zu wollen
 * Selbst mit Warnung vom Professor Aufwand unterschätzt
-
+	* AST
+	* Codeerzeugung
 * Keine dynamischen Array Slices
     * Passt konzeptuell nicht zu IML
 * Arrays auf Heap ablegen
@@ -118,5 +125,3 @@ Lädt so bestimmten Teil des Arrays auf den Stack
 ## Fragen
 
 Vielen Dank! 
-
-![Foo](latenights.png)
