@@ -54,16 +54,22 @@ namespace Compiler
           //Load address where to save the input
           vm.IntLoad(loc++, param.Address);
           //Switch between types:
-          switch (param.TypeOrArray.Type) {
-            case Type.INT32:
-              vm.IntInput(loc++, param.Ident);
-              break;
-            case Type.BOOL:
-              vm.BoolInput(loc++, param.Ident);
-              break;
-            case Type.DECIMAL:
-              vm.DecimalInput(loc++, param.Ident);
-              break;
+
+          if (param.TypeOrArray.isArray) {
+            vm.ArrayInput(loc++, param.Ident, param.TypeOrArray.dimensions[0], param.TypeOrArray.Type);
+          }
+          else{
+            switch (param.TypeOrArray.Type) {
+              case Type.INT32:
+                vm.IntInput(loc++, param.Ident);
+                break;
+              case Type.BOOL:
+                vm.BoolInput(loc++, param.Ident);
+                break;
+              case Type.DECIMAL:
+                vm.DecimalInput(loc++, param.Ident);
+                break;
+            }
           }
         }
       }
@@ -82,7 +88,7 @@ namespace Compiler
             vm.IntLoad(loc++, param.Address);
             vm.ArrayAccess(loc++);
             vm.ArrayOutput(loc++, param.Ident, param.Size());
-            break;
+            continue;
           }
           //Load output value for non-arrays
           vm.IntLoad(loc++, param.Address);

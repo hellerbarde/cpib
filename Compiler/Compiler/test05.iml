@@ -18,5 +18,7 @@ global
 do
     call fibProc(pos, fib init);
     c init := [99,201,150];
+    debugout c;
+    c[2] := 22;
     debugout c
 endprogram

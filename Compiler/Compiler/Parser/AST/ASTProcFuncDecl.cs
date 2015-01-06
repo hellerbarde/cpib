@@ -72,7 +72,14 @@ namespace Compiler
       {
         if (param.OptMechmode == MechMode.COPY && param.FlowMode == FlowMode.INOUT)
         {
-          vm.CopyIn(loc++, param.AddressLocation.Value, param.Address);
+          if (param.TypeOrArray.isArray) {
+            for (int i = 0; i < param.TypeOrArray.dimensions[0]; i++) {
+              vm.CopyIn(loc++, param.AddressLocation.Value+i, param.Address+i);
+            }
+          }
+          else {
+            vm.CopyIn(loc++, param.AddressLocation.Value, param.Address);
+          }
         }
       }
       //Generate body
@@ -85,7 +92,15 @@ namespace Compiler
       {
         if (param.OptMechmode == MechMode.COPY && (param.FlowMode == FlowMode.INOUT || param.FlowMode == FlowMode.OUT))
         {
-          vm.CopyOut(loc++, param.Address, param.AddressLocation.Value);
+          if (param.TypeOrArray.isArray) {
+            for (int i = 0; i < param.TypeOrArray.dimensions[0]; i++) {
+              vm.CopyOut(loc++, param.Address+i, param.AddressLocation.Value+i);
+            }
+
+          }
+          else {
+            vm.CopyOut(loc++, param.Address, param.AddressLocation.Value);
+          }
         }
       }
       //Return

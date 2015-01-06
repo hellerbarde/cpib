@@ -33,18 +33,18 @@ namespace Compiler
     {
       //TODO: Could also be a function call! (Phil: not really... This is the LValue.)
       if (info.CurrentNamespace != null &&
-        info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-        info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
+          info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+          info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
         IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][Ident];
         if (storage is ASTStoDecl || (storage is ASTParam && ((ASTParam)storage).OptMechmode == MechMode.COPY)) {
           //Local Identifier or parameter with mechmode COPY
 
           if (this.IsArrayAccess) {
             ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
-            vm.IntLoad(loc++, storage.Address);
+            vm.LoadRel(loc++, storage.Address);
             vm.IntAdd(loc++);
           }
-          else{
+          else {
             vm.LoadRel(loc++, storage.Address);
           }
         }
@@ -53,7 +53,7 @@ namespace Compiler
           //Load parameter with mechmode REF
           if (this.IsArrayAccess) {
             ((ASTArrayAccess)this).Accessor[0].Start.GenerateCode(loc, vm, info);
-            vm.IntLoad(loc++, storage.Address);
+            vm.LoadRel(loc++, storage.Address);
             vm.IntAdd(loc++);
             //vm.LoadRel(loc++, storage.Address); //Relative Address to fp
           }
@@ -90,8 +90,8 @@ namespace Compiler
     {
       //TODO: Could also be a function call!
       if (info.CurrentNamespace != null &&
-        info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-        info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
+          info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+          info.Namespaces[info.CurrentNamespace].ContainsIdent(Ident)) {
         return info.Namespaces[info.CurrentNamespace].GetIdent(Ident).TypeOrArray;
       }
 

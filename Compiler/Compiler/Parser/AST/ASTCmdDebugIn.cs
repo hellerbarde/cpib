@@ -21,6 +21,10 @@ namespace Compiler
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
       loc = Expr.GenerateLValue(loc, vm, info);
+      if (Expr.GetExpressionType(info).isArray) {
+        vm.ArrayInput(loc++, "DEBUGIN", Expr.GetExpressionType(info).dimensions[0], Expr.GetExpressionType(info).Type);
+        return loc;
+      }
       switch (Expr.GetExpressionType(info).Type)
             {
                 case Type.INT32:

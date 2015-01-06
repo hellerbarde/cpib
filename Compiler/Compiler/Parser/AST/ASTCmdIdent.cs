@@ -28,90 +28,93 @@ namespace Compiler
 
     public override int GenerateCode(int loc, IVirtualMachine vm, CheckerInformation info)
     {
+      IASTStoDecl lstorage;
+      IASTStoDecl rstorage;
+      if (info.CurrentNamespace != null && info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+        info.Namespaces[info.CurrentNamespace].ContainsIdent(((ASTIdent)LValue).Ident)) {
+        
+        // get the storage declaration if it's in the local namespace
+        lstorage = info.Namespaces[info.CurrentNamespace][((ASTIdent)LValue).Ident];
+        
+      }
+      else if (info.Globals.ContainsIdent(((ASTIdent)LValue).Ident)) {
+        // get the storage declaration if it's in the Global namespace
+        lstorage = info.Globals[((ASTIdent)LValue).Ident];
+      }
+      else {
+        // If it's not in any namespaces, the IML source code is wrong.
+        throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ((ASTIdent)LValue).Ident);
+      }
+      // Now we have the storage declaration and thus the startAddress
+
       if (RValue.GetExpressionType(info).isArray) {
-        int? startAdress = null;
-        if (info.CurrentNamespace != null &&
-          info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-          info.Namespaces[info.CurrentNamespace].ContainsIdent(((ASTIdent)LValue).Ident)) {
-          IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][((ASTIdent)LValue).Ident];
-          startAdress = storage.Address;
-        }
-        else if (info.Globals.ContainsIdent(((ASTIdent)LValue).Ident)) {
-          IASTStoDecl storage = info.Globals[((ASTIdent)LValue).Ident];
-          startAdress = storage.Address;
-        }
-        else {
-          throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ((ASTIdent)LValue).Ident);
-        }
+        //int? startAdress = null;
+        // if it's a literal, just write it in.
         if (RValue is ASTArrayLiteral) {
+          int startAdress = lstorage.Address;
           foreach (ASTExpression expr in ((ASTArrayLiteral)RValue).Value) {
             loc = expr.GenerateCode(loc, vm, info);
-            vm.LoadRel(loc++, startAdress++.Value);
+            vm.LoadRel(loc++, startAdress++);
             vm.Store(loc++);
+
           }
+          return loc;
         }
-        else if (RValue is ASTArrayAccess) {
+
+        // If it's an array access, we need to handle it differently
+        if (RValue is ASTArrayAccess) {
           String ident = ((ASTArrayAccess)RValue).Ident;
-          if (info.CurrentNamespace != null &&
-              info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-              info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
-            IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];   
-            ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
-            int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
-            for (int i = accessSize - 1; i >= 0; i--) {
-              vm.LoadRel(loc++, startAdress.Value + i);
-              vm.Store(loc++);
-            }
+          int accessSize;
+
+          if (info.CurrentNamespace != null &&info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+                info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
+            rstorage = info.Namespaces[info.CurrentNamespace][ident];   
+            loc = RValue.GenerateCode(loc, vm, info);
+            accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
           }
           else if (info.Globals.ContainsIdent(ident)) {
-            IASTStoDecl storage = info.Globals[ident];   
-            ((ASTArrayAccess)RValue).GenerateCode(loc++, vm, info);
-            int accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
-            for (int i = accessSize - 1; i >= 0; i--) {
-              vm.LoadRel(loc++, startAdress.Value + i);
-              vm.Store(loc++);
-            }
+            rstorage = info.Globals[ident];   
+            loc = RValue.GenerateCode(loc, vm, info);
+            accessSize = ((ASTArrayAccess)RValue).GetExpressionType(info).dimensions.Aggregate<int>((u, v) => u * v);
+          }
+          else 
+            throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ident);
+
+          //loc = RValue.GenerateCode(loc, vm, info);
+
+          if (LValue is ASTArrayAccess) {
+            vm.LoadRel(loc++, lstorage.Address);
+            loc = (LValue as ASTArrayAccess).Accessor[0].Start.GenerateCode(loc, vm, info);
+            vm.IntAdd(loc++);
           }
           else {
-            throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ident);
+            //vm.LoadRel(loc++, lstorage.Address);
+            loc = LValue.GenerateLValue(loc, vm, info);
           }
+          //loc = ((ASTArrayAccess)LValue).Accessor[0].Start.GenerateCode(loc, vm, info);
+
+
+          vm.Store(loc++);
+//          for (int i = accessSize - 1; i >= 0; i--) {
+//            vm.LoadRel(loc++, startAdress.Value + i);
+//            vm.Store(loc++);
+//          }
+          return loc;
         }
-        else if (RValue is ASTIdent) {
-          String ident = ((ASTIdent)RValue).Ident;
-          if (info.CurrentNamespace != null &&
-            info.Namespaces.ContainsKey(info.CurrentNamespace) &&
-            info.Namespaces[info.CurrentNamespace].ContainsIdent(ident)) {
-            IASTStoDecl storage = info.Namespaces[info.CurrentNamespace][ident];
-            int Adress = storage.Address;       
-            vm.IntLoad(loc++, storage.Size() - 1);            
-            vm.IntLoad(loc++, 0);     
-            vm.IntLoad(loc++, Adress);
-            vm.ArrayAccess(loc++);
-            for (int i = storage.Size() - 1; i >= 0; i--) {
-              vm.LoadRel(loc++, startAdress.Value + i);
-              vm.Store(loc++);
-            }
-          }
-          else if (info.Globals.ContainsIdent(ident)) {
-            IASTStoDecl storage = info.Globals[ident];
-            int Adress = storage.Address;          
-            vm.IntLoad(loc++, storage.Size() - 1);
-            vm.IntLoad(loc++, 0);  
-            vm.IntLoad(loc++, Adress);
-            vm.ArrayAccess(loc++);
-            for (int i = storage.Size() -1; i >= 0; i--) {
-              vm.LoadRel(loc++, startAdress.Value + i);
-              vm.Store(loc++);
-            }
-          }
-          else {
-            throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ident);
-          }
-        }
+
+        // TODO
       }
       else {
         loc = RValue.GenerateCode(loc, vm, info);
-        loc = LValue.GenerateLValue(loc, vm, info);
+        if (LValue is ASTArrayAccess) {
+          vm.LoadRel(loc++, lstorage.Address);
+          loc = (LValue as ASTArrayAccess).Accessor[0].Start.GenerateCode(loc, vm, info);
+          vm.IntAdd(loc++);
+        }
+        else {
+          //vm.LoadRel(loc++, lstorage.Address);
+          loc = LValue.GenerateLValue(loc, vm, info);
+        }
         vm.Store(loc++);
       }
       return loc;
