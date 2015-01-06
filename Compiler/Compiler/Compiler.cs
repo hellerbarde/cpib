@@ -9,9 +9,13 @@ namespace Compiler
     static void Main(string[] args)
     {
       try {
-        Console.WriteLine("args: (" + String.Join(",",args)+")");
+        //Console.WriteLine("args: (" + String.Join(",",args)+")");
+        if (args.Length != 1){
+          Console.WriteLine("Please specify a file to run ");
+          return;
+        }
         var scanner = new Scanner();
-        var list = scanner.Scan(new System.IO.StreamReader("bubblesort.iml"));
+        var list = scanner.Scan(new System.IO.StreamReader(args[0]));
         //Console.WriteLine("[" + String.Join(",\n", list) + "]");
         var parser = new Parser(list);
         IProgram cst = parser.parseprogram();
@@ -26,7 +30,7 @@ namespace Compiler
 
         var stringbuilder = new StringBuilder();
         program.printAST(0, stringbuilder);
-        Console.Write(stringbuilder.ToString());
+        //Console.Write(stringbuilder.ToString());
         //return;
         //Checker
         CheckerInformation info = new CheckerInformation();
@@ -35,8 +39,8 @@ namespace Compiler
         //Code Generator
         IVirtualMachine vm = new VirtualMachine(1000, 1000);
         program.GenerateCode(0, vm, info);
-        Console.WriteLine(vm.ToString());
-        Console.WriteLine();
+        //Console.WriteLine(vm.ToString());
+        //Console.WriteLine();
         //Execution
         vm.Execute();
       } catch (Exception ex) {
