@@ -12,14 +12,14 @@ namespace Compiler
       AddressLocation = null;
     }
 
+    public bool isInitialized { get; set; }
+
     public string Ident { get; set; }
 
     public IASTNode NextParam { get; set; }
 
     public ASTTypeOrArray TypeOrArray { get; set; }
-
     //public Type Type { get; set; }
-
     public int Address { get; set; }
 
     /// <summary>
@@ -37,7 +37,7 @@ namespace Compiler
     public virtual int Size()
     {
       if (this.TypeOrArray.isArray) {
-        int memoryRequired = this.TypeOrArray.dimensions.Aggregate<int>((u, v) => u*v);
+        int memoryRequired = this.TypeOrArray.dimensions.Aggregate<int>((u, v) => u * v);
         return memoryRequired;  
       }
       else {

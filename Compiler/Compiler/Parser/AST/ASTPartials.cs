@@ -103,6 +103,7 @@ namespace Compiler
       var decl = new ASTStoDecl();
       decl.Ident = ((IdentToken)((TypedIdentIDENT)this.TypedIdent).IDENT.Token).Value;
       decl.TypeOrArray = (ASTTypeOrArray)((TypedIdentIDENT)TypedIdent).TypeOrArray.ToAbstractSyntax();
+      decl.isInitialized = false;
       // DONE!
         
       decl.Changemode = ((ChangeModeToken)this.CHANGEMODE.Token).Value;
@@ -1030,7 +1031,7 @@ namespace Compiler
     public virtual IASTNode ToAbstractSyntax()
     {
       var ident = new ASTCmdDebugIn();
-      ident.Expr = (ASTExpression)this.Expr.ToAbstractSyntax();
+      ident.Ident = (ASTIdent)this.Expr.ToAbstractSyntax();
       return ident;
     }
   }
@@ -2311,6 +2312,7 @@ namespace Compiler
         var returnvalue = new ASTArrayAccess();
         returnvalue.Ident = ident.Ident;
         returnvalue.IsArrayAccess = true;
+        returnvalue.IsInit = false;
 
         var arrayaccessor = this.OptInitOrExprListOrArrayAccess.ToAbstractSyntax();
         while (!(arrayaccessor is ASTEmpty)) {

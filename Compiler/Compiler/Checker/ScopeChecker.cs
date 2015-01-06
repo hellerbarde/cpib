@@ -8,13 +8,16 @@ namespace Compiler
 {
   public class ScopeChecker : Checker
   {
-    private void OptainNamespaceInformation(ASTProgram root, CheckerInformation info)
+    private void ObtainNamespaceInformation(ASTProgram root, CheckerInformation info)
     {
       int globalAddress = 0;
       //Add global parameters
       foreach (ASTParam param in root.Params) {
         param.Address = globalAddress;
         globalAddress += param.Size();
+        if (param.FlowMode == FlowMode.IN || param.FlowMode == FlowMode.INOUT){
+          param.isInitialized = true;
+        }
         info.Globals.addDeclaration(param);
       }
       //Add Global Variables, Functions and Procedures
@@ -49,6 +52,17 @@ namespace Compiler
               localParam.Address = paramAddress;
               paramAddress += localParam.Size();
             }
+            // if localparam ident is in the globals or local namespace then use its isInitialized value
+            if (info.CurrentNamespace != null && info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+                info.Namespaces[info.CurrentNamespace].ContainsIdent(localParam.Ident)) {
+              localParam.isInitialized = info.Namespaces[info.CurrentNamespace][localParam.Ident].isInitialized;
+            }
+            else if (info.Globals.ContainsIdent((localParam.Ident))) {
+              localParam.isInitialized = info.Globals[localParam.Ident].isInitialized;   
+            }
+            else {
+              throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + localParam.Ident);
+            }
             ns.addDeclaration(localParam);
           }
           //Add local storage identifier of this function/procedure
@@ -65,14 +79,14 @@ namespace Compiler
 
     private void CheckForUndeclaredIdent(ASTProgram root, CheckerInformation info)
     {
-      //TODO: Implement
+
     }
 
     public void Check(ASTProgram root, CheckerInformation info)
     {
       //Fill namespaces with declaration identifiers
       //Throws an exception if an identifier is declared more then once in a namespace
-      OptainNamespaceInformation(root, info);
+      ObtainNamespaceInformation(root, info);
       //is any applied identifier declared?
       CheckForUndeclaredIdent(root, info);
     }

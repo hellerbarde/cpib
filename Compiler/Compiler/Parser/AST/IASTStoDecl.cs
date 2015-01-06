@@ -6,5 +6,6 @@ namespace Compiler
   {
     ASTTypeOrArray TypeOrArray { get; set; }
     int Size();
+    bool isInitialized{ get; set; }
   }
 }

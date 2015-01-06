@@ -45,8 +45,32 @@ namespace Compiler
         // If it's not in any namespaces, the IML source code is wrong.
         throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ((ASTIdent)LValue).Ident);
       }
+      // This check should be refactored into a general check() method
+      //
+      if (LValue is ASTIdent && !(((ASTIdent)LValue).IsInit || lstorage.isInitialized)) {
+        throw new CheckerException("Writing to uninitialized variable " + lstorage.Ident + " is not allowed.");
+      }
+      else if (LValue is ASTIdent && ((ASTIdent)LValue).IsInit && lstorage.isInitialized) {
+        throw new CheckerException("Variable " + lstorage.Ident + " is being initialized again!");
+      }
+      else if (LValue is ASTIdent && ((ASTIdent)LValue).IsInit && !lstorage.isInitialized) {        
+        lstorage.isInitialized = true;
+      }
       // Now we have the storage declaration and thus the startAddress
 
+      if (RValue is ASTIdent){
+        if (info.CurrentNamespace != null && info.Namespaces.ContainsKey(info.CurrentNamespace) &&
+          info.Namespaces[info.CurrentNamespace].ContainsIdent(((ASTIdent)RValue).Ident)) {
+          rstorage = info.Namespaces[info.CurrentNamespace][((ASTIdent)RValue).Ident];   
+        }
+        else if (info.Globals.ContainsIdent(((ASTIdent)RValue).Ident)) {
+          rstorage = info.Globals[((ASTIdent)RValue).Ident];   
+        }
+        else {
+          throw new IVirtualMachine.InternalError("Access of undeclared Identifier " + ((ASTIdent)RValue).Ident);
+        }
+        if (!rstorage.isInitialized) {throw new CheckerException("Can not read from unitialized variable " + ((ASTIdent)RValue).Ident);};
+      }
       if (RValue.GetExpressionType(info).isArray) {
         //int? startAdress = null;
         // if it's a literal, just write it in.

@@ -51,6 +51,7 @@ namespace Compiler
       //Load input params
       foreach (ASTParam param in Params) {
         if (param.FlowMode == FlowMode.IN || param.FlowMode == FlowMode.INOUT) {
+          info.Globals[param.Ident].isInitialized = true;
           //Load address where to save the input
           vm.IntLoad(loc++, param.Address);
           //Switch between types:

@@ -10,6 +10,8 @@ namespace Compiler
 
     public ChangeMode Changemode { get; set; }
 
+    public bool isInitialized{ get; set; }
+
     public override string ToString()
     {
       return string.Format("{0} {1} : {2}", Changemode, Ident, TypeOrArray);
@@ -37,9 +39,9 @@ namespace Compiler
       }
     }
 
-    public virtual ASTTypeOrArray GetExpressionType(CheckerInformation info){
+    public virtual ASTTypeOrArray GetExpressionType(CheckerInformation info)
+    {
       return this.TypeOrArray;
     }
-
   }
 }

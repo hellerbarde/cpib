@@ -13,7 +13,7 @@ do
   i init := 1;
   tmp init := 0;
   swapped init := true; 
-  debugin  arr;
+  debugin arr;
   while swapped do
     swapped := false;
     i := 1;
