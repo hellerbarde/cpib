@@ -70,6 +70,12 @@ namespace Compiler
       }
       if (Accessor.First().End is ASTEmpty){
         type.dimensions.Add(1);
+      } else if (Accessor.First().Start is ASTIntLiteral){
+        if (Accessor.First().End is ASTIntLiteral){
+          type.dimensions.Add(((ASTIntLiteral)Accessor.First().End).Value - ((ASTIntLiteral)Accessor.First().Start).Value);
+        } else if (Accessor.First().End is ASTIdent){
+          //type.dimensions.Add(((ASTIdent)Accessor.First().End).Value - ((ASTIntLiteral)Accessor.First().Start).Value);
+        }
       }
       type.isArray = true;
       return type;
